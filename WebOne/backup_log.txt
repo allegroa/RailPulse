@@ -1,0 +1,74 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Copia di file efficace per Windows                              
+-------------------------------------------------------------------------------
+
+  Avviato: mercoledç 10 giugno 2026 15:21:04
+      Origine : D:\004_Software\WebOne\
+ Destinazione = G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\
+
+         File: *.*
+	    
+Directory exc: node_modules
+	    .git
+	    dist
+	    
+      Opzioni: *.* /S /E /DCOPY:DA /COPY:DAT /PURGE /MIR /NP /MT:8 /R:1 /W:1 
+
+-------------------------------------------------------------------------------
+
+	  *File supplementare		     673	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\backup_log.txt
+2026/06/10 15:21:04 ERRORE 32 (0x00000020) Eliminazione del file supplementare in corso G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\backup_log.txt
+Impossibile accedere al file. Il file ä utilizzato da un altro processo.
+
+	  *File supplementare		    4123	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\dump.txt
+	  *File supplementare		    1189	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\fix_brace.js
+	  *File supplementare		    1244	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\fix_context_menu.js
+	  *File supplementare		    1697	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\fix_data.js
+	  *File supplementare		     864	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\fix_scope.js
+	  *File supplementare		     988	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\fix_script.js
+	  *File supplementare		    1817	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\fix_token.js
+	  *File supplementare		    1367	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\fix_ui.js
+	  *File supplementare		     778	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\inject.js
+	  *File supplementare		     783	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\inject_format.js
+	  *File supplementare		   19174	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\missing_code.txt
+	  *File supplementare		   51990	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\specifiche_implementative.md
+	  *File supplementare		    2683	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\update_ui.js
+	    Nuovo file		    8756	D:\004_Software\WebOne\apply_perfect_fix.js
+	    Nuovo file		     233	D:\004_Software\WebOne\count.js
+	    Nuovo file		    2703	D:\004_Software\WebOne\extract.js
+	    Nuovo file		    3597	D:\004_Software\WebOne\final_dynamic_fix.js
+	  *File supplementare		     697	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\backend_webbone\update_herm_pwd.js
+	  *File supplementare		   22767	G:\Il mio Drive\GESTIONE TITS\99_PROGETTI\P2604 - RAMSYS\WebOne\frontend_webbone\src\components\DefectTable.jsx
+	    Nuovo file		    4463	D:\004_Software\WebOne\fix_all_final.js
+	    Nuovo file		    1931	D:\004_Software\WebOne\fix_axes.js
+	    Nuovo file		    3418	D:\004_Software\WebOne\fix_viz.js
+	    Nuovo file		  348417	D:\004_Software\WebOne\head.log
+	    Nuovo file		    9301	D:\004_Software\WebOne\modify_viz.js
+	    Nuovo file		    1535	D:\004_Software\WebOne\recover.js
+	   Pió recente		     644	D:\004_Software\WebOne\sync_to_gdrive.bat
+	    Nuovo file		   10707	D:\004_Software\WebOne\temp.txt
+	    Nuovo file		    3080	D:\004_Software\WebOne\temp2.txt
+	    Nuovo file		    1605	D:\004_Software\WebOne\temp_fetch.txt
+	    Nuovo file		    6760	D:\004_Software\WebOne\temp_load.txt
+	   Pió recente		   70658	D:\004_Software\WebOne\backend_webbone\package-lock.json
+	    Nuovo file		    1443	D:\004_Software\WebOne\frontend_webbone\src\components\MapWrapper.jsx
+	   Pió vecchio		   71146	D:\004_Software\WebOne\frontend_webbone\src\pages\DataVizualizer.jsx
+	    Nuovo file		   4.8 m	D:\004_Software\WebOne\backend_webbone\uploads\Taipei Metro\Track Geometry\2026-06-09_Padova_Milano.geo
+	    Nuovo file		   4.8 m	D:\004_Software\WebOne\backend_webbone\uploads\Taipei Metro\Track Geometry\2026-06-09_Padova_Milano_Offset10.geo
+	    Nuovo file		   4.8 m	D:\004_Software\WebOne\backend_webbone\uploads\Taipei Metro\Track Geometry\2026-06-09_Padova_Milano_Offset12500.geo
+	    Nuovo file		      70	D:\004_Software\WebOne\backend_webbone\uploads\Taipei Metro\Track Geometry\tolerances_db.json
+
+-------------------------------------------------------------------------------
+
+              Totale   Copiato  IgnorateNon corrispondentiNon riuscitaSupplementari
+Directory:        37        33        37         0         0         0
+     File:       158        22       136         0         0        16
+     Byte:   48.14 m   15.00 m   33.13 m         0         0   110.1 k
+   Durata:   0:00:04   0:00:00                       0:00:00   0:00:00
+
+
+ VelocitÖ:           26.013.466 Byte/sec.
+ VelocitÖ:             1488,502 MB/min.
+   Terminato: mercoledç 10 giugno 2026 15:21:05
+

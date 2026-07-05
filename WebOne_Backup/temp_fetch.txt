@@ -1,0 +1,47 @@
+﻿
+      const n = Number(s);
+      return Number.isFinite(n) ? n : NaN;
+    }
+  
+    // Load list of files from server 'upload' folder
+>   const fetchFiles = async () => {
+      try {
+        const res = await axios.get(`/api/files/${encodeURIComponent('upload')}`, { headers: { Authorization: `Bearer 
+${token}` } });
+        setAvailableFiles(res.data?.files || []);
+      } catch (err) {
+        // silently ignore
+        setAvailableFiles([]);
+      }
+    };
+  
+>   useEffect(() => { fetchFiles(); }, []);
+  
+    // no unit detection â€” keep X dynamic based on input
+  
+    // Load a CSV that's already on the server (in upload folder)
+    const loadServerCsv = async (fileName, requestedSampleSize = sampleSize, storeFull = false) => {
+      setLastServerFile(fileName);
+      setIsFullLoad(!!storeFull);
+      setLoading(true);
+      setParseProgress({ parsed: 0 });
+      try {
+      setUploadInProgress(true);
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        await axios.post(`/api/files/${encodeURIComponent('upload')}/upload`, formData, { headers: { Authorization: 
+`Bearer ${token}`, 'Content-Type': 'multipart/form-data' } });
+>       await fetchFiles();
+        setUploadStatus({ type: 'success', msg: 'File uploaded to upload/' });
+        setShowUploadModal(false);
+        setUploadCandidate(null);
+      } catch (err) {
+        console.error('upload failed', err);
+        setUploadStatus({ type: 'error', msg: 'Upload failed' });
+      }
+      setUploadInProgress(false);
+    };
+  
+
+

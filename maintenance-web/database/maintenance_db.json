@@ -1,0 +1,62 @@
+[
+  {
+    "id": "m1",
+    "date": "2026-06-15",
+    "taskType": "Rincalzatura",
+    "line": "Linea Nord",
+    "track": "Binario 1",
+    "startKm": 100.200,
+    "endKm": 100.500,
+    "operator": "Costruzioni Ferroviarie SpA",
+    "status": "Completato",
+    "notes": "Eseguita rincalzatura sistematica con macchina rincalzatrice. Valori geometrici post-lavoro rientranti nei limiti di tolleranza T1.",
+    "attachments": [],
+    "externalRef": {
+      "erpId": "WO-2026-001",
+      "tgmId": "2026.02.27 00.22.18K100+000~K99+442",
+      "rpId": ""
+    },
+    "createdAt": "2026-06-15T08:00:00.000Z",
+    "updatedAt": "2026-06-15T12:30:00.000Z"
+  },
+  {
+    "id": "m2",
+    "date": "2026-06-20",
+    "taskType": "Rettifica Rotaia",
+    "line": "Linea Nord",
+    "track": "Binario 2",
+    "startKm": 101.100,
+    "endKm": 101.400,
+    "operator": "RailService Srl",
+    "status": "Completato",
+    "notes": "Rettifica preventiva per eliminazione usura ondulatoria di tipo wave wear (onde corte).",
+    "attachments": [],
+    "externalRef": {
+      "erpId": "WO-2026-002",
+      "tgmId": "",
+      "rpId": "251220-013153_1141219NKLUP__left_Wear.csv"
+    },
+    "createdAt": "2026-06-20T09:15:00.000Z",
+    "updatedAt": "2026-06-20T17:00:00.000Z"
+  },
+  {
+    "id": "m3",
+    "date": "2026-07-10",
+    "taskType": "Cambio Rotaia",
+    "line": "Linea Sud",
+    "track": "Binario Unico",
+    "startKm": 95.600,
+    "endKm": 95.650,
+    "operator": "Manutenzioni Italia",
+    "status": "Pianificato",
+    "notes": "Sostituzione rotaia interna curva per usura laterale oltre soglia T3. Intervento programmato in finestra notturna.",
+    "attachments": [],
+    "externalRef": {
+      "erpId": "WO-2026-003",
+      "tgmId": "",
+      "rpId": ""
+    },
+    "createdAt": "2026-07-05T07:30:00.000Z",
+    "updatedAt": "2026-07-05T07:30:00.000Z"
+  }
+]

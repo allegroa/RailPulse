@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Build and Dist
+dist/
+build/
+.next/
+
+# Environment Variables
+.env
+.env.local
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs and Uploads
+*.log
+uploads/
+/uploads/
+WebOne/backend_webbone/uploads/
+maintenance-web/uploads/
+
+# Local databases that might contain sensitive/runtime data
+# Uncomment if needed to exclude them:
+# database/
+# DATABASE/

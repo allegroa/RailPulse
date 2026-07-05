@@ -1,0 +1,12 @@
+- [x] Inserimento Singolarità (Database Linee)
+- [x] **Report Difetti (Sez. 6) - EN 13231-3**
+- [ ] **Bugfix: Singolarità**
+    - [ ] Verificare e risolvere i problemi di funzionamento sulle singolarità inserite.
+- [x] **Integrazione Google Maps**
+    - [ ] Ristrutturare il layout: ridurre a metà altezza i box "Info" e "Data/Chart Configuration".
+    - [ ] Inserire mappa Google Maps nello spazio liberato.
+    - [ ] Creare marker dinamico che segua la latitudine e longitudine in base al punto del grafico.
+- [x] **Supporto Multilingua**
+    - [ ] Implementare traduzioni per Italiano, Inglese e Cinese.
+- [ ] **Confronto Rilievi (Sez. 7)**
+- [ ] **Esportazione (Sez. 9)**

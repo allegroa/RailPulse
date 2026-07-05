@@ -1,0 +1,27 @@
+Attiva la modalità di ricerca autonoma multi-agente per eseguire un'analisi di mercato approfondita e competitiva nel settore dei software ferroviari.
+
+Il software target dell'analisi è: RAMSYS (Rail Asset Management System), sistema software specializzato nell'integrazione di dati diagnostici, monitoraggio delle condizioni del binario (inclusa l'analisi dei difetti geometrici, usura rotaie e marezzatura/corrugation) e pianificazione predittiva della manutenzione dei componenti dell'infrastruttura ferroviaria e metropolitana.
+
+Voglio che deleghi i task a tre agenti specializzati in background per generare un report strutturato sotto forma di Artifact finale. Non procedere per approssimazioni qualitative, ma raccogli dati tecnici, specifiche e modelli di architettura software.
+
+Configura l'output seguendo rigorosamente questa struttura logica:
+
+1. MAPPATURA DEI COMPETITOR INTERNAZIONALI (Agente 1)
+- Identifica i primi 4 competitor diretti a livello globale nel mercato dei sistemi di Rail Asset Management e diagnostica predittiva dell'infrastruttura (es. piattaforme come Bentley AssetWise / OpenRail, Siemens Mobility, Maximo for Rail, o ditte specializzate come Plasser & Theurer / Trimble).
+- Per ciascun competitor indica: Ragione sociale, suite software di riferimento, anno di rilascio/maturità della piattaforma e target di riferimento principale (Infrastrutture Nazionali, Linee Metropolitane High-Density, Heavy Haul).
+
+2. MATRICE COMPARATIVA DELLE FUNZIONALITÀ (Agente 2)
+Genera una tabella di confronto tecnico. Sulle righe inserisci i competitor identificati (più RAMSYS come target) e sulle colonne mappa la presenza/assenza (usa i simboli [X] e [ ]) delle seguenti macro-funzionalità core:
+- Integrazione multi-sorgente contactless (importazione dati da treni diagnostici, laser, ultrasuoni, eddy current).
+- Analisi automatica della geometria del binario e filtraggio spaziale delle lunghezze d'onda (onde corte/medie per corrugation).
+- Algoritmi predittivi per il calcolo del Degradation Rate (Tasso di degrado del binario) e pianificazione cicli di molatura (grinding).
+- Modulo GIS integrato per la geolocalizzazione lineare dei difetti.
+- Esportazione dei dati in formati standard standardizzati (CSV, database relazionali, report di sintesi).
+
+3. ANALISI DELLE STRATEGIE E LIMITI DI SISTEMA (Agente 3)
+Per ogni competitor identificato, esegui un'analisi asciutta e pragmatica focalizzata su:
+- Core Value Proposition: Qual è il loro punto di forza dichiarato rispetto all'approccio di RAMSYS.
+- Limitazioni Tecniche e Vincoli: Individua i punti deboli riscontrabili (es. architetture closed-source pesanti, dipendenza da hardware di misura proprietario, tempi lunghi di elaborazione batch dei dati, complessità di interfacciamento con i sistemi di bordo dello Yellow Plant).
+- Modulo di Business: Analizza se operano tramite modelli di licenza aziendale On-Premise (legati al server di deposito), contratti Enterprise SaaS o pacchetti hardware+software combinati.
+
+Procedi autonomamente senza chiedere conferme intermedie durante l'esecuzione delle query di ricerca. Mostra il report completo ed esportabile appena terminato.

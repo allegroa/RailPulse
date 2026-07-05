@@ -1,0 +1,11 @@
+{
+  "useSmb": false,
+  "smb": {
+    "share": "",
+    "username": "",
+    "password": "",
+    "domain": ""
+  },
+  "basePath": "/srv/webone_files",
+  "allowPublicDownload": false
+}

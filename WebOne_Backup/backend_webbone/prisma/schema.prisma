@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  contact   String?
+  folderName String
+  users     User[]
+  products  Product[]
+  groups    Group[]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   // "superadmin" | "admin" | "cliente"
+  clientId  Int?     // <- diventa opzionale
+  client    Client?  @relation(fields: [clientId], references: [id])
+  files     File[]
+  groups    GroupUser[]
+  createdAt DateTime @default(now())
+}
+
+
+model Product {
+  id         Int     @id @default(autoincrement())
+  name       String
+  serial     String
+  firmware   String?
+  description String?
+  clientId   Int
+  client     Client  @relation(fields: [clientId], references: [id])
+  files      File[]
+}
+
+model File {
+  id         Int      @id @default(autoincrement())
+  filename   String
+  path       String
+  productId  Int
+  product    Product  @relation(fields: [productId], references: [id])
+  uploadedBy Int
+  user       User     @relation(fields: [uploadedBy], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model Group {
+  id        Int         @id @default(autoincrement())
+  name      String
+  clientId  Int
+  client    Client      @relation(fields: [clientId], references: [id])
+  members   GroupUser[]
+}
+
+model GroupUser {
+  userId   Int
+  groupId  Int
+  user     User   @relation(fields: [userId], references: [id])
+  group    Group  @relation(fields: [groupId], references: [id])
+
+  @@id([userId, groupId])
+}

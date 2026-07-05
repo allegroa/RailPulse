@@ -1,0 +1,14 @@
+Trasformare PROMPT MULTIGRAFO e ALINEANETO in una specifica chiaraca tgm.
+Mettere pulsante full-screen sul grafico
+Database manutenzione
+------ MIEI IDEE, DA QUI NON IMPLEMENTARE
+email: vedere mesaggio di cortesia di risposta
+email: attraverso check-box dentro configEmail dare la possibiita di abilitare o disabilitare questa funzione
+- Fare un editor delle stazioni
+- creare un backup giornaliero, creare interfacia grafica per decidere quando fare il backup, pianififcazione. IL backup giornaliero deve essere salvato in formato rar dentro database-backup. Il file deve essere dominato con yyyy.mm.dd-hh.mm.ss e deve essere un processo in background
+- unificare l'architettura di RP a wbone
+- rsp Receive Logs manca l'indirizzo IP 
+- http://localhost:3000/configuration, il testo "Ogni quanti minuti il sistema controllerà la posta per scaricare nuovi archivi ZIP/RAR in background." non è il lingua di default
+
+- quando si preme l'icona del cestino per cancellare bisogna richiedere doppia conferma prima di cancellare. Quando si cancella bisgona scrivere l'operazione in un file di log locale dentro database
+- http://localhost:5173/webone/files rimuovi la cartella upload, manuals e config

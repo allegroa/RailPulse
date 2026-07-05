@@ -1,0 +1,66 @@
+
+services:
+  backend:
+    build:
+      context: ./backend_webbone
+      dockerfile: Dockerfile
+    container_name: weebone_backend
+    restart: unless-stopped
+    env_file:
+      - ./backend_webbone/.env.example
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend_webbone/uploads:/app/uploads
+      # mount host folder for client files if needed
+      # - /path/on/host/to/nas:/mnt/nas:rw
+    networks:
+      - weebone_net
+
+  frontend:
+    build:
+      context: ./frontend_webbone
+      dockerfile: Dockerfile
+    container_name: weebone_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://host.docker.internal:5000
+    networks:
+      - weebone_net
+
+  db:
+    image: postgres:15
+    container_name: weebone_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: weebone
+      POSTGRES_PASSWORD: weebonepass
+      POSTGRES_DB: weebone
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - weebone_net
+
+  prisma_migrate:
+    image: node:18-alpine
+    container_name: weebone_prisma_migrate
+    working_dir: /app
+    volumes:
+      - ./backend_webbone:/app
+    entrypoint: ["/bin/sh", "-c"]
+    command: "npm ci --no-audit --no-fund && npx prisma migrate deploy && npx prisma db seed"
+    depends_on:
+      - db
+    restart: 'no'
+    networks:
+      - weebone_net
+
+networks:
+  weebone_net:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local

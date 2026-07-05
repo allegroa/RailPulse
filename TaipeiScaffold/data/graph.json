@@ -1,0 +1,2634 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "name_en": "Tamsui",
+      "name_zh": "淡水",
+      "x": 115,
+      "y": 62,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R28"
+    },
+    {
+      "name_en": "Hongshulin",
+      "name_zh": "紅樹林",
+      "x": 128,
+      "y": 98,
+      "lines": [
+        "R",
+        "V"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R27"
+    },
+    {
+      "name_en": "Zhuwei",
+      "name_zh": "竹圍",
+      "x": 140,
+      "y": 138,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R26"
+    },
+    {
+      "name_en": "Guandu",
+      "name_zh": "關渡",
+      "x": 152,
+      "y": 180,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R25"
+    },
+    {
+      "name_en": "Zhongyi",
+      "name_zh": "忠義",
+      "x": 165,
+      "y": 240,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R24"
+    },
+    {
+      "name_en": "Fuxinggang",
+      "name_zh": "復興崗",
+      "x": 182,
+      "y": 280,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R23"
+    },
+    {
+      "name_en": "Beitou",
+      "name_zh": "北投",
+      "x": 238,
+      "y": 318,
+      "lines": [
+        "R"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R22"
+    },
+    {
+      "name_en": "Xinbeitou",
+      "name_zh": "新北投",
+      "x": 168,
+      "y": 318,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R22A"
+    },
+    {
+      "name_en": "Qiyan",
+      "name_zh": "奇岩",
+      "x": 295,
+      "y": 352,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R21"
+    },
+    {
+      "name_en": "Qi'lian",
+      "name_zh": "唭哩岸",
+      "x": 322,
+      "y": 382,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R20"
+    },
+    {
+      "name_en": "Shipai",
+      "name_zh": "石牌",
+      "x": 345,
+      "y": 412,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R19"
+    },
+    {
+      "name_en": "Mingde",
+      "name_zh": "明德",
+      "x": 360,
+      "y": 442,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R18"
+    },
+    {
+      "name_en": "Zhishan",
+      "name_zh": "芝山",
+      "x": 372,
+      "y": 472,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R17"
+    },
+    {
+      "name_en": "Shilin",
+      "name_zh": "士林",
+      "x": 382,
+      "y": 508,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R16"
+    },
+    {
+      "name_en": "Jiantan",
+      "name_zh": "劍潭",
+      "x": 388,
+      "y": 545,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R15"
+    },
+    {
+      "name_en": "Yuanshan",
+      "name_zh": "圓山",
+      "x": 382,
+      "y": 585,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R14"
+    },
+    {
+      "name_en": "Minquan W. Rd.",
+      "name_zh": "民權西路",
+      "x": 372,
+      "y": 625,
+      "lines": [
+        "R",
+        "O"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R13"
+    },
+    {
+      "name_en": "Shuanglian",
+      "name_zh": "雙連",
+      "x": 365,
+      "y": 660,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R12"
+    },
+    {
+      "name_en": "Zhongshan",
+      "name_zh": "中山",
+      "x": 358,
+      "y": 695,
+      "lines": [
+        "R",
+        "G"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R11"
+    },
+    {
+      "name_en": "Taipei Main Station",
+      "name_zh": "台北車站",
+      "x": 352,
+      "y": 730,
+      "lines": [
+        "BL",
+        "G"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "BL12"
+    },
+    {
+      "name_en": "Beimen",
+      "name_zh": "北門",
+      "x": 308,
+      "y": 730,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R09"
+    },
+    {
+      "name_en": "Ximen",
+      "name_zh": "西門",
+      "x": 278,
+      "y": 858,
+      "lines": [
+        "BL"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "BL11"
+    },
+    {
+      "name_en": "Chiang Kai-shek Memorial",
+      "name_zh": "中正紀念堂",
+      "x": 345,
+      "y": 858,
+      "lines": [
+        "R",
+        "G"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R07"
+    },
+    {
+      "name_en": "Dongmen",
+      "name_zh": "東門",
+      "x": 412,
+      "y": 858,
+      "lines": [
+        "R",
+        "O"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R06"
+    },
+    {
+      "name_en": "Daan",
+      "name_zh": "大安",
+      "x": 479,
+      "y": 858,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R05"
+    },
+    {
+      "name_en": "Xinyi Anhe",
+      "name_zh": "信義安和",
+      "x": 546,
+      "y": 858,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R04"
+    },
+    {
+      "name_en": "Taipei 101 / WTC",
+      "name_zh": "台北101/世貿",
+      "x": 613,
+      "y": 858,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R03"
+    },
+    {
+      "name_en": "Xiangshan",
+      "name_zh": "象山",
+      "x": 680,
+      "y": 858,
+      "lines": [
+        "R"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "R02"
+    },
+    {
+      "name_en": "Dingpu",
+      "name_zh": "頂埔",
+      "x": 98,
+      "y": 1150,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL01"
+    },
+    {
+      "name_en": "Yongning",
+      "name_zh": "永寧",
+      "x": 120,
+      "y": 1110,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL02"
+    },
+    {
+      "name_en": "Tucheng",
+      "name_zh": "土城",
+      "x": 145,
+      "y": 1072,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL03"
+    },
+    {
+      "name_en": "Haishan",
+      "name_zh": "海山",
+      "x": 168,
+      "y": 1035,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL04"
+    },
+    {
+      "name_en": "Far Eastern Hospital",
+      "name_zh": "亞東醫院",
+      "x": 192,
+      "y": 998,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL05"
+    },
+    {
+      "name_en": "Fuzhong",
+      "name_zh": "府中",
+      "x": 205,
+      "y": 980,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL06"
+    },
+    {
+      "name_en": "Banqiao",
+      "name_zh": "板橋",
+      "x": 218,
+      "y": 962,
+      "lines": [
+        "BL",
+        "Y"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "BL07"
+    },
+    {
+      "name_en": "Xinpu",
+      "name_zh": "新埔",
+      "x": 245,
+      "y": 928,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL08"
+    },
+    {
+      "name_en": "Jiangzicui",
+      "name_zh": "江子翠",
+      "x": 272,
+      "y": 895,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL09"
+    },
+    {
+      "name_en": "Longshan Temple",
+      "name_zh": "龍山寺",
+      "x": 262,
+      "y": 840,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL10"
+    },
+    {
+      "name_en": "Shandao Temple",
+      "name_zh": "善導寺",
+      "x": 408,
+      "y": 730,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL13"
+    },
+    {
+      "name_en": "Zhongxiao Xinsheng",
+      "name_zh": "忠孝新生",
+      "x": 462,
+      "y": 730,
+      "lines": [
+        "BL",
+        "O"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "BL14"
+    },
+    {
+      "name_en": "Zhongxiao Fuxing",
+      "name_zh": "忠孝復興",
+      "x": 518,
+      "y": 730,
+      "lines": [
+        "BL",
+        "BR"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "BL15"
+    },
+    {
+      "name_en": "Zhongxiao Dunhua",
+      "name_zh": "忠孝敦化",
+      "x": 572,
+      "y": 730,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL16"
+    },
+    {
+      "name_en": "Sun Yat-sen Memorial",
+      "name_zh": "國父紀念館",
+      "x": 625,
+      "y": 730,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL17"
+    },
+    {
+      "name_en": "Taipei City Hall",
+      "name_zh": "市政府",
+      "x": 678,
+      "y": 730,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL18"
+    },
+    {
+      "name_en": "Yongchun",
+      "name_zh": "永春",
+      "x": 718,
+      "y": 730,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL19"
+    },
+    {
+      "name_en": "Houshanpi",
+      "name_zh": "後山埤",
+      "x": 758,
+      "y": 730,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL20"
+    },
+    {
+      "name_en": "Kunyang",
+      "name_zh": "昆陽",
+      "x": 798,
+      "y": 710,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL21"
+    },
+    {
+      "name_en": "Nangang",
+      "name_zh": "南港",
+      "x": 830,
+      "y": 688,
+      "lines": [
+        "BL"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BL22"
+    },
+    {
+      "name_en": "Nangang Exh. Center",
+      "name_zh": "南港展覽館",
+      "x": 862,
+      "y": 665,
+      "lines": [
+        "BL",
+        "BR"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "BL23"
+    },
+    {
+      "name_en": "Songshan",
+      "name_zh": "松山",
+      "x": 620,
+      "y": 648,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G18"
+    },
+    {
+      "name_en": "Nanjing Sanmin",
+      "name_zh": "南京三民",
+      "x": 580,
+      "y": 682,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G17"
+    },
+    {
+      "name_en": "Taipei Arena",
+      "name_zh": "台北小巨蛋",
+      "x": 548,
+      "y": 712,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G16"
+    },
+    {
+      "name_en": "Nanjing Fuxing",
+      "name_zh": "南京復興",
+      "x": 515,
+      "y": 712,
+      "lines": [
+        "G",
+        "BR"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "G15"
+    },
+    {
+      "name_en": "Songjiang Nanjing",
+      "name_zh": "松江南京",
+      "x": 480,
+      "y": 712,
+      "lines": [
+        "G",
+        "O"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "G14"
+    },
+    {
+      "name_en": "Xiaonanmen",
+      "name_zh": "小南門",
+      "x": 305,
+      "y": 765,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G11"
+    },
+    {
+      "name_en": "Guting",
+      "name_zh": "古亭",
+      "x": 282,
+      "y": 838,
+      "lines": [
+        "G",
+        "O"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "G09"
+    },
+    {
+      "name_en": "Taipower Building",
+      "name_zh": "台電大樓",
+      "x": 385,
+      "y": 870,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G08"
+    },
+    {
+      "name_en": "Gongguan",
+      "name_zh": "公館",
+      "x": 388,
+      "y": 912,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G07"
+    },
+    {
+      "name_en": "Wanlong",
+      "name_zh": "萬隆",
+      "x": 395,
+      "y": 952,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G06"
+    },
+    {
+      "name_en": "Jingmei",
+      "name_zh": "景美",
+      "x": 398,
+      "y": 990,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G05"
+    },
+    {
+      "name_en": "Qizhang",
+      "name_zh": "七張",
+      "x": 435,
+      "y": 1048,
+      "lines": [
+        "G",
+        "Y"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "G03"
+    },
+    {
+      "name_en": "Xiaobitan",
+      "name_zh": "小碧潭",
+      "x": 365,
+      "y": 1048,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G04"
+    },
+    {
+      "name_en": "Xindian District Office",
+      "name_zh": "新店區公所",
+      "x": 462,
+      "y": 1128,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G02"
+    },
+    {
+      "name_en": "Xindian",
+      "name_zh": "新店",
+      "x": 472,
+      "y": 1200,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "G01"
+    },
+    {
+      "name_en": "Nanshijiao",
+      "name_zh": "南勢角",
+      "x": 200,
+      "y": 1090,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O01"
+    },
+    {
+      "name_en": "Jingan",
+      "name_zh": "景安",
+      "x": 218,
+      "y": 1052,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O02"
+    },
+    {
+      "name_en": "Yongan Market",
+      "name_zh": "永安市場",
+      "x": 230,
+      "y": 1018,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O03"
+    },
+    {
+      "name_en": "Dingxi",
+      "name_zh": "頂溪",
+      "x": 242,
+      "y": 982,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O04"
+    },
+    {
+      "name_en": "Yonghe Senior HS",
+      "name_zh": "永和高中",
+      "x": 255,
+      "y": 945,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O05"
+    },
+    {
+      "name_en": "Xingtian Temple",
+      "name_zh": "行天宮",
+      "x": 445,
+      "y": 628,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O08"
+    },
+    {
+      "name_en": "Zhongshan Elem.",
+      "name_zh": "中山國小",
+      "x": 408,
+      "y": 626,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O09"
+    },
+    {
+      "name_en": "Daqiaotou",
+      "name_zh": "大橋頭",
+      "x": 272,
+      "y": 622,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O10"
+    },
+    {
+      "name_en": "Taipei Bridge",
+      "name_zh": "台北橋",
+      "x": 258,
+      "y": 650,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O13"
+    },
+    {
+      "name_en": "Cailiao",
+      "name_zh": "菜寮",
+      "x": 242,
+      "y": 680,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O14"
+    },
+    {
+      "name_en": "Sanchong",
+      "name_zh": "三重",
+      "x": 228,
+      "y": 712,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O15"
+    },
+    {
+      "name_en": "Xianse Temple",
+      "name_zh": "先嗇宮",
+      "x": 215,
+      "y": 742,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O16"
+    },
+    {
+      "name_en": "Toupianzhhuang",
+      "name_zh": "頭前庄",
+      "x": 202,
+      "y": 768,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O17"
+    },
+    {
+      "name_en": "Xinzhuang",
+      "name_zh": "新莊",
+      "x": 190,
+      "y": 798,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O18"
+    },
+    {
+      "name_en": "Fu Jen University",
+      "name_zh": "輔大",
+      "x": 178,
+      "y": 828,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O19"
+    },
+    {
+      "name_en": "Danfeng",
+      "name_zh": "丹鳳",
+      "x": 168,
+      "y": 858,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O20"
+    },
+    {
+      "name_en": "Huilong",
+      "name_zh": "迴龍",
+      "x": 155,
+      "y": 892,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O21"
+    },
+    {
+      "name_en": "Sanchong Elem.",
+      "name_zh": "三重國小",
+      "x": 178,
+      "y": 585,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O50"
+    },
+    {
+      "name_en": "Sanhe Jr. HS",
+      "name_zh": "三和國中",
+      "x": 168,
+      "y": 550,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O51"
+    },
+    {
+      "name_en": "St. Ignatius HS",
+      "name_zh": "徐匯中學",
+      "x": 158,
+      "y": 515,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O52"
+    },
+    {
+      "name_en": "Sanmin Sr. HS",
+      "name_zh": "三民高中",
+      "x": 145,
+      "y": 478,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O53"
+    },
+    {
+      "name_en": "Luzhou",
+      "name_zh": "蘆洲",
+      "x": 128,
+      "y": 438,
+      "lines": [
+        "O"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "O54"
+    },
+    {
+      "name_en": "Taipei Zoo",
+      "name_zh": "動物園",
+      "x": 895,
+      "y": 1100,
+      "lines": [
+        "BR",
+        "MK"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR01"
+    },
+    {
+      "name_en": "Muzha",
+      "name_zh": "木柵",
+      "x": 872,
+      "y": 1060,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR02"
+    },
+    {
+      "name_en": "Wanfang Hospital",
+      "name_zh": "萬芳醫院",
+      "x": 848,
+      "y": 1022,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR03"
+    },
+    {
+      "name_en": "Wanfang Community",
+      "name_zh": "萬芳社區",
+      "x": 820,
+      "y": 988,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR04"
+    },
+    {
+      "name_en": "Xinhai",
+      "name_zh": "辛亥",
+      "x": 792,
+      "y": 958,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR05"
+    },
+    {
+      "name_en": "Linguang",
+      "name_zh": "麟光",
+      "x": 762,
+      "y": 928,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR06"
+    },
+    {
+      "name_en": "Liuzhangli",
+      "name_zh": "六張犁",
+      "x": 728,
+      "y": 900,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR07"
+    },
+    {
+      "name_en": "Technology Building",
+      "name_zh": "科技大樓",
+      "x": 698,
+      "y": 872,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR08"
+    },
+    {
+      "name_en": "Daan (Wenhu)",
+      "name_zh": "大安",
+      "x": 652,
+      "y": 848,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR09"
+    },
+    {
+      "name_en": "Zhongshan Jr. HS",
+      "name_zh": "中山國中",
+      "x": 530,
+      "y": 685,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR12"
+    },
+    {
+      "name_en": "Songshan Airport",
+      "name_zh": "松山機場",
+      "x": 575,
+      "y": 640,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR13"
+    },
+    {
+      "name_en": "Dazhi",
+      "name_zh": "大直",
+      "x": 615,
+      "y": 608,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR14"
+    },
+    {
+      "name_en": "Jiannan Rd.",
+      "name_zh": "劍南路",
+      "x": 658,
+      "y": 572,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR15"
+    },
+    {
+      "name_en": "Xihu",
+      "name_zh": "西湖",
+      "x": 700,
+      "y": 548,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR16"
+    },
+    {
+      "name_en": "Gangqian",
+      "name_zh": "港墘",
+      "x": 742,
+      "y": 535,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR17"
+    },
+    {
+      "name_en": "Wende",
+      "name_zh": "文德",
+      "x": 780,
+      "y": 525,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR18"
+    },
+    {
+      "name_en": "Neihu",
+      "name_zh": "內湖",
+      "x": 818,
+      "y": 520,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR19"
+    },
+    {
+      "name_en": "Dahu Park",
+      "name_zh": "大湖公園",
+      "x": 852,
+      "y": 510,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR20"
+    },
+    {
+      "name_en": "Huzhou",
+      "name_zh": "葫洲",
+      "x": 870,
+      "y": 532,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR21"
+    },
+    {
+      "name_en": "Donghu",
+      "name_zh": "東湖",
+      "x": 878,
+      "y": 558,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR22"
+    },
+    {
+      "name_en": "Nangang Software Park",
+      "name_zh": "南港軟體園區",
+      "x": 870,
+      "y": 610,
+      "lines": [
+        "BR"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "BR23"
+    },
+    {
+      "name_en": "New Taipei Industrial Pk",
+      "name_zh": "新北產業園區",
+      "x": 92,
+      "y": 720,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y01"
+    },
+    {
+      "name_en": "Xinfu",
+      "name_zh": "幸福",
+      "x": 112,
+      "y": 752,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y02"
+    },
+    {
+      "name_en": "Taishan",
+      "name_zh": "泰山",
+      "x": 130,
+      "y": 778,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y03"
+    },
+    {
+      "name_en": "Taishan-Guihe",
+      "name_zh": "泰山貴和",
+      "x": 148,
+      "y": 806,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y04"
+    },
+    {
+      "name_en": "Xinzhuang Hub",
+      "name_zh": "新莊副都心",
+      "x": 162,
+      "y": 832,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y05"
+    },
+    {
+      "name_en": "Xinpu-Minsheng",
+      "name_zh": "新埔民生",
+      "x": 190,
+      "y": 898,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y10"
+    },
+    {
+      "name_en": "Zhongyuan",
+      "name_zh": "中原",
+      "x": 358,
+      "y": 1010,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y12"
+    },
+    {
+      "name_en": "Zhonghem",
+      "name_zh": "中和",
+      "x": 385,
+      "y": 1030,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y13"
+    },
+    {
+      "name_en": "Zhonghe",
+      "name_zh": "中和",
+      "x": 408,
+      "y": 1052,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y14"
+    },
+    {
+      "name_en": "Jingan (Y)",
+      "name_zh": "景安",
+      "x": 432,
+      "y": 1075,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y15"
+    },
+    {
+      "name_en": "Jingping",
+      "name_zh": "景平",
+      "x": 452,
+      "y": 1098,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y16"
+    },
+    {
+      "name_en": "Xiulang Bridge",
+      "name_zh": "秀朗橋",
+      "x": 480,
+      "y": 1118,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y17"
+    },
+    {
+      "name_en": "Shizhang",
+      "name_zh": "十四張",
+      "x": 495,
+      "y": 1140,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y18"
+    },
+    {
+      "name_en": "Dapinglin",
+      "name_zh": "大坪林",
+      "x": 518,
+      "y": 1092,
+      "lines": [
+        "Y"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "Y19"
+    },
+    {
+      "name_en": "Shazun",
+      "name_zh": "沙崙",
+      "x": 45,
+      "y": 15,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V11"
+    },
+    {
+      "name_en": "Kanding",
+      "name_zh": "崁頂",
+      "x": 62,
+      "y": 38,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V10"
+    },
+    {
+      "name_en": "Danhai",
+      "name_zh": "淡海",
+      "x": 78,
+      "y": 58,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V09"
+    },
+    {
+      "name_en": "Xinshi 1st Rd.",
+      "name_zh": "新市一路",
+      "x": 90,
+      "y": 78,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V08"
+    },
+    {
+      "name_en": "Danhai New Town",
+      "name_zh": "淡海新市鎮",
+      "x": 100,
+      "y": 98,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V07"
+    },
+    {
+      "name_en": "Xinshi 3rd Rd.",
+      "name_zh": "新市三路",
+      "x": 108,
+      "y": 118,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V06"
+    },
+    {
+      "name_en": "Tamsui Admin. Ctr.",
+      "name_zh": "淡水行政中心",
+      "x": 116,
+      "y": 138,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V05"
+    },
+    {
+      "name_en": "Tamsui Culture Univ.",
+      "name_zh": "台灣大學海洋",
+      "x": 122,
+      "y": 158,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V04"
+    },
+    {
+      "name_en": "Danjiang University",
+      "name_zh": "淡江大學",
+      "x": 126,
+      "y": 178,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V03"
+    },
+    {
+      "name_en": "Ganzhenlin",
+      "name_zh": "竿蓁林",
+      "x": 128,
+      "y": 198,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V02"
+    },
+    {
+      "name_en": "Hongshulin (V)",
+      "name_zh": "紅樹林",
+      "x": 128,
+      "y": 218,
+      "lines": [
+        "V"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "V01"
+    },
+    {
+      "name_en": "Shizhang (K)",
+      "name_zh": "十四張",
+      "x": 490,
+      "y": 1140,
+      "lines": [
+        "K"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "K01"
+    },
+    {
+      "name_en": "Shuangcheng",
+      "name_zh": "雙城",
+      "x": 498,
+      "y": 1162,
+      "lines": [
+        "K"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "K02"
+    },
+    {
+      "name_en": "Rose China Town",
+      "name_zh": "玫瑰中國城",
+      "x": 505,
+      "y": 1185,
+      "lines": [
+        "K"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "K03"
+    },
+    {
+      "name_en": "Taipei Xiaocheng",
+      "name_zh": "台北小城",
+      "x": 512,
+      "y": 1208,
+      "lines": [
+        "K"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "K04"
+    },
+    {
+      "name_en": "Cardinal Tien Hospital",
+      "name_zh": "耕莘醫院",
+      "x": 518,
+      "y": 1228,
+      "lines": [
+        "K"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "K05"
+    },
+    {
+      "name_en": "Ankeng",
+      "name_zh": "安坑",
+      "x": 525,
+      "y": 1248,
+      "lines": [
+        "K"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "K06"
+    },
+    {
+      "name_en": "Zoo South",
+      "name_zh": "動物園南站",
+      "x": 908,
+      "y": 1140,
+      "lines": [
+        "MK"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "MK02"
+    },
+    {
+      "name_en": "Zhinan Temple",
+      "name_zh": "指南宮",
+      "x": 920,
+      "y": 1175,
+      "lines": [
+        "MK"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "MK03"
+    },
+    {
+      "name_en": "Maokong",
+      "name_zh": "貓空",
+      "x": 932,
+      "y": 1210,
+      "lines": [
+        "MK"
+      ],
+      "type": "station",
+      "km": 0.0,
+      "id": "MK04"
+    },
+    {
+      "name_en": "Taipei Main Station",
+      "name_zh": "台北車站",
+      "x": 352,
+      "y": 730,
+      "lines": [
+        "R"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R10"
+    },
+    {
+      "name_en": "Ximen",
+      "name_zh": "西門",
+      "x": 278,
+      "y": 858,
+      "lines": [
+        "R"
+      ],
+      "type": "main_station",
+      "km": 0.0,
+      "id": "R08"
+    }
+  ],
+  "edges": [
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R28",
+      "target": "R27"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R27",
+      "target": "R26"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "R27",
+      "target": "V01"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R26",
+      "target": "R25"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R25",
+      "target": "R24"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R24",
+      "target": "R23"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R23",
+      "target": "R22"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R22",
+      "target": "R21"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R22",
+      "target": "R22A"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R21",
+      "target": "R20"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R20",
+      "target": "R19"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R19",
+      "target": "R18"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R18",
+      "target": "R17"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R17",
+      "target": "R16"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R16",
+      "target": "R15"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R15",
+      "target": "R14"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R14",
+      "target": "R13"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R13",
+      "target": "R12"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "R13",
+      "target": "O10"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "R13",
+      "target": "O09"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R12",
+      "target": "R11"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R11",
+      "target": "R10"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "R11",
+      "target": "G14"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "R11",
+      "target": "BL12"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL12",
+      "target": "BL13"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL12",
+      "target": "BL11"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "BL12",
+      "target": "G11"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R09",
+      "target": "R10"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R09",
+      "target": "R08"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL11",
+      "target": "BL10"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R07",
+      "target": "R08"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R07",
+      "target": "R06"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "R07",
+      "target": "G11"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "R07",
+      "target": "G09"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R06",
+      "target": "R05"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "R06",
+      "target": "BL14"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "R06",
+      "target": "G09"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R05",
+      "target": "R04"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R04",
+      "target": "R03"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R03",
+      "target": "R02"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL01",
+      "target": "BL02"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL02",
+      "target": "BL03"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL03",
+      "target": "BL04"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL04",
+      "target": "BL05"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL05",
+      "target": "BL06"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL06",
+      "target": "BL07"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL07",
+      "target": "BL08"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "BL07",
+      "target": "Y10"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "BL07",
+      "target": "Y12"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL08",
+      "target": "BL09"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL09",
+      "target": "BL10"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL13",
+      "target": "BL14"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL14",
+      "target": "BL15"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "BL14",
+      "target": "G14"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL15",
+      "target": "BL16"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BL15",
+      "target": "BR09"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BL15",
+      "target": "G15"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL16",
+      "target": "BL17"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL17",
+      "target": "BL18"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL18",
+      "target": "BL19"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL19",
+      "target": "BL20"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL20",
+      "target": "BL21"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL21",
+      "target": "BL22"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "BL22",
+      "target": "BL23"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BL23",
+      "target": "BR23"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G18",
+      "target": "G17"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G17",
+      "target": "G16"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G16",
+      "target": "G15"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G15",
+      "target": "G14"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "G15",
+      "target": "BR12"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "G14",
+      "target": "O08"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G09",
+      "target": "G08"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "G09",
+      "target": "O05"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G08",
+      "target": "G07"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G07",
+      "target": "G06"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G06",
+      "target": "G05"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G05",
+      "target": "G03"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G03",
+      "target": "G02"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G03",
+      "target": "G04"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "G03",
+      "target": "Y18"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G02",
+      "target": "G01"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O01",
+      "target": "O02"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O02",
+      "target": "O03"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O03",
+      "target": "O04"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O04",
+      "target": "O05"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O08",
+      "target": "O09"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O10",
+      "target": "O13"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O13",
+      "target": "O14"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O14",
+      "target": "O50"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O14",
+      "target": "O15"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O15",
+      "target": "O16"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O16",
+      "target": "O17"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O17",
+      "target": "O18"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O18",
+      "target": "O19"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O19",
+      "target": "O20"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O20",
+      "target": "O21"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O50",
+      "target": "O51"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O51",
+      "target": "O52"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O52",
+      "target": "O53"
+    },
+    {
+      "line": "O",
+      "weight": 1,
+      "source": "O53",
+      "target": "O54"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR01",
+      "target": "BR02"
+    },
+    {
+      "line": "MK",
+      "weight": 1,
+      "source": "BR01",
+      "target": "MK02"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR02",
+      "target": "BR03"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR03",
+      "target": "BR04"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR04",
+      "target": "BR05"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR05",
+      "target": "BR06"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR06",
+      "target": "BR07"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR07",
+      "target": "BR08"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR08",
+      "target": "BR09"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR12",
+      "target": "BR13"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR13",
+      "target": "BR14"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR14",
+      "target": "BR15"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR15",
+      "target": "BR16"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR16",
+      "target": "BR17"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR17",
+      "target": "BR18"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR18",
+      "target": "BR19"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR19",
+      "target": "BR20"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR20",
+      "target": "BR21"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR21",
+      "target": "BR22"
+    },
+    {
+      "line": "BR",
+      "weight": 1,
+      "source": "BR22",
+      "target": "BR23"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y01",
+      "target": "Y02"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y02",
+      "target": "Y03"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y03",
+      "target": "Y04"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y04",
+      "target": "Y05"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y05",
+      "target": "Y10"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y12",
+      "target": "Y13"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y13",
+      "target": "Y14"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y14",
+      "target": "Y15"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y15",
+      "target": "Y16"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y16",
+      "target": "Y17"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y17",
+      "target": "Y18"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "Y18",
+      "target": "Y19"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V11",
+      "target": "V10"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V10",
+      "target": "V09"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V09",
+      "target": "V08"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V08",
+      "target": "V07"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V07",
+      "target": "V06"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V06",
+      "target": "V05"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V05",
+      "target": "V04"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V04",
+      "target": "V03"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V03",
+      "target": "V02"
+    },
+    {
+      "line": "V",
+      "weight": 1,
+      "source": "V02",
+      "target": "V01"
+    },
+    {
+      "line": "K",
+      "weight": 1,
+      "source": "K01",
+      "target": "K02"
+    },
+    {
+      "line": "K",
+      "weight": 1,
+      "source": "K02",
+      "target": "K03"
+    },
+    {
+      "line": "K",
+      "weight": 1,
+      "source": "K03",
+      "target": "K04"
+    },
+    {
+      "line": "K",
+      "weight": 1,
+      "source": "K04",
+      "target": "K05"
+    },
+    {
+      "line": "K",
+      "weight": 1,
+      "source": "K05",
+      "target": "K06"
+    },
+    {
+      "line": "MK",
+      "weight": 1,
+      "source": "MK02",
+      "target": "MK03"
+    },
+    {
+      "line": "MK",
+      "weight": 1,
+      "source": "MK03",
+      "target": "MK04"
+    }
+  ]
+}

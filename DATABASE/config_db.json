@@ -1,0 +1,84 @@
+{
+  "language": {
+    "active": "en",
+    "available": [
+      {
+        "code": "it",
+        "label": "Italiano"
+      },
+      {
+        "code": "en",
+        "label": "English"
+      },
+      {
+        "code": "zh",
+        "label": "中文"
+      }
+    ]
+  },
+  "lines": [
+    {
+      "id": "line_nord",
+      "name": "Linea Nord",
+      "startKm": 0,
+      "endKm": 150,
+      "tracks": [
+        "Binario 1",
+        "Binario 2"
+      ]
+    },
+    {
+      "id": "line_sud",
+      "name": "Linea Sud",
+      "startKm": 0,
+      "endKm": 100,
+      "tracks": [
+        "Binario Unico",
+        "Binario 1",
+        "Binario 2"
+      ]
+    }
+  ],
+  "operators": [
+    "Costruzioni Ferroviarie SpA",
+    "RailService Srl",
+    "Manutenzioni Italia"
+  ],
+  "taskTypes": [
+    {
+      "name": "Rincalzatura",
+      "color": "#ff5722",
+      "icon": "⚙️"
+    },
+    {
+      "name": "Rettifica Rotaia",
+      "color": "#2196f3",
+      "icon": "🛠️"
+    },
+    {
+      "name": "Molatura",
+      "color": "#e91e63",
+      "icon": "🔥"
+    },
+    {
+      "name": "Cambio Rotaia",
+      "color": "#4caf50",
+      "icon": "🛤️"
+    },
+    {
+      "name": "Saldatura",
+      "color": "#ffeb3b",
+      "icon": "⚡"
+    },
+    {
+      "name": "Regolazione Tensione",
+      "color": "#9c27b0",
+      "icon": "📐"
+    },
+    {
+      "name": "Altro",
+      "color": "#607d8b",
+      "icon": "📝"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+.fade-transition {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.fade-transition.fade-out {
+  opacity: 0;
+}
+.fade-transition.fade-in {
+  opacity: 1;
+}
