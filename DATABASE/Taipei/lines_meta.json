@@ -1,0 +1,56 @@
+[
+  {
+    "id": "R",
+    "e": "Tamsui-Xinyi Line",
+    "z": "淡水信義線",
+    "color": "#E3002C"
+  },
+  {
+    "id": "BL",
+    "e": "Bannan Line",
+    "z": "板南線",
+    "color": "#0070BD"
+  },
+  {
+    "id": "G",
+    "e": "Songshan-Xindian Line",
+    "z": "松山新店線",
+    "color": "#008659"
+  },
+  {
+    "id": "O",
+    "e": "Zhonghe-Xinlu Line",
+    "z": "中和新蘆線",
+    "color": "#F8A500"
+  },
+  {
+    "id": "BR",
+    "e": "Wenhu Line",
+    "z": "文湖線",
+    "color": "#C48A00"
+  },
+  {
+    "id": "Y",
+    "e": "Circular Line",
+    "z": "環狀線",
+    "color": "#FFCB00"
+  },
+  {
+    "id": "V",
+    "e": "Danhai LRT",
+    "z": "淡海輕軌",
+    "color": "#00ABDE"
+  },
+  {
+    "id": "K",
+    "e": "Ankeng LRT",
+    "z": "安坑輕軌",
+    "color": "#A0785A"
+  },
+  {
+    "id": "MK",
+    "e": "Maokong Gondola",
+    "z": "貓空纜車",
+    "color": "#7B5B3A"
+  }
+]

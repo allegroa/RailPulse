@@ -232,6 +232,9 @@ router.post('/stations', async (req, res) => {
       if (station.kmStart !== undefined) stations[idx].kmStart = station.kmStart;
       if (station.kmEnd !== undefined) stations[idx].kmEnd = station.kmEnd;
       if (station.tracks !== undefined) stations[idx].tracks = station.tracks;
+      if (station.lineCode !== undefined) stations[idx].lineCode = station.lineCode;
+      if (station.stationNumber !== undefined) stations[idx].stationNumber = station.stationNumber;
+      if (station.stationType !== undefined) stations[idx].stationType = station.stationType;
     } else {
       stations.push(station);
       stations.sort((a, b) => a.code.localeCompare(b.code));

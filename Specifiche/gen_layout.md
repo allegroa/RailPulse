@@ -62,3 +62,34 @@ La visualizzazione dei parametri di usura o geometria (es. `W1-W4`) sul grafico 
   * **Arancione Scuro** (`T3 < valore <= T4`): Stato di pre-allarme.
   * **Rosso** (`valore > T4`): Stato critico / allarme di sicurezza.
 * **Controllo Mappa Integrato**: Il passaggio del cursore sull'asse chilometrico del grafico (hover) deve aggiornare a circa ~30fps il marker della mappa interattiva associando le coordinate GPS corrispondenti.
+
+---
+
+## 5. Header Titolo Pagina Maintenance (Box Rettangolare)
+
+Lo stile dell'header della pagina Maintenance è un **rettangolo arrotondato** che contiene titolo, sottotitolo, stato API e selettore tab. Questo stile deve essere preservato e replicato per coerenza con il design system.
+
+### 5.1 Struttura del Box
+* **Contenitore**: Flexbox orizzontale (`display: flex; justify-content: space-between; align-items: center`).
+* **Padding interno**: `16px 24px`.
+* **Background**: Bianco (`var(--bg-card)` / `#ffffff`).
+* **Bordo**: `1px solid var(--border-color)` (`#e2e8f0`).
+* **Border-radius**: `12px` (angoli arrotondati).
+* **Ombra**: `box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05)` — ombra morbida sottile.
+* **Classe CSS**: `.app-header.glass-panel`.
+
+### 5.2 Contenuto Lato Sinistro (Brand)
+* **Titolo (h1)**: Font-size `1.25rem`, font-weight `700`, colore `var(--text-primary)` (`#0f172a`), letter-spacing `-0.02em`.
+* **Sottotitolo (p)**: Font-size `0.8rem`, colore `var(--text-secondary)` (`#475569`).
+* Layout verticale (`flex-direction: column`).
+
+### 5.3 Contenuto Lato Destro
+* **Indicatore Stato API**: Pill arrotondato (`border-radius: 99px`) con:
+  * Dot colorato (8×8px): verde `#16803d` se connesso, giallo `#a16207` se in connessione, rosso `#b91c1c` se offline.
+  * Testo: `font-size: 0.8rem`, colore `var(--text-secondary)`.
+  * Background: `#f1f5f9`, bordo `1px solid var(--border-color)`.
+* **Tab Selector (Database / Simulator)**: Contenitore con background `#f1f5f9`, border-radius `8px`, padding `3px`. I pulsanti tab hanno padding `4px 12px`, border-radius `6px`, font-size `0.8rem`.
+
+### 5.4 Regola di Conservazione
+> **Questo stile è VINCOLANTE**: il titolo "Maintenance" deve rimanere sempre racchiuso in un rettangolo arrotondato con le proprietà sopra descritte. Qualsiasi modifica al layout della pagina Maintenance non deve alterare l'aspetto di questo header box.
+

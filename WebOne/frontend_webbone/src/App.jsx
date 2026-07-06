@@ -19,7 +19,7 @@ import TGMVisualizer from "./pages/tgm/components/DataVisualizerClient";
 import TGMConfiguration from "./pages/tgm/components/ConfigurationPage";
 import GeneralConfigurationPage from "./pages/general-configuration/GeneralConfigurationPage";
 import MaintenancePage from "./pages/maintenance/MaintenancePage";
-
+import TaipeiScaffoldPage from "./pages/taipei/TaipeiScaffoldPage";
 
 function App() {
   const token = localStorage.getItem('token');
@@ -48,6 +48,7 @@ function App() {
         <Route path="/tgm/configuration" element={<ProtectedRoute><TGMConfiguration /></ProtectedRoute>} />
         <Route path="/general-configuration" element={<ProtectedRoute roles={["superadmin", "admin"]}><GeneralConfigurationPage /></ProtectedRoute>} />
         <Route path="/maintenance" element={<ProtectedRoute><MaintenancePage /></ProtectedRoute>} />
+        <Route path="/taipei" element={<ProtectedRoute><TaipeiScaffoldPage /></ProtectedRoute>} />
       </Route>
     </Routes>
   );

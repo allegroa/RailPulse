@@ -51,16 +51,22 @@ app.use(cors({
 }));
 app.use(express.json());
 
+const statusRoutes = require('./routes/status.routes.js');
+const taipeiRoutes = require('./routes/taipei.routes.js');
+
 app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/files', filesRoutes);
 app.use('/api/railprofile', railprofileRoutes);
+app.use('/api/status', statusRoutes);
 app.use('/api', tgmRoutes);
 app.use('/api/config', configRoutes);
 app.use('/api/maintenance', maintenanceRoutes);
+app.use('/api/taipei', taipeiRoutes);
 
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+app.use('/taipei_static', express.static(path.join(process.cwd(), 'public', 'taipei')));
 
 // Routes di test
 app.get('/', (req, res) => {

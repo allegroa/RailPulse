@@ -6,8 +6,26 @@ const { parseCSVFile } = require('../utils/railprofile.utils');
 // ---------------------------------------------------------------------------
 // Resolved paths from environment (fallback to old hardcoded values)
 // ---------------------------------------------------------------------------
-const dbPath     = path.resolve(process.env.RAILPROFILE_DB_PATH     || 'E:/Software/RailPulse/DATABASE/RP/railprofile.db');
-const configPath = path.resolve(process.env.RAILPROFILE_CONFIG_PATH || 'E:/Software/RailPulse/WebOne/backend_webbone/config/railprofile_thresholds.json');
+function getDbPath() {
+    const configPathGlobal = path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json');
+    try {
+        if (fs.existsSync(configPathGlobal)) {
+            const data = fs.readFileSync(configPathGlobal, 'utf-8');
+            const config = JSON.parse(data);
+            if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
+                const dbDir = path.join(config.systemPrefs.dataLocationPath, 'RP');
+                if (!fs.existsSync(dbDir)) {
+                    fs.mkdirSync(dbDir, { recursive: true });
+                }
+                return path.join(dbDir, 'railprofile.db');
+            }
+        }
+    } catch (err) {
+        console.warn('Impossibile leggere config_db.json per railprofile, uso fallback');
+    }
+    return path.resolve(process.env.RAILPROFILE_DB_PATH || 'E:/Software/RailPulse/DATABASE/RP/railprofile.db');
+}
+const configPath = path.resolve(process.env.RAILPROFILE_CONFIG_PATH || path.join(__dirname, '..', '..', 'config', 'railprofile_thresholds.json'));
 
 // ---------------------------------------------------------------------------
 // Background exceedance calculation
@@ -16,7 +34,7 @@ const configPath = path.resolve(process.env.RAILPROFILE_CONFIG_PATH || 'E:/Softw
 // ---------------------------------------------------------------------------
 const runExceedanceCalculation = () => {
     try {
-        const db = new Database(dbPath);
+        const db = new Database(getDbPath());
 
         db.prepare(`
             CREATE TABLE IF NOT EXISTS exceedances (
@@ -124,7 +142,7 @@ const runExceedanceCalculation = () => {
 // ---------------------------------------------------------------------------
 exports.getSessions = (req, res) => {
     try {
-        const db = new Database(dbPath);
+        const db = new Database(getDbPath());
 
         // Ensure exceedances table exists
         db.prepare(`
@@ -202,7 +220,7 @@ exports.updateSession = (req, res) => {
         if (!id) return res.status(400).json({ success: false, message: 'No session IDs provided' });
 
         const idArray = id.split(',');
-        const db = new Database(dbPath);
+        const db = new Database(getDbPath());
 
         const updateStmt = db.prepare(`
             UPDATE sessions
@@ -239,7 +257,7 @@ exports.deleteSession = (req, res) => {
         if (!id) return res.status(400).json({ success: false, message: 'No session IDs provided' });
 
         const idArray = id.split(',');
-        const db = new Database(dbPath);
+        const db = new Database(getDbPath());
 
         const delSession = db.prepare(`DELETE FROM sessions WHERE session_id = ?`);
         db.transaction(() => { for (const sid of idArray) delSession.run(sid); })();
@@ -280,7 +298,7 @@ exports.saveConfig = (req, res) => {
         fs.writeFileSync(configPath, JSON.stringify(req.body, null, 2), 'utf8');
 
         // Wipe all exceedances so they are recalculated with the new thresholds
-        const db = new Database(dbPath);
+        const db = new Database(getDbPath());
         try { db.prepare(`DELETE FROM exceedances`).run(); } catch (e) {
             console.error('[RailProfile] Error clearing exceedances on config save:', e);
         }
@@ -305,7 +323,7 @@ exports.getSessionData = (req, res) => {
         if (!id) return res.status(400).json({ success: false, message: 'No session IDs provided' });
 
         const idArray = id.split(',');
-        const db = new Database(dbPath);
+        const db = new Database(getDbPath());
 
         const placeholders = idArray.map(() => '?').join(',');
         const records = db.prepare(`

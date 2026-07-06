@@ -46,37 +46,37 @@
   ],
   "taskTypes": [
     {
-      "name": "Rincalzatura",
+      "name": "Tamping",
       "color": "#ff5722",
       "icon": "⚙️"
     },
     {
-      "name": "Rettifica Rotaia",
+      "name": "Rail Reprofiling",
       "color": "#2196f3",
       "icon": "🛠️"
     },
     {
-      "name": "Molatura",
+      "name": "Rail Grinding",
       "color": "#e91e63",
       "icon": "🔥"
     },
     {
-      "name": "Cambio Rotaia",
+      "name": "Rail Replacement",
       "color": "#4caf50",
       "icon": "🛤️"
     },
     {
-      "name": "Saldatura",
+      "name": "Welding",
       "color": "#ffeb3b",
       "icon": "⚡"
     },
     {
-      "name": "Regolazione Tensione",
+      "name": "Stress Regulation",
       "color": "#9c27b0",
       "icon": "📐"
     },
     {
-      "name": "Altro",
+      "name": "Other",
       "color": "#607d8b",
       "icon": "📝"
     }

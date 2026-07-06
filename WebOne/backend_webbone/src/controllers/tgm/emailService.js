@@ -4,8 +4,8 @@ const nodemailer = require('nodemailer');
 const fs = require('fs/promises');
 const path = require('path');
 
-const TMP_UPLOAD_DIR = path.resolve(process.cwd(), '..', 'track_web-main', 'tmp_uploads', 'email_queue');
-const LOG_FILE = path.resolve(process.cwd(), '..', 'track_web-main', 'configuration', 'email_receipts.log');
+const TMP_UPLOAD_DIR = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'tmp_uploads', 'email_queue');
+const LOG_FILE = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'configuration', 'email_receipts.log');
 
 async function checkNewEmails(emailConfig) {
   const { email, password, imapHost, imapPort, imapSecure } = emailConfig;

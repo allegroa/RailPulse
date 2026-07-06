@@ -25,8 +25,22 @@ const parseValue = (v) => {
  * @param {string} filename - Basename only; resolved against RAILPROFILE_DB_DIR env var.
  * @returns {Array|null}
  */
+function getDbDir() {
+    const configPathGlobal = path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json');
+    try {
+        if (fs.existsSync(configPathGlobal)) {
+            const data = fs.readFileSync(configPathGlobal, 'utf-8');
+            const config = JSON.parse(data);
+            if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
+                return path.join(config.systemPrefs.dataLocationPath, 'RP');
+            }
+        }
+    } catch (err) {}
+    return process.env.RAILPROFILE_DB_DIR || 'E:/Software/RailPulse/DATABASE/RP';
+}
+
 const parseCSVFile = (filename) => {
-    const dbDir = process.env.RAILPROFILE_DB_DIR || 'E:/Software/RailPulse/DATABASE/RP';
+    const dbDir = getDbDir();
     const filePath = path.join(dbDir, filename);
 
     if (!fs.existsSync(filePath)) return null;

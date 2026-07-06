@@ -6,7 +6,13 @@ export default defineConfig({
   base: '/webone/',
   plugins: [react()],
   server: {
+    host: true,
     proxy: {
+      '^/api/config(/|$)': {
+        target: 'http://localhost:5002',
+        changeOrigin: true,
+        secure: false,
+      },
       '/api': {
         target: 'http://localhost:5000',
         changeOrigin: true,

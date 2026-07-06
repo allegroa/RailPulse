@@ -18,7 +18,12 @@ app.use(express.json());
 async function readConfig() {
   try {
     const data = await fs.readFile(DB_PATH, 'utf-8');
-    return JSON.parse(data);
+    const parsed = JSON.parse(data);
+    if (!parsed.systemPrefs) {
+      parsed.systemPrefs = { dataLocationType: 'local', dataLocationPath: '', serverIp: '' };
+      await writeConfig(parsed);
+    }
+    return parsed;
   } catch (error) {
     if (error.code === 'ENOENT') {
       // Se non esiste, crea la struttura di base
@@ -28,12 +33,14 @@ async function readConfig() {
           available: [
             { code: 'it', label: 'Italiano' },
             { code: 'en', label: 'English' },
-            { code: 'zh', label: '中文' }
+            { code: 'zh', label: '简体中文' },
+            { code: 'zh-TW', label: '繁體中文 (台灣)' }
           ]
         },
         lines: [],
         operators: [],
-        taskTypes: []
+        taskTypes: [],
+        systemPrefs: { dataLocationType: 'local', dataLocationPath: '', serverIp: '' }
       };
       await fs.mkdir(path.dirname(DB_PATH), { recursive: true });
       await fs.writeFile(DB_PATH, JSON.stringify(defaultConfig, null, 2), 'utf-8');
@@ -62,6 +69,29 @@ app.get('/api/config', async (req, res) => {
     return res.status(500).json({ error: 'Errore interno del server' });
   }
   res.json(config);
+});
+
+// GET /api/config/system-prefs - Ottiene preferenze di sistema
+app.get('/api/config/system-prefs', async (req, res) => {
+  const config = await readConfig();
+  res.json(config ? config.systemPrefs : {});
+});
+
+// POST /api/config/system-prefs - Aggiorna preferenze di sistema
+app.post('/api/config/system-prefs', async (req, res) => {
+  try {
+    const { dataLocationType, dataLocationPath, serverIp } = req.body;
+    const config = await readConfig();
+    config.systemPrefs = {
+      dataLocationType: dataLocationType || config.systemPrefs.dataLocationType,
+      dataLocationPath: dataLocationPath !== undefined ? dataLocationPath : config.systemPrefs.dataLocationPath,
+      serverIp: serverIp !== undefined ? serverIp : config.systemPrefs.serverIp
+    };
+    await writeConfig(config);
+    res.json({ success: true, systemPrefs: config.systemPrefs });
+  } catch (error) {
+    res.status(500).json({ error: 'Errore durante il salvataggio delle preferenze di sistema.' });
+  }
 });
 
 // POST /api/config/language - Imposta lingua attiva
@@ -307,6 +337,9 @@ app.post('/api/config/stations', async (req, res) => {
       if (station.kmStart !== undefined) stations[idx].kmStart = station.kmStart;
       if (station.kmEnd !== undefined) stations[idx].kmEnd = station.kmEnd;
       if (station.tracks !== undefined) stations[idx].tracks = station.tracks;
+      if (station.lineCode !== undefined) stations[idx].lineCode = station.lineCode;
+      if (station.stationNumber !== undefined) stations[idx].stationNumber = station.stationNumber;
+      if (station.stationType !== undefined) stations[idx].stationType = station.stationType;
     } else {
       stations.push(station);
       stations.sort((a, b) => a.code.localeCompare(b.code));

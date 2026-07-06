@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TGMDatabaseVisualizer from './TGMDatabaseVisualizer';
-import TGMMaintenanceDatabase from './TGMMaintenanceDatabase';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions }) {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [baseDbPath, setBaseDbPath] = useState('');
   const baseDbPathRef = useRef('');
@@ -43,12 +44,11 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
       setLoading(true);
       setError('');
       
-      const configRes = await fetch('/api/configuration');
-      if (!configRes.ok) throw new Error('Impossibile leggere la configurazione');
-      const configData = await configRes.json();
+      const prefsRes = await fetch('/api/config/system-prefs');
+      if (!prefsRes.ok) throw new Error('Impossibile leggere le preferenze di sistema');
+      const prefsData = await prefsRes.json();
       
-      const activeOp = configData.activeOperator;
-      const targetPath = configData.operators?.[activeOp]?.dataSourcePath || 'DATABASE/TGM';
+      const targetPath = prefsData.dataLocationPath ? `${prefsData.dataLocationPath}/TGM` : 'DATABASE/TGM';
       setBaseDbPath(targetPath);
       
       let fullPath = targetPath;
@@ -536,14 +536,12 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
           </span>
         </div>
         <div className="flex gap-3 items-center">
-          {viewMode === 'database' && (
-            <button
-              onClick={() => setViewMode('maintenance')}
-              className="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition shadow-sm"
-            >
-              🛠️ {t('maintenance', 'Manutenzioni')}
-            </button>
-          )}
+          <button
+            onClick={() => navigate('/maintenance')}
+            className="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition shadow-sm"
+          >
+            🛠️ {t('maintenance', 'Manutenzioni')}
+          </button>
           {/* Pulsante Importazione File */}
           <div className="relative">
             <button
@@ -611,23 +609,16 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
       )}
 
       <div className="flex-1 overflow-hidden rounded-xl border border-slate-200">
-        {viewMode === 'maintenance' ? (
-          <TGMMaintenanceDatabase 
-            dbPath={baseDbPath} 
-            onNavigateBack={() => setViewMode('database')} 
-          />
-        ) : (
-          <TGMDatabaseVisualizer 
-            sessions={sessions} 
-            stationsList={stationsList}
-            currentSubFolder={currentSubFolder}
-            onNavigate={handleNavigate}
-            onPlaySession={(s, dbPath) => onPlaySession(s, baseDbPath + (currentSubFolder ? '/' + currentSubFolder : ''))}
-            onMoveFolder={handleMoveFolder}
-            onDeleteSession={handleDeleteSession}
-            baseDbPath={baseDbPath}
-          />
-        )}
+        <TGMDatabaseVisualizer 
+          sessions={sessions} 
+          stationsList={stationsList}
+          currentSubFolder={currentSubFolder}
+          onNavigate={handleNavigate}
+          onPlaySession={(s, dbPath) => onPlaySession(s, baseDbPath + (currentSubFolder ? '/' + currentSubFolder : ''))}
+          onMoveFolder={handleMoveFolder}
+          onDeleteSession={handleDeleteSession}
+          baseDbPath={baseDbPath}
+        />
       </div>
 
       {/* Overlay di Caricamento e Macchina a Stati */}

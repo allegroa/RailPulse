@@ -86,6 +86,34 @@ const resources = {
       "savingError": "保存时出错",
       "language": "语言"
     }
+  },
+  'zh-TW': {
+    translation: {
+      "appTitle": "TGM Visualizer",
+      "importFile": "匯入檔案",
+      "loadServer": "伺服器檔案",
+      "noFileSelected": "未加載檔案",
+      "saveDatabase": "儲存路線資料庫",
+      "resetZoom": "重設縮放",
+      "configureGraphs": "配置圖表",
+      "infoTitle": "測量資訊",
+      "configTitle": "資料/設定",
+      "defectsTitle": "缺陷與公差報告",
+      "tolerance": "公差",
+      "samples": "樣本",
+      "outOfBounds": "越界",
+      "percentage": "百分比",
+      "insertTolerance": "插入公差。",
+      "resample": "重新採樣",
+      "apply": "應用",
+      "reset": "重設",
+      "xRange": "X 範圍:",
+      "mapTitle": "車輛位置 (地圖)",
+      "noLocation": "該點沒有可用的經緯度資料。",
+      "savingSuccess": "路線資料庫儲存成功！",
+      "savingError": "儲存時出錯",
+      "language": "語言"
+    }
   }
 };
 

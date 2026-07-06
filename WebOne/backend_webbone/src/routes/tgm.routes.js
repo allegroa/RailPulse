@@ -26,7 +26,7 @@ function resolveTargetPath(targetPath) {
   return path.resolve(process.cwd(), '..', '..', targetPath);
 }
 
-const CONFIG_DIR = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'configuration');
+const CONFIG_DIR = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'configuration');
 
 
 // Regex per convalidare il nome standard della cartella
@@ -391,7 +391,7 @@ router.post('/local-files', async (req, res) => {
 // -------------------------------------------------------------
 // 3. EMAIL AUTO-IMPORT ROUTES
 // -------------------------------------------------------------
-const TMP_UPLOAD_DIR = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'tmp_uploads', 'email_queue');
+const TMP_UPLOAD_DIR = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'tmp_uploads', 'email_queue');
 
 router.get('/tgm/email/check', async (req, res) => {
   try {
@@ -587,8 +587,8 @@ router.get('/tgm/sessions', async (req, res) => {
 
 router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
   const tempDirName = `import_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  const tempUploadDir = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'tmp_uploads', tempDirName);
-  const emailQueueDir = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'tmp_uploads', 'email_queue');
+  const tempUploadDir = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'tmp_uploads', tempDirName);
+  const emailQueueDir = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'tmp_uploads', 'email_queue');
   
   try {
     const targetPath = req.body.path;

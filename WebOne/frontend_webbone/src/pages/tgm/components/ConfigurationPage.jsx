@@ -220,22 +220,26 @@ export default function ConfigurationPage() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800 flex flex-col items-center p-6">
-      <div className="w-full max-w-5xl bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden transition-all duration-300 mt-6">
-        
-        {/* Header */}
-        <div className="px-6 py-6 border-b border-slate-100 flex items-center justify-between bg-white">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-3">
+      
+      {/* Header section mirroring the Maintenance box style */}
+      <div className="w-full max-w-5xl flex justify-between items-center px-6 py-4 bg-white border border-slate-200 rounded-xl shadow-sm mb-6 mt-6">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold text-slate-800 tracking-tight font-sans">
               {t('tgmConfigTitle') || 'Configurazione Modulo TGM'}
-              <span className="bg-blue-50 text-blue-600 font-semibold px-2 py-0.5 rounded text-sm shadow-sm">
-                v1.6
-              </span>
             </h1>
-            <p className="text-slate-500 text-sm mt-1">
-              {t('tgmConfigDesc') || "Gestisci le preferenze di sistema e di visualizzazione per l'operatore attivo."}
-            </p>
+            <span className="bg-blue-50 text-blue-600 text-xs font-semibold px-2 py-0.5 rounded shadow-sm">
+              v1.6
+            </span>
           </div>
+          <p className="text-slate-500 mt-1 text-sm">
+            {t('tgmConfigDesc') || "Gestisci le preferenze di sistema e di visualizzazione per l'operatore attivo."}
+          </p>
         </div>
+      </div>
+
+      <div className="w-full max-w-5xl bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+
 
         {/* Tabs */}
         <div className="flex border-b border-slate-200 px-6 bg-slate-50/50">
@@ -333,63 +337,6 @@ export default function ConfigurationPage() {
                 )}
               </select>
             )}
-          </div>
-
-          {/* Origine Dati */}
-          <div className={`bg-slate-50 border border-slate-100 rounded-xl p-4 md:p-6 space-y-4 shadow-sm transition-opacity ${hasValidOperator ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
-            <h3 className="text-sm font-semibold tracking-wide uppercase text-slate-700">{t('dataLocation') || 'Posizione Dati'}</h3>
-            <div className="flex gap-4 mb-3">
-              <label className="flex items-center space-x-2 text-sm text-slate-600 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="dataSourceType" 
-                  value="local" 
-                  checked={config.dataSourceType === 'local'} 
-                  onChange={(e) => setConfig({ ...config, dataSourceType: e.target.value })}
-                  className="text-blue-600 border-slate-300 bg-white focus:ring-blue-500"
-                />
-                <span>{t('local') || 'Locale'}</span>
-              </label>
-              <label className="flex items-center space-x-2 text-sm text-slate-600 cursor-pointer">
-                <input 
-                  type="radio" 
-                  name="dataSourceType" 
-                  value="nas" 
-                  checked={config.dataSourceType === 'nas'} 
-                  onChange={(e) => setConfig({ ...config, dataSourceType: e.target.value })}
-                  className="text-blue-600 border-slate-300 bg-white focus:ring-blue-500"
-                />
-                <span>{t('nasNetworkPath') || 'NAS / Percorso di Rete'}</span>
-              </label>
-            </div>
-            
-            <div className="flex flex-col space-y-2 relative">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('dataFolderPath') || 'Percorso Cartella Dati'}</label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={config.dataSourcePath}
-                  onChange={(e) => setConfig({ ...config, dataSourcePath: e.target.value })}
-                  onKeyDown={preventEnterSubmit}
-                  className="flex-1 bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-500 rounded-lg px-3 py-2 text-sm text-slate-800 transition-all focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  placeholder={config.dataSourceType === 'nas' ? '\\\\IndirizzoNAS\\Cartella\\Dati' : 'C:\\Dati\\Operatore'}
-                />
-                <button
-                  type="button"
-                  onClick={() => setIsFileBrowserOpen(true)}
-                  className="bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg px-4 py-2 text-sm text-slate-700 transition-colors shadow-sm whitespace-nowrap font-medium"
-                >
-                  {t('browse') || 'Sfoglia...'}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleClearDatabase}
-                  className="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg px-4 py-2 text-sm transition-colors shadow-sm whitespace-nowrap font-medium"
-                >
-                  {t('clearDatabase') || 'Cancella Database'}
-                </button>
-              </div>
-            </div>
           </div>
 
           {/* Configurazione Parametri */}
@@ -664,121 +611,8 @@ export default function ConfigurationPage() {
             </button>
           </div>
 
-          <FileBrowserModal 
-            isOpen={isFileBrowserOpen}
-            initialPath={config.dataSourcePath || 'DATABASE/TGM'}
-            onClose={() => setIsFileBrowserOpen(false)}
-            onSelect={(path) => {
-              setConfig({ ...config, dataSourcePath: path });
-              setIsFileBrowserOpen(false);
-            }}
-          />
-
         </form>
       </div>
     </main>
   );
 }
-
-// --- FILE BROWSER MODAL COMPONENT ---
-const FileBrowserModal = ({ isOpen, initialPath, onClose, onSelect }) => {
-  const [currentPath, setCurrentPath] = useState('');
-  const [folders, setFolders] = useState([]);
-  const [loadingDir, setLoadingDir] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      loadDirectory(initialPath || '');
-    }
-  }, [isOpen, initialPath]);
-
-  const loadDirectory = async (path) => {
-    setLoadingDir(true);
-    try {
-      const res = await fetch('/api/list-dirs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ currentPath: path })
-      });
-      const data = await res.json();
-      if (data.error) {
-        alert("Errore accesso cartella: " + data.error);
-      } else {
-        setFolders(data.files || []);
-        setCurrentPath(data.currentPath);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-    setLoadingDir(false);
-  };
-
-  const goUp = () => {
-    if (!currentPath || currentPath.length <= 3) {
-      loadDirectory(''); // dischi
-      return;
-    }
-    const parts = currentPath.split(/[\\/]/).filter(Boolean);
-    parts.pop();
-    if (parts.length === 1 && currentPath.includes(':\\')) {
-      loadDirectory(parts[0] + '\\');
-    } else if (parts.length > 0) {
-      loadDirectory(parts.join('\\'));
-    } else {
-      loadDirectory('');
-    }
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="bg-slate-800 border border-slate-700 rounded-xl w-full max-w-lg shadow-2xl flex flex-col h-[70vh]">
-        <div className="p-4 border-b border-slate-700 flex justify-between items-center">
-          <h2 className="text-lg font-semibold text-slate-200">Seleziona Cartella Dati</h2>
-          <button type="button" onClick={onClose} className="text-slate-400 hover:text-slate-200 text-xl font-bold">&times;</button>
-        </div>
-        <div className="p-3 bg-slate-900/50 flex gap-2 items-center border-b border-slate-700/50">
-          <button type="button" onClick={goUp} disabled={!currentPath} className="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded text-slate-200 text-sm disabled:opacity-50 border border-slate-600 transition-colors">
-            &#8593; Su
-          </button>
-          <div className="flex-1 truncate text-sm text-blue-300 font-mono bg-slate-900 p-1.5 rounded border border-slate-700/50">
-            {currentPath || "Dischi Locali (Seleziona un'unità)"}
-          </div>
-        </div>
-        <div className="flex-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
-          {loadingDir ? (
-            <div className="flex justify-center p-8 text-slate-500 text-sm">Caricamento in corso...</div>
-          ) : (
-            <div className="space-y-1">
-              {folders.map(f => (
-                <div 
-                  key={f.path}
-                  onClick={() => loadDirectory(f.path)}
-                  className="flex items-center gap-3 p-2.5 hover:bg-slate-700/60 cursor-pointer rounded-lg text-slate-200 text-sm transition-colors border border-transparent hover:border-slate-600"
-                >
-                  <span className="text-blue-400 text-xl">📁</span>
-                  <span className="truncate">{f.name}</span>
-                </div>
-              ))}
-              {folders.length === 0 && <div className="p-4 text-center text-slate-500 text-sm">Questa cartella è vuota o non contiene sottocartelle.</div>}
-            </div>
-          )}
-        </div>
-        <div className="p-4 border-t border-slate-700 flex justify-end gap-3 bg-slate-900/30">
-          <button type="button" onClick={onClose} className="px-4 py-2 rounded-lg border border-slate-600 text-slate-300 hover:bg-slate-700 text-sm transition-colors font-medium">
-            Annulla
-          </button>
-          <button 
-            type="button"
-            onClick={() => onSelect(currentPath)}
-            disabled={!currentPath}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm disabled:opacity-50 transition-colors shadow-md"
-          >
-            Conferma questa cartella
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};

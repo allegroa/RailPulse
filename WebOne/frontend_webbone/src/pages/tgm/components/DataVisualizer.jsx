@@ -187,11 +187,21 @@ function DataVisualizer() {
 
   const loadActiveOperatorConfig = async () => {
     try {
+      let sysPrefs = {};
+      try {
+        const prefsRes = await fetch('/api/config/system-prefs');
+        if (prefsRes.ok) sysPrefs = await prefsRes.json();
+      } catch (e) {
+        console.warn("Could not load system prefs", e);
+      }
+
       const res = await fetch('/api/configuration');
       const data = await res.json();
       const activeOp = data.activeOperator;
       if (activeOp && data.operators && data.operators[activeOp]) {
         const conf = data.operators[activeOp];
+        conf.dataSourcePath = sysPrefs.dataLocationPath ? `${sysPrefs.dataLocationPath}/TGM` : 'DATABASE/TGM';
+        
         if (conf.language) {
           i18n.changeLanguage(conf.language);
         } else {
@@ -1450,26 +1460,29 @@ function DataVisualizer() {
       {parseError && <div className="mb-4 bg-rose-50 border-l-4 border-rose-500 p-3 rounded-lg"><div className="text-sm text-rose-700 font-medium">{parseError}</div></div>}
       {uploadStatus && <div className={`mb-4 ${uploadStatus.type === 'success' ? 'bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700' : 'bg-rose-50 border-l-4 border-rose-500 text-rose-700'} p-3 rounded-lg font-medium`}><div className="text-sm">{uploadStatus.msg}</div></div>}
 
-      <div className="mb-8">
-        <div className="flex justify-between items-center w-full">
-          <div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-800 flex items-center">
+      {/* Header section mirroring the Maintenance box style */}
+      <div className="flex justify-between items-center px-6 py-4 bg-white border border-slate-200 rounded-xl shadow-sm mb-6">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold text-slate-800 tracking-tight font-sans">
               TGM Visualizer
-              <span className="text-sm font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md ml-3">
-                v1.6
-              </span>
-            </h2>
-            <p className="text-slate-400 text-sm mt-1">{t('visualizeExplore') || 'Visualize and explore your CSV data'}</p>
+            </h1>
+            <span className="bg-blue-50 text-blue-600 text-xs font-semibold px-2 py-0.5 rounded shadow-sm">
+              v1.6
+            </span>
           </div>
-          <div className="flex gap-4 items-center">
-            <button 
-              onClick={() => navigate('/tgm/configuration')}
-              className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-md font-semibold transition-colors shadow-sm"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              {t('configureGraphs') || 'Configurazione'}
-            </button>
-          </div>
+          <p className="text-slate-500 mt-1 text-sm">
+            {t('visualizeExplore') || 'Visualize and explore your CSV data'}
+          </p>
+        </div>
+        <div className="flex gap-4 items-center">
+          <button 
+            onClick={() => navigate('/tgm/configuration')}
+            className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-md font-semibold transition-colors shadow-sm text-sm"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            {t('configureGraphs') || 'Configurazione'}
+          </button>
         </div>
       </div>
 

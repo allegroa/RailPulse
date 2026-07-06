@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
-const API_BASE = import.meta.env.DEV ? 'http://localhost:5000/api/maintenance' : '/api/maintenance';
+const API_BASE = '/api/maintenance';
 
 const TRANSLATIONS = {
   it: {
@@ -360,7 +360,7 @@ export default function App() {
   useEffect(() => {
     const fetchGeneralConfig = async () => {
       try {
-        const configApiUrl = import.meta.env.DEV ? 'http://localhost:5000/api/config' : '/api/config';
+        const configApiUrl = '/api/config';
         const res = await fetch(configApiUrl);
         if (res.ok) {
           const config = await res.json();

@@ -598,25 +598,19 @@ const RailProfilePage = () => {
 
   return (
     <div className="flex flex-col w-full h-full p-8 bg-slate-50 overflow-y-auto">
-      {/* Header section mirroring the provided mockup */}
-      <div className="flex flex-col mb-8">
-        <div className="flex justify-between items-start">
-          <div>
-            <div className="flex items-center gap-3">
-              <div className="text-blue-600">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 14v4a2 2 0 002 2h2a2 2 0 002-2v-4M5 14V8a2 2 0 012-2h2a2 2 0 012 2v6M5 14h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M13 10v8a2 2 0 002 2h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2a2 2 0 00-2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h1 className="text-2xl font-extrabold text-slate-800 tracking-tight font-sans">RailProfile</h1>
-              <span className="bg-blue-100 text-blue-600 text-xs font-semibold px-2 py-1 rounded-md">v1.0</span>
-            </div>
-            <p className="text-slate-500 mt-1 text-sm font-light">visualizeExplore</p>
+      {/* Header section mirroring the Maintenance box style */}
+      <div className="flex justify-between items-center px-6 py-4 bg-white border border-slate-200 rounded-xl shadow-sm mb-6">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold text-slate-800 tracking-tight font-sans">RailProfile</h1>
+            <span className="bg-blue-50 text-blue-600 text-xs font-semibold px-2 py-0.5 rounded shadow-sm">v1.0</span>
           </div>
+          <p className="text-slate-500 mt-1 text-sm">visualizeExplore</p>
+        </div>
+        <div>
           <button 
             onClick={() => setShowConfigModal(true)} 
-            className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-md font-semibold transition-colors shadow-sm"
+            className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-md font-semibold transition-colors shadow-sm text-sm"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             Configuration

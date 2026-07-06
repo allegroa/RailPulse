@@ -11,7 +11,7 @@ let emailPollingIntervalId = null;
 
 async function startEmailPolling() {
   try {
-    const configPath = path.resolve(__dirname, '..', '..', 'track_web-main', 'configuration', 'config.json');
+    const configPath = path.resolve(__dirname, '..', '..', 'track_web-main', 'backend', 'configuration', 'config.json');
     const configContent = await fs.readFile(configPath, 'utf-8');
     const config = JSON.parse(configContent);
     const emailConfig = config.emailConfig;

@@ -8,13 +8,13 @@
       "useSampling": true,
       "selectedX": "km",
       "dataSourceType": "local",
-      "dataSourcePath": "E:\\Software\\RailPulse\\DATABASE\\TGM"
+      "dataSourcePath": "D:\\004_Software\\RailPulse\\DATABASE"
     }
   },
   "emailConfig": {
     "email": "railpulse@adts.it",
     "password": "RaIlpul1!26",
-    "pollingInterval": 15,
+    "pollingInterval": 1,
     "imapHost": "imap.adts.it",
     "imapPort": 993,
     "imapSecure": true,
