@@ -112,7 +112,27 @@ const translations = {
     prefsBrowse: "Sfoglia...",
     prefsServerIp: "IP Server",
     prefsSave: "Salva Preferenze",
-    toastPrefsSuccess: "Preferenze di sistema salvate con successo."
+    toastPrefsSuccess: "Preferenze di sistema salvate con successo.",
+    tabGis: "GIS Database",
+    gisTitle: "GIS Database Infrastruttura",
+    gisDesc: "Registro manuale dei parametri infrastrutturali per tratta chilometrica.",
+    gisSelectLine: "Seleziona Linea",
+    gisNoLines: "Nessuna linea disponibile. Crea prima una linea nella tab Linee e Binari.",
+    gisLayerSleepers: "Traverse", gisLayerSlab: "Slab Track", gisLayerBallast: "Massicciata",
+    gisLayerCurvatures: "Curvature", gisLayerTonnage: "Tonnellaggio", gisLayerSwitches: "Scambi",
+    gisStartKm: "Km Inizio", gisEndKm: "Km Fine", gisKm: "Km (posizione)",
+    gisType: "Tipo", gisCondition: "Condizione", gisColor: "Colore",
+    gisRadius: "Raggio (m)", gisSuperElev: "Sopraelevazione (mm)",
+    gisTransition: "Tipo Transizione", gisTransitionLen: "Lunghezza Transizione (m)",
+    gisAnnualMGT: "Traffico Annuo (MGT)", gisAxleLoad: "Carico Asse (t)", gisTrafficType: "Tipo Traffico",
+    gisSwitchId: "ID Scambio", gisSwitchAngle: "Angolo",
+    gisIsSlabTrack: "Armamento su Soletta", gisSlabType: "Tipo Soletta",
+    gisBtnAdd: "Aggiungi Segmento", gisBtnSave: "Salva", gisBtnCancel: "Annulla",
+    gisBtnEdit: "Modifica", gisBtnDelete: "Elimina",
+    gisNoSegments: "Nessun segmento inserito.", gisStripChart: "Mappa Lineare (Km)",
+    gisToastSaved: "Segmento salvato con successo.", gisToastDeleted: "Segmento eliminato.",
+    gisToastError: "Errore durante il salvataggio.",
+    gisTableKmRange: "Tratta Km", gisTableParams: "Parametri", gisTableActions: "Azioni"
   },
   en: {
     headerTitle: "System Configuration",
@@ -220,7 +240,27 @@ const translations = {
     prefsBrowse: "Browse...",
     prefsServerIp: "Server IP",
     prefsSave: "Save Preferences",
-    toastPrefsSuccess: "System preferences saved successfully."
+    toastPrefsSuccess: "System preferences saved successfully.",
+    tabGis: "GIS Database",
+    gisTitle: "Infrastructure GIS Database",
+    gisDesc: "Manual register of infrastructure parameters per km range.",
+    gisSelectLine: "Select Line",
+    gisNoLines: "No lines available. Create a line first in the Lines & Tracks tab.",
+    gisLayerSleepers: "Sleepers", gisLayerSlab: "Slab Track", gisLayerBallast: "Ballast",
+    gisLayerCurvatures: "Curvatures", gisLayerTonnage: "Tonnage", gisLayerSwitches: "Switches",
+    gisStartKm: "Start Km", gisEndKm: "End Km", gisKm: "Km (position)",
+    gisType: "Type", gisCondition: "Condition", gisColor: "Color",
+    gisRadius: "Radius (m)", gisSuperElev: "Super-elevation (mm)",
+    gisTransition: "Transition Type", gisTransitionLen: "Transition Length (m)",
+    gisAnnualMGT: "Annual Traffic (MGT)", gisAxleLoad: "Axle Load (t)", gisTrafficType: "Traffic Type",
+    gisSwitchId: "Switch ID", gisSwitchAngle: "Angle",
+    gisIsSlabTrack: "Slab Track", gisSlabType: "Slab Type",
+    gisBtnAdd: "Add Segment", gisBtnSave: "Save", gisBtnCancel: "Cancel",
+    gisBtnEdit: "Edit", gisBtnDelete: "Delete",
+    gisNoSegments: "No segments entered.", gisStripChart: "Linear Map (Km)",
+    gisToastSaved: "Segment saved successfully.", gisToastDeleted: "Segment deleted.",
+    gisToastError: "Error saving segment.",
+    gisTableKmRange: "Km Range", gisTableParams: "Parameters", gisTableActions: "Actions"
   },
   'zh': {
     headerTitle: "系统设置",
@@ -328,7 +368,27 @@ const translations = {
     prefsBrowse: "浏览...",
     prefsServerIp: "服务器 IP",
     prefsSave: "保存偏好设置",
-    toastPrefsSuccess: "系统偏好设置保存成功。"
+    toastPrefsSuccess: "系统偏好设置保存成功。",
+    tabGis: "GIS 数据库",
+    gisTitle: "基础设施 GIS 数据库",
+    gisDesc: "按公里范围手动登记基础设施参数。",
+    gisSelectLine: "选择线路",
+    gisNoLines: "没有可用线路。请先在线路与轨道标签页创建线路。",
+    gisLayerSleepers: "枕木", gisLayerSlab: "板式轨道", gisLayerBallast: "道碴",
+    gisLayerCurvatures: "曲线", gisLayerTonnage: "吨位", gisLayerSwitches: "道岔",
+    gisStartKm: "起点里程", gisEndKm: "终点里程", gisKm: "里程 (位置)",
+    gisType: "类型", gisCondition: "状态", gisColor: "颜色",
+    gisRadius: "半径 (m)", gisSuperElev: "超高 (mm)",
+    gisTransition: "缓和曲线类型", gisTransitionLen: "缓和曲线长度 (m)",
+    gisAnnualMGT: "年交通量 (MGT)", gisAxleLoad: "轴重 (t)", gisTrafficType: "交通类型",
+    gisSwitchId: "道岔编号", gisSwitchAngle: "角度",
+    gisIsSlabTrack: "板式轨道", gisSlabType: "板型",
+    gisBtnAdd: "添加段落", gisBtnSave: "保存", gisBtnCancel: "取消",
+    gisBtnEdit: "编辑", gisBtnDelete: "删除",
+    gisNoSegments: "未输入任何段落。", gisStripChart: "线性地图 (Km)",
+    gisToastSaved: "段落保存成功。", gisToastDeleted: "段落已删除。",
+    gisToastError: "保存时出错。",
+    gisTableKmRange: "里程范围", gisTableParams: "参数", gisTableActions: "操作"
   },
   'zh-TW': {
     headerTitle: "系統設定",
@@ -436,7 +496,27 @@ const translations = {
     prefsBrowse: "瀏覽...",
     prefsServerIp: "伺服器 IP",
     prefsSave: "儲存偏好設定",
-    toastPrefsSuccess: "系統偏好設定儲存成功。"
+    toastPrefsSuccess: "系統偏好設定儲存成功。",
+    tabGis: "GIS 資料庫",
+    gisTitle: "基礎設施 GIS 資料庫",
+    gisDesc: "按公里範圍手動登錄基礎設施參數。",
+    gisSelectLine: "選擇路線",
+    gisNoLines: "沒有可用路線。請先在路線與軌道標籤頁建立路線。",
+    gisLayerSleepers: "枕木", gisLayerSlab: "版式軌道", gisLayerBallast: "道碴",
+    gisLayerCurvatures: "曲線", gisLayerTonnage: "噸位", gisLayerSwitches: "道岔",
+    gisStartKm: "起點里程", gisEndKm: "終點里程", gisKm: "里程 (位置)",
+    gisType: "類型", gisCondition: "狀態", gisColor: "顏色",
+    gisRadius: "半徑 (m)", gisSuperElev: "超高 (mm)",
+    gisTransition: "緩和曲線類型", gisTransitionLen: "緩和曲線長度 (m)",
+    gisAnnualMGT: "年交通量 (MGT)", gisAxleLoad: "軸重 (t)", gisTrafficType: "交通類型",
+    gisSwitchId: "道岔編號", gisSwitchAngle: "角度",
+    gisIsSlabTrack: "版式軌道", gisSlabType: "版型",
+    gisBtnAdd: "新增段落", gisBtnSave: "儲存", gisBtnCancel: "取消",
+    gisBtnEdit: "編輯", gisBtnDelete: "刪除",
+    gisNoSegments: "未輸入任何段落。", gisStripChart: "線性地圖 (Km)",
+    gisToastSaved: "段落儲存成功。", gisToastDeleted: "段落已刪除。",
+    gisToastError: "儲存時發生錯誤。",
+    gisTableKmRange: "里程範圍", gisTableParams: "參數", gisTableActions: "動作"
   }
 };
 
@@ -448,6 +528,15 @@ export default function GeneralConfigurationPage() {
   const [stations, setStations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState({ show: false, message: '', isError: false });
+
+  // GIS State
+  const [selectedGisLineId, setSelectedGisLineId] = useState('');
+  const [gisActiveLayer, setGisActiveLayer] = useState('sleepers');
+  const [gisData, setGisData] = useState(null);
+  const [gisLoading, setGisLoading] = useState(false);
+  const [gisForm, setGisForm] = useState({});
+  const [gisEditingId, setGisEditingId] = useState(null);
+  const [gisShowForm, setGisShowForm] = useState(false);
 
   // Form states
   const [selectedLanguage, setSelectedLanguage] = useState('it');
@@ -475,6 +564,14 @@ export default function GeneralConfigurationPage() {
     fetchConfig();
     fetchStations();
   }, []);
+
+  useEffect(() => {
+    if (selectedGisLineId) {
+      fetchGisData(selectedGisLineId);
+    } else {
+      setGisData(null);
+    }
+  }, [selectedGisLineId]);
 
   useEffect(() => {
     if (activeTab === 'status') {
@@ -739,7 +836,6 @@ export default function GeneralConfigurationPage() {
       showToast(err.message, true);
     }
   };
-
   const handleStationDelete = async (code) => {
     if (!window.confirm(t('confirmDeleteStation').replace('{code}', code))) return;
     try {
@@ -750,11 +846,176 @@ export default function GeneralConfigurationPage() {
       showToast(t('toastStationDeleteSuccess'));
       if (editingStation === code) {
         setEditingStation(null);
-        setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '' });
+        setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', stationNumber: '', stationType: 'station' });
       }
     } catch (err) {
       showToast(err.message, true);
     }
+  };
+
+  const handleRailMLImport = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!window.confirm("Attenzione: l'importazione da RailML sovrascriverà i dati esistenti per i layer che verranno trovati. Vuoi procedere?")) {
+      e.target.value = null; // reset
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('overwrite', 'true');
+
+    try {
+      setGisLoading(true);
+      const res = await fetch(`${API_BASE}/gis/${selectedGisLineId}/import-railml`, {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.error || 'Errore importazione');
+      showToast('Importazione RailML completata con successo!');
+      fetchGisData(selectedGisLineId);
+    } catch (err) {
+      showToast(err.message || 'Errore durante l\'importazione', true);
+    } finally {
+      setGisLoading(false);
+      e.target.value = null;
+    }
+  };
+
+  // ─── GIS FUNCTIONS ───────────────────────────────────────────────
+  const fetchGisData = async (lineId) => {
+    try {
+      setGisLoading(true);
+      const res = await fetch(`${API_BASE}/gis/${lineId}`);
+      const data = await res.json();
+      if (data.success) setGisData(data.data);
+    } catch (err) {
+      showToast(t('gisToastError'), true);
+    } finally {
+      setGisLoading(false);
+    }
+  };
+
+  const getDefaultGisForm = (layer) => {
+    const d = {
+      sleepers:   { startKm: '', endKm: '', type: 'Concrete_Monoblock', color: '#C0C0C0' },
+      slab:       { startKm: '', endKm: '', isSlabTrack: true, slabType: 'RHEDA', color: '#607D8B' },
+      ballast:    { startKm: '', endKm: '', ballastType: 'Granite', condition: 'Good', color: '#9E9E9E' },
+      curvatures: { startKm: '', endKm: '', radius: '', superElevation: '', transitionType: 'Clothoid', transitionLength: '', color: '#FFC107' },
+      tonnage:    { startKm: '', endKm: '', annualTraffic_MGT: '', axleLoad_t: '', trafficType: 'Mixed', color: '#4CAF50' },
+      switches:   { km: '', switchId: '', switchType: 'Simple', angle: '1:12', condition: 'Good', color: '#2196F3' }
+    };
+    return d[layer] || {};
+  };
+
+  const handleGisAddSegment = async (e) => {
+    e.preventDefault();
+    if (!selectedGisLineId) return;
+    try {
+      const url = gisEditingId
+        ? `${API_BASE}/gis/${selectedGisLineId}/${gisActiveLayer}/${gisEditingId}`
+        : `${API_BASE}/gis/${selectedGisLineId}/${gisActiveLayer}`;
+      const res = await fetch(url, {
+        method: gisEditingId ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gisForm)
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        return showToast(err.error || t('gisToastError'), true);
+      }
+      showToast(t('gisToastSaved'));
+      setGisShowForm(false);
+      setGisEditingId(null);
+      setGisForm(getDefaultGisForm(gisActiveLayer));
+      fetchGisData(selectedGisLineId);
+    } catch (err) {
+      showToast(t('gisToastError'), true);
+    }
+  };
+
+  const handleGisEdit = (segment) => {
+    setGisEditingId(segment.id);
+    setGisForm({ ...segment });
+    setGisShowForm(true);
+  };
+
+  const handleGisDelete = async (segmentId) => {
+    if (!window.confirm(t('gisBtnDelete') + '?')) return;
+    try {
+      await fetch(`${API_BASE}/gis/${selectedGisLineId}/${gisActiveLayer}/${segmentId}`, { method: 'DELETE' });
+      showToast(t('gisToastDeleted'));
+      fetchGisData(selectedGisLineId);
+    } catch (err) {
+      showToast(t('gisToastError'), true);
+    }
+  };
+
+  const handleGisLayerChange = (layer) => {
+    setGisActiveLayer(layer);
+    setGisShowForm(false);
+    setGisEditingId(null);
+    setGisForm(getDefaultGisForm(layer));
+  };
+
+  const renderGisForm = () => {
+    const inputCls = 'w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-slate-800 text-sm focus:border-blue-500 transition-all outline-none';
+    const labelCls = 'block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1';
+    const setF = (key, val) => setGisForm(prev => ({ ...prev, [key]: val }));
+    const kmRow = (
+      <div className="grid grid-cols-2 gap-3">
+        <div><label className={labelCls}>{t('gisStartKm')}</label>
+          <input type="number" step="0.001" value={gisForm.startKm ?? ''} onChange={e => setF('startKm', parseFloat(e.target.value))} className={inputCls} required /></div>
+        <div><label className={labelCls}>{t('gisEndKm')}</label>
+          <input type="number" step="0.001" value={gisForm.endKm ?? ''} onChange={e => setF('endKm', parseFloat(e.target.value))} className={inputCls} required /></div>
+      </div>
+    );
+    const colorRow = (
+      <div className="flex items-center gap-3">
+        <div className="flex-1"><label className={labelCls}>{t('gisColor')}</label>
+          <input type="text" value={gisForm.color ?? '#888'} onChange={e => setF('color', e.target.value)} className={inputCls} /></div>
+        <div className="mt-5"><input type="color" value={gisForm.color ?? '#888888'} onChange={e => setF('color', e.target.value)} className="w-10 h-10 rounded cursor-pointer border border-slate-200" /></div>
+      </div>
+    );
+    if (gisActiveLayer === 'sleepers') return <div className="space-y-3">{kmRow}<div><label className={labelCls}>{t('gisType')}</label><select value={gisForm.type ?? 'Concrete_Monoblock'} onChange={e => setF('type', e.target.value)} className={inputCls}><option value="Wood">Wood</option><option value="Concrete_Monoblock">Concrete Monoblock</option><option value="Concrete_Biblock">Concrete Biblock</option><option value="Steel">Steel</option><option value="Composite">Composite</option></select></div>{colorRow}</div>;
+    if (gisActiveLayer === 'slab') return <div className="space-y-3">{kmRow}<div className="flex items-center gap-3"><label className={labelCls}>{t('gisIsSlabTrack')}</label><input type="checkbox" checked={!!gisForm.isSlabTrack} onChange={e => setF('isSlabTrack', e.target.checked)} className="w-4 h-4 text-blue-600" /></div><div><label className={labelCls}>{t('gisSlabType')}</label><select value={gisForm.slabType ?? 'RHEDA'} onChange={e => setF('slabType', e.target.value)} className={inputCls}><option value="RHEDA">RHEDA</option><option value="LVT">LVT</option><option value="Stedef">Stedef</option><option value="Heitkamp">Heitkamp</option><option value="Other">Other</option></select></div>{colorRow}</div>;
+    if (gisActiveLayer === 'ballast') return <div className="space-y-3">{kmRow}<div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisType')}</label><select value={gisForm.ballastType ?? 'Granite'} onChange={e => setF('ballastType', e.target.value)} className={inputCls}><option value="Granite">Granite</option><option value="Limestone">Limestone</option><option value="Mixed">Mixed</option><option value="None">None</option></select></div><div><label className={labelCls}>{t('gisCondition')}</label><select value={gisForm.condition ?? 'Good'} onChange={e => setF('condition', e.target.value)} className={inputCls}><option value="Good">Good</option><option value="Fouled">Fouled</option><option value="To_Replace">To Replace</option></select></div></div>{colorRow}</div>;
+    if (gisActiveLayer === 'curvatures') return <div className="space-y-3">{kmRow}<div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisRadius')}</label><input type="number" value={gisForm.radius ?? ''} onChange={e => setF('radius', parseFloat(e.target.value))} className={inputCls} placeholder="0=straight" /></div><div><label className={labelCls}>{t('gisSuperElev')}</label><input type="number" value={gisForm.superElevation ?? ''} onChange={e => setF('superElevation', parseFloat(e.target.value))} className={inputCls} /></div></div><div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisTransition')}</label><select value={gisForm.transitionType ?? 'Clothoid'} onChange={e => setF('transitionType', e.target.value)} className={inputCls}><option value="Clothoid">Clothoid</option><option value="Cubic_Parabola">Cubic Parabola</option><option value="None">None</option></select></div><div><label className={labelCls}>{t('gisTransitionLen')}</label><input type="number" value={gisForm.transitionLength ?? ''} onChange={e => setF('transitionLength', parseFloat(e.target.value))} className={inputCls} /></div></div>{colorRow}</div>;
+    if (gisActiveLayer === 'tonnage') return <div className="space-y-3">{kmRow}<div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisAnnualMGT')}</label><input type="number" step="0.1" value={gisForm.annualTraffic_MGT ?? ''} onChange={e => setF('annualTraffic_MGT', parseFloat(e.target.value))} className={inputCls} /></div><div><label className={labelCls}>{t('gisAxleLoad')}</label><input type="number" step="0.5" value={gisForm.axleLoad_t ?? ''} onChange={e => setF('axleLoad_t', parseFloat(e.target.value))} className={inputCls} /></div></div><div><label className={labelCls}>{t('gisTrafficType')}</label><select value={gisForm.trafficType ?? 'Mixed'} onChange={e => setF('trafficType', e.target.value)} className={inputCls}><option value="Passenger">Passenger</option><option value="Freight">Freight</option><option value="Mixed">Mixed</option></select></div>{colorRow}</div>;
+    if (gisActiveLayer === 'switches') return <div className="space-y-3"><div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisKm')}</label><input type="number" step="0.001" value={gisForm.km ?? ''} onChange={e => setF('km', parseFloat(e.target.value))} className={inputCls} required /></div><div><label className={labelCls}>{t('gisSwitchId')}</label><input type="text" value={gisForm.switchId ?? ''} onChange={e => setF('switchId', e.target.value)} className={inputCls} placeholder="SW-001" /></div></div><div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisType')}</label><select value={gisForm.switchType ?? 'Simple'} onChange={e => setF('switchType', e.target.value)} className={inputCls}><option value="Simple">Simple</option><option value="Double">Double</option><option value="Trailing">Trailing</option><option value="Facing">Facing</option><option value="Scissor">Scissor</option></select></div><div><label className={labelCls}>{t('gisSwitchAngle')}</label><select value={gisForm.angle ?? '1:12'} onChange={e => setF('angle', e.target.value)} className={inputCls}><option value="1:9">1:9</option><option value="1:12">1:12</option><option value="1:15">1:15</option><option value="1:18.5">1:18.5</option></select></div></div><div><label className={labelCls}>{t('gisCondition')}</label><select value={gisForm.condition ?? 'Good'} onChange={e => setF('condition', e.target.value)} className={inputCls}><option value="Good">Good</option><option value="Warning">Warning</option><option value="Critical">Critical</option></select></div>{colorRow}</div>;
+    return null;
+  };
+
+  const renderGisStripChart = () => {
+    const segments = gisData?.gisLayers?.[gisActiveLayer] || [];
+    const line = config?.lines?.find(l => l.id === selectedGisLineId);
+    if (!line || segments.length === 0) return null;
+    const lineStart = line.startKm;
+    const range = (line.endKm - line.startKm) || 1;
+    return (
+      <div className="mt-4 mb-2">
+        <div className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">{t('gisStripChart')} — {line.name} ({lineStart} – {line.endKm} km)</div>
+        <div className="relative h-8 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+          {gisActiveLayer === 'switches'
+            ? segments.map(s => <div key={s.id} title={`${s.switchId || ''} @ ${s.km} km`} className="absolute top-0 h-full w-1" style={{ left: `${((s.km - lineStart) / range) * 100}%`, backgroundColor: s.color || '#2196F3' }} />)
+            : segments.map(s => <div key={s.id} title={`${s.startKm}–${s.endKm} km`} className="absolute top-0 h-full opacity-80 hover:opacity-100 transition-opacity" style={{ left: `${((s.startKm - lineStart) / range) * 100}%`, width: `${((s.endKm - s.startKm) / range) * 100}%`, backgroundColor: s.color || '#888' }} />)
+          }
+        </div>
+        <div className="flex justify-between text-xs text-slate-400 mt-1"><span>{lineStart} km</span><span>{line.endKm} km</span></div>
+      </div>
+    );
+  };
+
+  const fmtParams = (seg, layer) => {
+    if (layer === 'sleepers') return seg.type || '-';
+    if (layer === 'slab') return `${seg.slabType || '-'}${seg.isSlabTrack ? '' : ' (no slab)'}`;
+    if (layer === 'ballast') return `${seg.ballastType || '-'} / ${seg.condition || '-'}`;
+    if (layer === 'curvatures') return `R=${seg.radius ?? '∞'}m, e=${seg.superElevation ?? 0}mm`;
+    if (layer === 'tonnage') return `${seg.annualTraffic_MGT ?? '-'} MGT, ${seg.axleLoad_t ?? '-'}t`;
+    if (layer === 'switches') return `${seg.switchId || '-'} ${seg.switchType || ''} ${seg.angle || ''}, ${seg.condition || '-'}`;
+    return '-';
   };
 
   if (loading) {
@@ -773,8 +1034,18 @@ export default function GeneralConfigurationPage() {
     { id: 'operators', label: t('tabOperators') },
     { id: 'taskTypes', label: t('tabTaskTypes') },
     { id: 'stations', label: t('tabStations') },
+    { id: 'gis', label: t('tabGis') },
     { id: 'status', label: t('tabStatus') },
     { id: 'prefs', label: t('tabPrefs') }
+  ];
+
+  const gisLayers = [
+    { id: 'sleepers',   label: t('gisLayerSleepers') },
+    { id: 'slab',       label: t('gisLayerSlab') },
+    { id: 'ballast',    label: t('gisLayerBallast') },
+    { id: 'curvatures', label: t('gisLayerCurvatures') },
+    { id: 'tonnage',    label: t('gisLayerTonnage') },
+    { id: 'switches',   label: t('gisLayerSwitches') }
   ];
 
   return (
@@ -1329,6 +1600,108 @@ export default function GeneralConfigurationPage() {
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* TAB GIS DATABASE */}
+        {activeTab === 'gis' && (
+          <div className="space-y-6">
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+              <h2 className="text-lg font-bold text-slate-800 mb-1">{t('gisTitle')}</h2>
+              <p className="text-slate-500 text-sm mb-6">{t('gisDesc')}</p>
+              <div className="mb-6 max-w-xs">
+                <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">{t('gisSelectLine')}</label>
+                {(!config?.lines || config.lines.length === 0) ? (
+                  <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">{t('gisNoLines')}</div>
+                ) : (
+                  <select value={selectedGisLineId} onChange={e => { setSelectedGisLineId(e.target.value); setGisShowForm(false); setGisEditingId(null); }} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none">
+                    <option value="">-- {t('gisSelectLine')} --</option>
+                    {config.lines.map(l => <option key={l.id} value={l.id}>{l.name} ({l.id})</option>)}
+                  </select>
+                )}
+              </div>
+              {selectedGisLineId && (
+                <>
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="flex gap-1 flex-wrap bg-slate-100 rounded-lg p-1">
+                      {gisLayers.map(layer => (
+                        <button key={layer.id} onClick={() => handleGisLayerChange(layer.id)}
+                          className={`px-4 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition-all ${gisActiveLayer === layer.id ? 'bg-white text-blue-600 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-700 hover:bg-white/50'}`}>
+                          {layer.label}
+                        </button>
+                      ))}
+                    </div>
+                    <div>
+                      <label className="cursor-pointer px-4 py-2 bg-indigo-50 text-indigo-600 border border-indigo-200 hover:bg-indigo-100 rounded-md text-sm font-semibold transition-all shadow-sm">
+                        <span>📤 Importa da RailML</span>
+                        <input type="file" accept=".xml,.railml" onChange={handleRailMLImport} className="hidden" />
+                      </label>
+                    </div>
+                  </div>
+                  {gisLoading ? (
+                    <div className="text-center py-8 text-slate-400 text-sm animate-pulse">Caricamento...</div>
+                  ) : (
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                      <div className="lg:col-span-4">
+                        {!gisShowForm ? (
+                          <button onClick={() => { setGisShowForm(true); setGisEditingId(null); setGisForm(getDefaultGisForm(gisActiveLayer)); }}
+                            className="w-full py-3 border-2 border-dashed border-blue-200 hover:border-blue-400 text-blue-500 hover:text-blue-600 rounded-xl text-sm font-semibold transition-all">
+                            + {t('gisBtnAdd')}
+                          </button>
+                        ) : (
+                          <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
+                            <h3 className="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">
+                              {gisEditingId ? t('gisBtnEdit') : t('gisBtnAdd')} – {gisLayers.find(l => l.id === gisActiveLayer)?.label}
+                            </h3>
+                            <form onSubmit={handleGisAddSegment} className="space-y-4">
+                              {renderGisForm()}
+                              <div className="flex gap-2 pt-2">
+                                <button type="submit" className="flex-1 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded-md font-medium text-sm transition-all">{t('gisBtnSave')}</button>
+                                <button type="button" onClick={() => { setGisShowForm(false); setGisEditingId(null); }} className="border border-slate-300 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-md font-medium text-sm transition-all">{t('gisBtnCancel')}</button>
+                              </div>
+                            </form>
+                          </div>
+                        )}
+                      </div>
+                      <div className="lg:col-span-8">
+                        {renderGisStripChart()}
+                        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mt-4">
+                          <table className="w-full text-left">
+                            <thead>
+                              <tr className="bg-slate-50 border-b border-slate-200">
+                                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{gisActiveLayer === 'switches' ? t('gisKm') : t('gisTableKmRange')}</th>
+                                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('gisTableParams')}</th>
+                                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('gisColor')}</th>
+                                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">{t('gisTableActions')}</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                              {(gisData?.gisLayers?.[gisActiveLayer] || []).length === 0 ? (
+                                <tr><td colSpan="4" className="px-4 py-10 text-center text-slate-400 text-sm">{t('gisNoSegments')}</td></tr>
+                              ) : (
+                                (gisData?.gisLayers?.[gisActiveLayer] || []).map(seg => (
+                                  <tr key={seg.id} className="hover:bg-slate-50 transition-colors">
+                                    <td className="px-4 py-3 text-sm font-mono text-slate-700">{gisActiveLayer === 'switches' ? `${seg.km} km` : `${seg.startKm} – ${seg.endKm} km`}</td>
+                                    <td className="px-4 py-3 text-sm text-slate-600">{fmtParams(seg, gisActiveLayer)}</td>
+                                    <td className="px-4 py-3"><div className="w-6 h-6 rounded border border-slate-200" style={{ backgroundColor: seg.color || '#888' }} /></td>
+                                    <td className="px-4 py-3 text-right">
+                                      <div className="flex justify-end gap-2">
+                                        <button onClick={() => handleGisEdit(seg)} className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate-700 bg-slate-100 hover:bg-slate-200 rounded transition-colors">{t('gisBtnEdit')}</button>
+                                        <button onClick={() => handleGisDelete(seg.id)} className="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-red-700 bg-red-50 hover:bg-red-100 rounded transition-colors">{t('gisBtnDelete')}</button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ))
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           </div>
         )}

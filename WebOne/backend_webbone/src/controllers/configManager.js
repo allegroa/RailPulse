@@ -4,6 +4,7 @@ const path = require('path');
 // Il backend risiede in WebOne/backend_webbone, quindi saliamo di due livelli per raggiungere DATABASE
 const DB_PATH = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'config_db.json');
 const STATION_DB_PATH = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'station.json');
+const GIS_DIR = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'GIS');
 
 // Helper per leggere il database delle configurazioni
 async function readConfig() {
@@ -85,9 +86,51 @@ async function writeStations(stations) {
   }
 }
 
+// Helper per leggere i dati GIS di una linea
+async function readGis(lineId) {
+  const filePath = path.join(GIS_DIR, `${lineId}_gis.json`);
+  try {
+    const data = await fs.readFile(filePath, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      const defaultGis = {
+        lineId,
+        gisLayers: {
+          sleepers:   [],
+          slab:       [],
+          ballast:    [],
+          curvatures: [],
+          tonnage:    [],
+          switches:   []
+        }
+      };
+      await fs.mkdir(GIS_DIR, { recursive: true });
+      await fs.writeFile(filePath, JSON.stringify(defaultGis, null, 2), 'utf-8');
+      return defaultGis;
+    }
+    console.error(`Errore lettura GIS per linea ${lineId}:`, error);
+    throw error;
+  }
+}
+
+// Helper per scrivere i dati GIS di una linea
+async function writeGis(lineId, data) {
+  const filePath = path.join(GIS_DIR, `${lineId}_gis.json`);
+  try {
+    await fs.mkdir(GIS_DIR, { recursive: true });
+    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+  } catch (error) {
+    console.error(`Errore scrittura GIS per linea ${lineId}:`, error);
+    throw error;
+  }
+}
+
 module.exports = {
   readConfig,
   writeConfig,
   readStations,
-  writeStations
+  writeStations,
+  readGis,
+  writeGis
 };

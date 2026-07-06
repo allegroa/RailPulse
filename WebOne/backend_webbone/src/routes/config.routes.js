@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { v4: uuidv4 } = require('uuid');
 const { readConfig, writeConfig, readStations, writeStations } = require('../controllers/configManager');
 
 router.get('/', async (req, res) => {

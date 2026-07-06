@@ -1,0 +1,30 @@
+{
+  "lineId": "line_nord",
+  "gisLayers": {
+    "sleepers": [
+      {
+        "startKm": 100,
+        "endKm": 101,
+        "type": "Concrete_Monoblock",
+        "color": "#C0C0C0",
+        "id": "306a5e26-65cf-4ea0-a5e0-80e0dfe09291"
+      }
+    ],
+    "slab": [],
+    "ballast": [],
+    "curvatures": [
+      {
+        "startKm": 101,
+        "endKm": 102,
+        "radius": "",
+        "superElevation": "",
+        "transitionType": "Clothoid",
+        "transitionLength": "",
+        "color": "#FFC107",
+        "id": "cd9bf7e5-a24d-4e19-a45f-50bfcb95bf2c"
+      }
+    ],
+    "tonnage": [],
+    "switches": []
+  }
+}

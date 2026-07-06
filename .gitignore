@@ -26,3 +26,6 @@ maintenance-web/uploads/
 # Uncomment if needed to exclude them:
 # database/
 # DATABASE/
+
+# Local machine-specific scripts (do NOT commit)
+start_servers_local.bat
