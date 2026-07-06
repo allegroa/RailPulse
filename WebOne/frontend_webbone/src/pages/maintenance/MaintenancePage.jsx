@@ -290,6 +290,13 @@ export default function App() {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
   const [error, setError] = useState('');
+  const [toast, setToast] = useState({ show: false, message: '', isError: false });
+  
+  const showToast = (message, isError = false) => {
+    setToast({ show: true, message, isError });
+    setTimeout(() => setToast({ show: false, message: '', isError: false }), 4000);
+  };
+
   const [activeTab, setActiveTab] = useState('database'); // 'database' | 'simulator'
   
   // Connessione backend
@@ -628,6 +635,24 @@ export default function App() {
 
   return (
     <div className="app-container">
+      {toast.show && (
+        <div style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          background: toast.isError ? '#fecaca' : '#dcfce7',
+          color: toast.isError ? '#991b1b' : '#166534',
+          border: `1px solid ${toast.isError ? '#f87171' : '#4ade80'}`,
+          padding: '12px 24px',
+          borderRadius: '8px',
+          zIndex: 9999,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          fontSize: '0.85rem',
+          fontWeight: '500'
+        }}>
+          {toast.message}
+        </div>
+      )}
       {/* Header */}
       <header className="app-header glass-panel">
         <div className="brand-section">
