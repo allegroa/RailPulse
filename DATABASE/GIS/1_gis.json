@@ -1,0 +1,42 @@
+{
+  "lineId": "1",
+  "gisLayers": {
+    "sleepers": [],
+    "slab": [],
+    "ballast": [],
+    "curvatures": [
+      {
+        "id": "2d9f26ca-71cb-49ae-8fc4-6071e6bb88df",
+        "startKm": 1,
+        "endKm": 1.1,
+        "radius": 500,
+        "superElevation": 0,
+        "transitionType": "None",
+        "transitionLength": 0,
+        "color": "#FFC107"
+      },
+      {
+        "id": "5d043ac3-993e-4d4a-adad-70593b1ddbcc",
+        "startKm": 2.5,
+        "endKm": 2.6,
+        "radius": 800,
+        "superElevation": 0,
+        "transitionType": "None",
+        "transitionLength": 0,
+        "color": "#FFC107"
+      }
+    ],
+    "tonnage": [],
+    "switches": [
+      {
+        "id": "bcdb4c85-046b-4710-b475-b4cd6c9de953",
+        "km": 3,
+        "switchId": "sw01",
+        "switchType": "ordinarySwitch",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3"
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../utils/api';
+import RailMLTopologyViewer from '../../components/RailMLTopologyViewer';
 
 // API always points to /api/config
 const API_BASE = '/api/config';
@@ -132,7 +133,8 @@ const translations = {
     gisNoSegments: "Nessun segmento inserito.", gisStripChart: "Mappa Lineare (Km)",
     gisToastSaved: "Segmento salvato con successo.", gisToastDeleted: "Segmento eliminato.",
     gisToastError: "Errore durante il salvataggio.",
-    gisTableKmRange: "Tratta Km", gisTableParams: "Parametri", gisTableActions: "Azioni"
+    gisTableKmRange: "Tratta Km", gisTableParams: "Parametri", gisTableActions: "Azioni",
+    gisViewModeStrip: "Mappa Lineare 1D", gisViewModeTopo: "Topologia 2D"
   },
   en: {
     headerTitle: "System Configuration",
@@ -531,11 +533,12 @@ export default function GeneralConfigurationPage() {
 
   // GIS State
   const [selectedGisLineId, setSelectedGisLineId] = useState('');
-  const [gisActiveLayer, setGisActiveLayer] = useState('sleepers');
+  const [gisActiveLayer, setGisActiveLayer] = useState('switches');
   const [gisData, setGisData] = useState(null);
+  const [gisViewMode, setGisViewMode] = useState('strip'); // 'strip' | 'topo'
+  const [gisEditingId, setGisEditingId] = useState(null);
   const [gisLoading, setGisLoading] = useState(false);
   const [gisForm, setGisForm] = useState({});
-  const [gisEditingId, setGisEditingId] = useState(null);
   const [gisShowForm, setGisShowForm] = useState(false);
 
   // Form states
@@ -1607,22 +1610,36 @@ export default function GeneralConfigurationPage() {
         {/* TAB GIS DATABASE */}
         {activeTab === 'gis' && (
           <div className="space-y-6">
-            <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
-              <h2 className="text-lg font-bold text-slate-800 mb-1">{t('gisTitle')}</h2>
-              <p className="text-slate-500 text-sm mb-6">{t('gisDesc')}</p>
-              <div className="mb-6 max-w-xs">
-                <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">{t('gisSelectLine')}</label>
-                {(!config?.lines || config.lines.length === 0) ? (
-                  <div className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">{t('gisNoLines')}</div>
-                ) : (
-                  <select value={selectedGisLineId} onChange={e => { setSelectedGisLineId(e.target.value); setGisShowForm(false); setGisEditingId(null); }} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none">
-                    <option value="">-- {t('gisSelectLine')} --</option>
-                    {config.lines.map(l => <option key={l.id} value={l.id}>{l.name} ({l.id})</option>)}
-                  </select>
-                )}
-              </div>
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div className="border-b border-slate-100 bg-slate-50/50 p-6">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                      <h2 className="text-xl font-bold text-slate-800">{t('gisTitle')}</h2>
+                      <p className="text-sm text-slate-500 mt-1">{t('gisDesc')}</p>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-3">
+                      <div className="flex bg-slate-200/50 p-1 rounded-lg">
+                        <button onClick={() => setGisViewMode('strip')} className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${gisViewMode === 'strip' ? 'bg-white shadow-sm text-slate-800' : 'text-slate-500 hover:text-slate-700'}`}>{t('gisViewModeStrip') || 'Mappa Lineare'}</button>
+                        <button onClick={() => setGisViewMode('topo')} className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${gisViewMode === 'topo' ? 'bg-white shadow-sm text-slate-800' : 'text-slate-500 hover:text-slate-700'}`}>{t('gisViewModeTopo') || 'Topologia 2D'}</button>
+                      </div>
+
+                      <select
+                        className="bg-white border border-slate-200 text-slate-700 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 p-2.5 shadow-sm"
+                        value={selectedGisLineId || ''}
+                        onChange={(e) => setSelectedGisLineId(e.target.value)}
+                      >
+                        <option value="" disabled>{t('gisSelectLine')}</option>
+                        {config.lines.map(l => (
+                          <option key={l.id} value={l.id}>{l.name} ({l.id})</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              
               {selectedGisLineId && (
-                <>
+                <div className="p-6">
                   <div className="flex justify-between items-center mb-6">
                     <div className="flex gap-1 flex-wrap bg-slate-100 rounded-lg p-1">
                       {gisLayers.map(layer => (
@@ -1664,6 +1681,12 @@ export default function GeneralConfigurationPage() {
                           </div>
                         )}
                       </div>
+                      
+                      {gisViewMode === 'topo' ? (
+                        <div className="lg:col-span-12 mt-4">
+                          <RailMLTopologyViewer topology={gisData?.gisLayers?.topology} />
+                        </div>
+                      ) : (
                       <div className="lg:col-span-8">
                         {renderGisStripChart()}
                         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mt-4">
@@ -1698,9 +1721,10 @@ export default function GeneralConfigurationPage() {
                           </table>
                         </div>
                       </div>
+                      )}
                     </div>
                   )}
-                </>
+                </div>
               )}
             </div>
           </div>

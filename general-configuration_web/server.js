@@ -3,7 +3,7 @@ import cors from 'cors';
 import fs from 'fs/promises';
 import path from 'path';
 import multer from 'multer';
-import { parseStringPromise } from 'xml2js';
+import { parseStringPromise, processors } from 'xml2js';
 import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -422,6 +422,9 @@ app.delete('/api/config/stations/:code', async (req, res) => {
 
 // ─── GIS Database Routes ───────────────────────────────────────────────────
 
+// Configurazione multer per l'upload temporaneo in memoria
+const upload = multer({ storage: multer.memoryStorage() });
+
 const VALID_LAYERS = ['sleepers', 'slab', 'ballast', 'curvatures', 'tonnage', 'switches'];
 
 // GET tutti i layer GIS di una linea
@@ -432,6 +435,412 @@ app.get('/api/config/gis/:lineId', async (req, res) => {
     res.json({ success: true, data: gis });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// POST – importa un file RailML per precompilare il GIS
+app.post('/api/config/gis/:lineId/import-railml', upload.single('file'), async (req, res) => {
+  try {
+    const { lineId } = req.params;
+    if (!req.file) {
+      return res.status(400).json({ success: false, error: 'Nessun file fornito' });
+    }
+
+    const xmlData = req.file.buffer.toString('utf-8');
+    const result = await parseStringPromise(xmlData, { 
+      explicitArray: false, 
+      mergeAttrs: true,
+      tagNameProcessors: [processors.stripPrefix]
+    });
+
+    const gis = await readGis(lineId);
+
+    const overwrite = req.body.overwrite === 'true';
+    if (overwrite) {
+      gis.gisLayers = { sleepers: [], slab: [], ballast: [], curvatures: [], tonnage: [], switches: [], topology: { nodes: [], edges: [] } };
+    }
+    if (!gis.gisLayers.topology) {
+      gis.gisLayers.topology = { nodes: [], edges: [] };
+    }
+
+    // Se è un file codelist, importiamo gli operatori
+    if (result?.infrastructureManagerCodes) {
+      const managers = result.infrastructureManagerCodes.infrastructureManager || [];
+      const managerList = Array.isArray(managers) ? managers : [managers];
+      let db = { operators: [] };
+      try {
+        const data = await fs.readFile(DB_PATH, 'utf-8');
+        db = JSON.parse(data);
+      } catch (e) {}
+      if (!db.operators) db.operators = [];
+      let count = 0;
+      for (const m of managerList) {
+        let nameObj = m.name;
+        let nameStr = m.code;
+        if (nameObj) {
+          if (Array.isArray(nameObj)) {
+            const en = nameObj.find(n => n['xml:lang'] === 'en');
+            if (en) nameStr = en._ || en;
+            else nameStr = nameObj[0]._ || nameObj[0];
+          } else {
+            nameStr = nameObj._ || nameObj;
+          }
+        }
+        const fullName = `${m.code} - ${nameStr}`;
+        if (!db.operators.includes(fullName)) {
+          db.operators.push(fullName);
+          count++;
+        }
+      }
+      await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), 'utf-8');
+      return res.json({ success: true, message: `Importati ${count} operatori dalla codelist!`, gis: await readGis(lineId) });
+    }
+
+    const infrastructure = result?.railml?.infrastructure || result?.infrastructure || result?.railML?.infrastructure;
+    if (!infrastructure) {
+      const keys = Object.keys(result || {}).join(', ');
+      return res.status(400).json({ success: false, error: `Formato RailML non valido o schema infrastructure mancante. Radici trovate nel file: [${keys}]` });
+    }
+
+    // Parsing RailML 2.5
+    let tracks = infrastructure.tracks?.track;
+    if (tracks) {
+      if (!Array.isArray(tracks)) tracks = [tracks];
+
+      // Build connection map for matching connections
+      const connectionMap = {};
+      tracks.forEach(track => {
+        const topo = track.trackTopology;
+        if (topo) {
+          if (topo.trackBegin?.connection) {
+            const conns = Array.isArray(topo.trackBegin.connection) ? topo.trackBegin.connection : [topo.trackBegin.connection];
+            conns.forEach(conn => {
+              connectionMap[conn.id] = {
+                trackId: track.id,
+                type: 'begin',
+                pos: parseFloat(topo.trackBegin.pos || 0)
+              };
+            });
+          }
+          if (topo.trackEnd?.connection) {
+            const conns = Array.isArray(topo.trackEnd.connection) ? topo.trackEnd.connection : [topo.trackEnd.connection];
+            conns.forEach(conn => {
+              connectionMap[conn.id] = {
+                trackId: track.id,
+                type: 'end',
+                pos: parseFloat(topo.trackEnd.pos || 0)
+              };
+            });
+          }
+          if (topo.connections) {
+            ['switch', 'crossing'].forEach(ctype => {
+              const items = topo.connections[ctype];
+              if (items) {
+                const itemArr = Array.isArray(items) ? items : [items];
+                itemArr.forEach(item => {
+                  const conns = item.connection;
+                  if (conns) {
+                    const connArr = Array.isArray(conns) ? conns : [conns];
+                    connArr.forEach(c => {
+                      connectionMap[c.id] = {
+                        trackId: track.id,
+                        type: ctype,
+                        itemId: item.id,
+                        pos: parseFloat(item.pos || 0),
+                        course: c.course,
+                        orientation: c.orientation
+                      };
+                    });
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+
+      // Build edges map (deduplicated)
+      const edgesMap = new Map();
+      tracks.forEach(track => {
+        const topo = track.trackTopology;
+        if (topo) {
+          const processConnection = (conn, sourceType, sourcePos, switchId = null) => {
+            if (conn && conn.ref) {
+              const targetConn = connectionMap[conn.ref];
+              if (targetConn) {
+                const edgeKey = [conn.id, conn.ref].sort().join('_');
+                if (!edgesMap.has(edgeKey)) {
+                  edgesMap.set(edgeKey, {
+                    id: edgeKey,
+                    source: track.id,
+                    target: targetConn.trackId,
+                    sourceConn: conn.id,
+                    targetConn: conn.ref,
+                    sourceType,
+                    targetType: targetConn.type,
+                    sourcePos,
+                    targetPos: targetConn.pos,
+                    switchId: switchId || targetConn.itemId || null
+                  });
+                }
+              }
+            }
+          };
+
+          if (topo.trackBegin?.connection) {
+            const conns = Array.isArray(topo.trackBegin.connection) ? topo.trackBegin.connection : [topo.trackBegin.connection];
+            conns.forEach(conn => processConnection(conn, 'begin', parseFloat(topo.trackBegin.pos || 0)));
+          }
+          if (topo.trackEnd?.connection) {
+            const conns = Array.isArray(topo.trackEnd.connection) ? topo.trackEnd.connection : [topo.trackEnd.connection];
+            conns.forEach(conn => processConnection(conn, 'end', parseFloat(topo.trackEnd.pos || 0)));
+          }
+          if (topo.connections) {
+            ['switch', 'crossing'].forEach(ctype => {
+              const items = topo.connections[ctype];
+              if (items) {
+                const itemArr = Array.isArray(items) ? items : [items];
+                itemArr.forEach(item => {
+                  const conns = item.connection;
+                  if (conns) {
+                    const connArr = Array.isArray(conns) ? conns : [conns];
+                    connArr.forEach(conn => processConnection(conn, ctype, parseFloat(item.pos || 0), item.id));
+                  }
+                });
+              }
+            });
+          }
+        }
+      });
+
+      // Extract tracks nodes details
+      const nodes = [];
+      tracks.forEach(track => {
+        const length = track.trackTopology?.trackEnd?.pos ? parseFloat(track.trackTopology.trackEnd.pos) : 0;
+        const trackElements = track.trackElements || track.trackTopology?.trackElements || {};
+
+        // Extract features
+        const features = {
+          signals: [],
+          levelCrossings: [],
+          platformEdges: [],
+          derailers: [],
+          speedChanges: []
+        };
+
+        const signals = track.ocsElements?.signals?.signal;
+        if (signals) {
+          const sigArr = Array.isArray(signals) ? signals : [signals];
+          sigArr.forEach(s => {
+            features.signals.push({
+              id: s.id,
+              name: s.code || s.id,
+              pos: parseFloat(s.pos || 0),
+              dir: s.dir || 'none',
+              function: s.function || 'main',
+              type: s.type || 'main'
+            });
+          });
+        }
+
+        const levelCrossings = trackElements.levelCrossings?.levelCrossing;
+        if (levelCrossings) {
+          const lcArr = Array.isArray(levelCrossings) ? levelCrossings : [levelCrossings];
+          lcArr.forEach(lc => {
+            features.levelCrossings.push({
+              id: lc.id,
+              pos: parseFloat(lc.pos || 0),
+              protection: lc.protection || 'none',
+              angle: parseFloat(lc.angle || 90)
+            });
+          });
+        }
+
+        const platformEdges = trackElements.platformEdges?.platformEdge;
+        if (platformEdges) {
+          const peArr = Array.isArray(platformEdges) ? platformEdges : [platformEdges];
+          peArr.forEach(pe => {
+            features.platformEdges.push({
+              id: pe.id,
+              name: pe.name || pe.id,
+              pos: parseFloat(pe.pos || 0),
+              length: parseFloat(pe.length || 0),
+              side: pe.side || 'left'
+            });
+          });
+        }
+
+        const derailers = track.ocsElements?.derailers?.derailer;
+        if (derailers) {
+          const derArr = Array.isArray(derailers) ? derailers : [derailers];
+          derArr.forEach(der => {
+            features.derailers.push({
+              id: der.id,
+              name: der.code || der.id,
+              pos: parseFloat(der.pos || 0),
+              side: der.derailSide || 'none'
+            });
+          });
+        }
+
+        const speedChanges = trackElements.speedChanges?.speedChange;
+        if (speedChanges) {
+          const scArr = Array.isArray(speedChanges) ? speedChanges : [speedChanges];
+          scArr.forEach(sc => {
+            features.speedChanges.push({
+              id: sc.id,
+              pos: parseFloat(sc.pos || 0),
+              vMax: sc.vMax || 'end'
+            });
+          });
+        }
+
+        nodes.push({
+          id: track.id,
+          name: track.name || track.id,
+          type: track.type || 'track',
+          length,
+          features
+        });
+
+        // Curvatures
+        let radiusChanges = trackElements.radiusChanges?.radiusChange;
+        if (radiusChanges) {
+          if (!Array.isArray(radiusChanges)) radiusChanges = [radiusChanges];
+          radiusChanges.forEach(rc => {
+            const km = parseFloat(rc.pos || 0) / 1000;
+            gis.gisLayers.curvatures.push({
+              id: uuidv4(),
+              startKm: km,
+              endKm: km + 0.1,
+              radius: parseFloat(rc.radius || 0),
+              superElevation: 0,
+              transitionType: 'None',
+              transitionLength: 0,
+              color: '#FFC107'
+            });
+          });
+        }
+
+        // Switches
+        let switches = trackElements?.switches?.switch || track.trackTopology?.connections?.switch || track.trackTopology?.connections?.crossing;
+        if (switches) {
+          if (!Array.isArray(switches)) switches = [switches];
+          switches.forEach(sw => {
+            const km = parseFloat(sw.pos || 0) / 1000;
+            gis.gisLayers.switches.push({
+              id: uuidv4(),
+              km: km,
+              switchId: sw.id || '',
+              switchType: sw.type || 'Simple',
+              angle: '1:12',
+              condition: 'Good',
+              color: '#2196F3'
+            });
+          });
+        }
+        
+        // Ballast/Sleepers
+        let trackConditions = track.trackElements?.trackConditions?.trackCondition;
+        if (trackConditions) {
+          if (!Array.isArray(trackConditions)) trackConditions = [trackConditions];
+          trackConditions.forEach(tc => {
+            if (tc.type === 'ballast') {
+              const startKm = parseFloat(tc.pos || 0) / 1000;
+              const length = parseFloat(tc.length || 100) / 1000;
+              gis.gisLayers.ballast.push({
+                id: uuidv4(),
+                startKm: startKm,
+                endKm: startKm + length,
+                ballastType: 'Mixed',
+                condition: 'Good',
+                color: '#9E9E9E'
+              });
+            }
+          });
+        }
+      });
+
+      // Extract OCPs (stations)
+      const ocps = [];
+      const ocpElements = infrastructure.operationControlPoints?.ocp;
+      if (ocpElements) {
+        const ocpArr = Array.isArray(ocpElements) ? ocpElements : [ocpElements];
+        ocpArr.forEach(ocp => {
+          let name = ocp.name;
+          if (name && typeof name === 'object') {
+            name = name._ || name.name || ocp.id;
+          }
+          let coord = ocp.geoCoord?.coord;
+          let lat = null, lon = null;
+          if (coord) {
+            const parts = coord.trim().split(/\s+/);
+            if (parts.length >= 2) {
+              lat = parseFloat(parts[0]);
+              lon = parseFloat(parts[1]);
+            }
+          }
+          const tracksList = [];
+          if (ocp.propEquipment?.trackRef) {
+            const refs = Array.isArray(ocp.propEquipment.trackRef) ? ocp.propEquipment.trackRef : [ocp.propEquipment.trackRef];
+            refs.forEach(r => {
+              if (r.ref) tracksList.push(r.ref);
+            });
+          }
+          ocps.push({
+            id: ocp.id,
+            name: name || ocp.id,
+            lat,
+            lon,
+            tracks: tracksList
+          });
+        });
+      }
+
+      // Associate cross-section ocpRefs to OCPs
+      tracks.forEach(track => {
+        const crossSections = track.trackTopology?.crossSections?.crossSection;
+        if (crossSections) {
+          const csArr = Array.isArray(crossSections) ? crossSections : [crossSections];
+          csArr.forEach(cs => {
+            if (cs.ocpRef) {
+              const ocp = ocps.find(o => o.id === cs.ocpRef);
+              if (ocp) {
+                if (!ocp.tracks.includes(track.id)) {
+                  ocp.tracks.push(track.id);
+                }
+              }
+            }
+          });
+        }
+      });
+
+      // Extract main line
+      let mainLine = [];
+      const lineElements = infrastructure.trackGroups?.line;
+      if (lineElements) {
+        const lineArr = Array.isArray(lineElements) ? lineElements : [lineElements];
+        const firstLine = lineArr[0];
+        if (firstLine && firstLine.trackRef) {
+          const trackRefs = Array.isArray(firstLine.trackRef) ? firstLine.trackRef : [firstLine.trackRef];
+          const sortedRefs = [...trackRefs].sort((a, b) => parseInt(a.sequence || 0) - parseInt(b.sequence || 0));
+          mainLine = sortedRefs.map(tr => tr.ref);
+        }
+      }
+
+      gis.gisLayers.topology = {
+        nodes,
+        edges: Array.from(edgesMap.values()),
+        ocps,
+        mainLine
+      };
+    }
+
+    await writeGis(lineId, gis);
+    res.json({ success: true, message: 'File RailML 2.5 processato', gis });
+  } catch (err) {
+    console.error('Errore durante il parsing RailML:', err);
+    res.status(500).json({ success: false, error: 'Errore durante il parsing del file XML: ' + err.message });
   }
 });
 
@@ -529,62 +938,9 @@ app.delete('/api/config/gis/:lineId/:layer/:segmentId', async (req, res) => {
   }
 });
 
-// Configurazione multer per l'upload temporaneo in memoria
-const upload = multer({ storage: multer.memoryStorage() });
 
-// POST – importa un file RailML per precompilare il GIS
-app.post('/api/config/gis/:lineId/import-railml', upload.single('file'), async (req, res) => {
-  try {
-    const { lineId } = req.params;
-    if (!req.file) {
-      return res.status(400).json({ success: false, error: 'Nessun file fornito' });
-    }
 
-    const xmlData = req.file.buffer.toString('utf-8');
-    const result = await parseStringPromise(xmlData, { explicitArray: false, mergeAttrs: true });
 
-    // Ottieni i dati GIS esistenti per non sovrascrivere tutto, o creane di nuovi
-    const gis = await readGis(lineId);
-
-    // Esempio logico di estrazione da RailML 3:
-    // Questa è una struttura molto basilare basata sullo standard.
-    // L'implementazione reale dipenderà fortemente dallo schema esatto caricato.
-    
-    // Per sicurezza, resettiamo o prepariamo i layer se l'utente vuole sovrascrivere
-    const overwrite = req.body.overwrite === 'true';
-    if (overwrite) {
-      gis.gisLayers = { sleepers: [], slab: [], ballast: [], curvatures: [], tonnage: [], switches: [] };
-    }
-
-    const infrastructure = result?.railml?.infrastructure || result?.infrastructure;
-    if (!infrastructure) {
-      return res.status(400).json({ success: false, error: 'Formato RailML non valido o schema infrastructure mancante' });
-    }
-
-    // Estrazione TrackParameters -> trackBed per traverse/slab/ballast
-    let trackParameters = infrastructure.trackParameters || infrastructure.tracks?.track?.trackParameters;
-    if (trackParameters) {
-      // Esempio: sleepers
-      if (trackParameters.trackBed?.sleepers) {
-         gis.gisLayers.sleepers.push({
-           id: uuidv4(),
-           startKm: 0, // da estrarre da linearLocation
-           endKm: 100, // finto per demo
-           params: 'Importato da RailML'
-         });
-      }
-    }
-
-    // Questo è un template: andrà espanso quando avremo un file RailML reale di esempio
-    // ...
-
-    await writeGis(lineId, gis);
-    res.json({ success: true, message: 'File RailML processato', gis });
-  } catch (err) {
-    console.error('Errore durante il parsing RailML:', err);
-    res.status(500).json({ success: false, error: 'Errore durante il parsing del file XML: ' + err.message });
-  }
-});
 
 // Gestione Frontend (Static files per ambiente di produzione)
 const distPath = path.join(__dirname, 'dist');

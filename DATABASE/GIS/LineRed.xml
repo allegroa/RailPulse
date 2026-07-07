@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<railml xmlns="https://www.railml.org/schemas/3.2" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="https://www.railml.org/schemas/3.2 https://www.railml.org/schemas/3.2/railml3.xsd" 
+        version="3.2">
+    
+    <metadata>
+        <organizationalUnits>
+            <infrastructureManager id="im_01" name="Rete_Infrastruttura_Esempio"/>
+        </organizationalUnits>
+    </metadata>
+
+    <infrastructure id="inf_01">
+        <topology>
+            <netElements>
+                <netElement id="ne_01">
+                    <relation ref="topo_rel_01"/>
+                </netElement>
+            </netElements>
+            <netRelations>
+                <netRelation id="topo_rel_01" positionOnA="1" positionOnB="0">
+                    <elementA ref="node_01"/>
+                    <elementB ref="node_02"/>
+                </netRelation>
+            </netRelations>
+            <networks>
+                <network id="nw_01">
+                    <level id="lvl_01" description="Micro-level topology">
+                        <networkResource ref="ne_01"/>
+                    </level>
+                </network>
+            </networks>
+        </topology>
+
+        <functionalInfrastructure>
+            <tracks>
+                <track id="tr_01" name="Binario_Principale_01">
+                    <linearLocation id="loc_01">
+                        <associatedNetElement netElementRef="ne_01" intrinsicCoordBegin="0.0" intrinsicCoordEnd="1.0"/>
+                    </linearLocation>
+                    <designator register="Codice_Interno" entry="BIN-01"/>
+                </track>
+            </tracks>
+            <bufferStops>
+                <bufferStop id="node_01" countryCode="IT">
+                    <spotLocation id="sl_01" netElementRef="ne_01" intrinsicCoord="0.0"/>
+                </bufferStop>
+                <bufferStop id="node_02" countryCode="IT">
+                    <spotLocation id="sl_02" netElementRef="ne_01" intrinsicCoord="1.0"/>
+                </bufferStop>
+            </bufferStops>
+        </functionalInfrastructure>
+
+        <physicalInfrastructure>
+            <trackGauges>
+                <trackGauge id="tg_01" value="1435">
+                    <linearLocation id="loc_tg_01">
+                        <associatedNetElement netElementRef="ne_01" intrinsicCoordBegin="0.0" intrinsicCoordEnd="1.0"/>
+                    </linearLocation>
+                </trackGauge>
+            </trackGauges>
+        </physicalInfrastructure>
+    </infrastructure>
+</railml>

@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@xyflow/react": "^12.11.2",
     "axios": "^1.9.0",
     "chart.js": "^4.5.0",
     "chartjs-plugin-annotation": "^3.1.0",
     "chartjs-plugin-zoom": "^2.2.0",
+    "dagre": "^0.8.5",
     "i18next": "^26.3.1",
     "i18next-browser-languagedetector": "^8.2.1",
     "jwt-decode": "^4.0.0",

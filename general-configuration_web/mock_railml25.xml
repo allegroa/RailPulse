@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<railml xmlns="https://www.railml.org/schemas/2021" version="2.5">
+  <infrastructure id="inf01">
+    <tracks>
+      <track id="tr01">
+        <trackTopology>
+          <trackElements>
+            <radiusChanges>
+              <radiusChange id="rc01" pos="1000" radius="500"/>
+              <radiusChange id="rc02" pos="2500" radius="800"/>
+            </radiusChanges>
+            <switches>
+              <switch id="sw01" pos="3000" type="ordinarySwitch"/>
+            </switches>
+          </trackElements>
+        </trackTopology>
+      </track>
+    </tracks>
+  </infrastructure>
+</railml>
