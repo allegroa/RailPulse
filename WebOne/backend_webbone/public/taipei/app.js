@@ -35,11 +35,11 @@ const STATIONS = {
   R08  : {e:'Ximen', z:'西門', x:278, y:858, ln:["R"], t:'main_station', km:0.0},
   BL11  : {e:'Ximen', z:'西門', x:278, y:858, ln:["BL"], t:'main_station', km:0.0},
   R07  : {e:'Chiang Kai-shek Memorial', z:'中正紀念堂', x:345, y:858, ln:["R","G"], t:'main_station', km:0.0},
-  R06  : {e:'Dongmen', z:'東門', x:412, y:858, ln:["R","O"], t:'main_station', km:0.0},
-  R05  : {e:'Daan', z:'大安', x:479, y:858, ln:["R"], t:'station', km:0.0},
-  R04  : {e:'Xinyi Anhe', z:'信義安和', x:546, y:858, ln:["R"], t:'station', km:0.0},
-  R03  : {e:'Taipei 101 / WTC', z:'台北101/世貿', x:613, y:858, ln:["R"], t:'station', km:0.0},
-  R02  : {e:'Xiangshan', z:'象山', x:680, y:858, ln:["R"], t:'station', km:0.0},
+  R06  : {e:'Dongmen', z:'東門', x:499, y:887, ln:["R","O"], t:'main_station', km:0.0},
+  R05  : {e:'Daan', z:'大安', x:531, y:888, ln:["R"], t:'station', km:0.0},
+  R04  : {e:'Xinyi Anhe', z:'信義安和', x:594, y:888, ln:["R"], t:'station', km:0.0},
+  R03  : {e:'Taipei 101 / WTC', z:'台北101/世貿', x:643, y:887, ln:["R"], t:'station', km:0.0},
+  R02  : {e:'Xiangshan', z:'象山', x:683, y:886, ln:["R"], t:'station', km:0.0},
   BL01 : {e:'Dingpu', z:'頂埔', x:98, y:1150, ln:["BL"], t:'station', km:0.0},
   BL02 : {e:'Yongning', z:'永寧', x:120, y:1110, ln:["BL"], t:'station', km:0.0},
   BL03 : {e:'Tucheng', z:'土城', x:145, y:1072, ln:["BL"], t:'station', km:0.0},
@@ -99,11 +99,11 @@ const STATIONS = {
   O53  : {e:'Sanmin Sr. HS', z:'三民高中', x:145, y:478, ln:["O"], t:'station', km:0.0},
   O54  : {e:'Luzhou', z:'蘆洲', x:128, y:438, ln:["O"], t:'station', km:0.0},
   BR01 : {e:'Taipei Zoo', z:'動物園', x:895, y:1100, ln:["BR","MK"], t:'station', km:0.0},
-  BR02 : {e:'Muzha', z:'木柵', x:872, y:1060, ln:["BR"], t:'station', km:0.0},
-  BR03 : {e:'Wanfang Hospital', z:'萬芳醫院', x:848, y:1022, ln:["BR"], t:'station', km:0.0},
-  BR04 : {e:'Wanfang Community', z:'萬芳社區', x:820, y:988, ln:["BR"], t:'station', km:0.0},
-  BR05 : {e:'Xinhai', z:'辛亥', x:792, y:958, ln:["BR"], t:'station', km:0.0},
-  BR06 : {e:'Linguang', z:'麟光', x:762, y:928, ln:["BR"], t:'station', km:0.0},
+  BR02 : {e:'Muzha', z:'木柵', x:683, y:886, ln:["BR"], t:'station', km:0.0},
+  BR03 : {e:'Wanfang Hospital', z:'萬芳醫院', x:643, y:887, ln:["BR"], t:'station', km:0.0},
+  BR04 : {e:'Wanfang Community', z:'萬芳社區', x:594, y:888, ln:["BR"], t:'station', km:0.0},
+  BR05 : {e:'Xinhai', z:'辛亥', x:531, y:888, ln:["BR"], t:'station', km:0.0},
+  BR06 : {e:'Linguang', z:'麟光', x:499, y:887, ln:["BR"], t:'station', km:0.0},
   BR07 : {e:'Liuzhangli', z:'六張犁', x:728, y:900, ln:["BR"], t:'station', km:0.0},
   BR08 : {e:'Technology Building', z:'科技大樓', x:698, y:872, ln:["BR"], t:'station', km:0.0},
   BR09 : {e:'Daan (Wenhu)', z:'大安', x:652, y:848, ln:["BR"], t:'station', km:0.0},
@@ -1156,7 +1156,7 @@ function adjustBgOpacity(val) {
 // ════════════════════════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════════════════════════
-const DB_VERSION = 12; // Auto-invalidate cache when topology changes
+const DB_VERSION = 20; // Auto-invalidate cache when topology changes
 const localVer = localStorage.getItem('taipei_mrt_db_version');
 const isOutdated = (!localVer || parseInt(localVer) < DB_VERSION);
 

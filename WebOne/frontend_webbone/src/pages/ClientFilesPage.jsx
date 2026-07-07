@@ -31,6 +31,8 @@ function ClientFilesPage({ level = 'project' }) {
         navigate('/general-configuration');
       } else if (folder === 'taipei-scaffold') {
         navigate('/taipei');
+      } else if (folder === 'railprofile') {
+        navigate('/railprofile');
       } else {
         navigate(`/files/${folder}`); // Go to systems
       }
@@ -62,11 +64,12 @@ function ClientFilesPage({ level = 'project' }) {
     if (!displayFolders.includes('maintenance-web')) displayFolders.push('maintenance-web');
     if (!displayFolders.includes('general-configuration_web')) displayFolders.push('general-configuration_web');
     if (!displayFolders.includes('taipei-scaffold')) displayFolders.push('taipei-scaffold');
+    if (!displayFolders.includes('railprofile')) displayFolders.push('railprofile');
   }
 
   let filteredFolders = displayFolders.filter(f => 
     f.toLowerCase().includes(search.toLowerCase()) && 
-    !['config', 'manual', 'manuals', 'upload'].includes(f.toLowerCase())
+    !['config', 'manual', 'manuals', 'upload', 'maintenance'].includes(f.toLowerCase())
   );
   if (sort === "name") {
     filteredFolders = filteredFolders.sort();
@@ -155,7 +158,7 @@ function ClientFilesPage({ level = 'project' }) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredFolders.map((folder, index) => {
-            const isSpecialModule = folder === 'track_web-main' || folder === 'maintenance-web' || folder === 'general-configuration_web' || folder === 'taipei-scaffold';
+            const isSpecialModule = folder === 'track_web-main' || folder === 'maintenance-web' || folder === 'general-configuration_web' || folder === 'taipei-scaffold' || folder === 'railprofile';
             return (
               <div key={index} 
                 onClick={() => handleClick(folder)}
@@ -163,20 +166,22 @@ function ClientFilesPage({ level = 'project' }) {
                 <div className="px-4 py-5 sm:p-6 flex flex-col items-center text-center">
                   <h3 className="text-lg font-medium text-slate-800">
                     {folder === 'track_web-main' ? 'track-view (TGM)' : 
-                     folder === 'maintenance-web' ? 'maintenance-web' : 
-                     folder === 'general-configuration_web' ? 'Configurazioni Generali' : 
+                     folder === 'maintenance-web' ? 'Maintenance' :
+                     folder === 'general-configuration_web' ? 'General Configuration' : 
                      folder === 'taipei-scaffold' ? 'Taipei Scaffold' :
+                     folder === 'railprofile' ? 'Rail Profile' :
                      folder}
                   </h3>
                   <p className="mt-1 text-sm text-slate-500">
-                    {folder === 'track_web-main' ? 'Visualizzazione parametri geometrici e TQI' : 
-                     folder === 'maintenance-web' ? 'Gestione interventi di manutenzione' : 
-                     folder === 'general-configuration_web' ? 'Configurazione comune di linee, binari, operatori e lingua' : 
-                     folder === 'taipei-scaffold' ? 'Mappa interattiva e gestione stazioni (Taipei)' :
+                    {folder === 'track_web-main' ? 'Geometric parameters and TQI visualization' : 
+                     folder === 'maintenance-web' ? 'Maintenance management' :
+                     folder === 'general-configuration_web' ? 'General configuration of lines, tracks, operators and language' : 
+                     folder === 'taipei-scaffold' ? 'Interactive map and stations management (Taipei)' :
+                     folder === 'railprofile' ? 'Cross-sectional rail profile analysis' :
                      `View ${folder}`}
                   </p>
                   <span className={`mt-4 inline-flex items-center px-3 py-1 rounded border border-slate-200 text-xs font-medium bg-white text-slate-700`}>
-                    {isSpecialModule ? 'Apri Modulo' : 'Open'}
+                    {isSpecialModule ? 'Open Module' : 'Open'}
                   </span>
                 </div>
               </div>

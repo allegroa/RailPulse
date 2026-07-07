@@ -8,7 +8,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R27": {
     "e": "Hongshulin",
@@ -20,7 +20,7 @@
       "V"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R26": {
     "e": "Zhuwei",
@@ -31,7 +31,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R25": {
     "e": "Guandu",
@@ -42,7 +42,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R24": {
     "e": "Zhongyi",
@@ -53,7 +53,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R23": {
     "e": "Fuxinggang",
@@ -64,7 +64,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R22": {
     "e": "Beitou",
@@ -75,7 +75,7 @@
       "R"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R22A": {
     "e": "Xinbeitou",
@@ -86,7 +86,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R21": {
     "e": "Qiyan",
@@ -97,7 +97,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R20": {
     "e": "Qi'lian",
@@ -108,7 +108,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R19": {
     "e": "Shipai",
@@ -119,7 +119,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R18": {
     "e": "Mingde",
@@ -130,7 +130,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R17": {
     "e": "Zhishan",
@@ -141,7 +141,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R16": {
     "e": "Shilin",
@@ -152,7 +152,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R15": {
     "e": "Jiantan",
@@ -163,7 +163,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R14": {
     "e": "Yuanshan",
@@ -174,7 +174,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R13": {
     "e": "Minquan W. Rd.",
@@ -186,7 +186,7 @@
       "O"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R12": {
     "e": "Shuanglian",
@@ -197,7 +197,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R11": {
     "e": "Zhongshan",
@@ -209,7 +209,7 @@
       "G"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "BL12": {
     "e": "Taipei Main Station",
@@ -221,7 +221,7 @@
       "G"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R09": {
     "e": "Beimen",
@@ -232,7 +232,7 @@
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL11": {
     "e": "Ximen",
@@ -243,7 +243,7 @@
       "BL"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R07": {
     "e": "Chiang Kai-shek Memorial",
@@ -255,63 +255,63 @@
       "G"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R06": {
     "e": "Dongmen",
     "z": "東門",
-    "x": 412,
-    "y": 858,
+    "x": 499,
+    "y": 887,
     "ln": [
       "R",
       "O"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R05": {
     "e": "Daan",
     "z": "大安",
-    "x": 479,
-    "y": 858,
+    "x": 531,
+    "y": 888,
     "ln": [
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R04": {
     "e": "Xinyi Anhe",
     "z": "信義安和",
-    "x": 546,
-    "y": 858,
+    "x": 594,
+    "y": 888,
     "ln": [
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R03": {
     "e": "Taipei 101 / WTC",
     "z": "台北101/世貿",
-    "x": 613,
-    "y": 858,
+    "x": 643,
+    "y": 887,
     "ln": [
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R02": {
     "e": "Xiangshan",
     "z": "象山",
-    "x": 680,
-    "y": 858,
+    "x": 683,
+    "y": 886,
     "ln": [
       "R"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL01": {
     "e": "Dingpu",
@@ -322,7 +322,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL02": {
     "e": "Yongning",
@@ -333,7 +333,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL03": {
     "e": "Tucheng",
@@ -344,7 +344,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL04": {
     "e": "Haishan",
@@ -355,7 +355,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL05": {
     "e": "Far Eastern Hospital",
@@ -366,7 +366,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL06": {
     "e": "Fuzhong",
@@ -377,7 +377,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL07": {
     "e": "Banqiao",
@@ -389,7 +389,7 @@
       "Y"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "BL08": {
     "e": "Xinpu",
@@ -400,7 +400,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL09": {
     "e": "Jiangzicui",
@@ -411,7 +411,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL10": {
     "e": "Longshan Temple",
@@ -422,7 +422,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL13": {
     "e": "Shandao Temple",
@@ -433,7 +433,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL14": {
     "e": "Zhongxiao Xinsheng",
@@ -445,7 +445,7 @@
       "O"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "BL15": {
     "e": "Zhongxiao Fuxing",
@@ -457,7 +457,7 @@
       "BR"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "BL16": {
     "e": "Zhongxiao Dunhua",
@@ -468,7 +468,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL17": {
     "e": "Sun Yat-sen Memorial",
@@ -479,7 +479,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL18": {
     "e": "Taipei City Hall",
@@ -490,7 +490,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL19": {
     "e": "Yongchun",
@@ -501,7 +501,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL20": {
     "e": "Houshanpi",
@@ -512,7 +512,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL21": {
     "e": "Kunyang",
@@ -523,7 +523,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL22": {
     "e": "Nangang",
@@ -534,7 +534,7 @@
       "BL"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BL23": {
     "e": "Nangang Exh. Center",
@@ -546,7 +546,7 @@
       "BR"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "G18": {
     "e": "Songshan",
@@ -557,7 +557,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G17": {
     "e": "Nanjing Sanmin",
@@ -568,7 +568,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G16": {
     "e": "Taipei Arena",
@@ -579,7 +579,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G15": {
     "e": "Nanjing Fuxing",
@@ -591,7 +591,7 @@
       "BR"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "G14": {
     "e": "Songjiang Nanjing",
@@ -603,7 +603,7 @@
       "O"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "G11": {
     "e": "Xiaonanmen",
@@ -614,7 +614,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G09": {
     "e": "Guting",
@@ -626,7 +626,7 @@
       "O"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "G08": {
     "e": "Taipower Building",
@@ -637,7 +637,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G07": {
     "e": "Gongguan",
@@ -648,7 +648,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G06": {
     "e": "Wanlong",
@@ -659,7 +659,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G05": {
     "e": "Jingmei",
@@ -670,7 +670,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G03": {
     "e": "Qizhang",
@@ -682,7 +682,7 @@
       "Y"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "G04": {
     "e": "Xiaobitan",
@@ -693,7 +693,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G02": {
     "e": "Xindian District Office",
@@ -704,7 +704,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "G01": {
     "e": "Xindian",
@@ -715,7 +715,7 @@
       "G"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O01": {
     "e": "Nanshijiao",
@@ -726,7 +726,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O02": {
     "e": "Jingan",
@@ -737,7 +737,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O03": {
     "e": "Yongan Market",
@@ -748,7 +748,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O04": {
     "e": "Dingxi",
@@ -759,7 +759,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O05": {
     "e": "Yonghe Senior HS",
@@ -770,7 +770,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O08": {
     "e": "Xingtian Temple",
@@ -781,7 +781,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O09": {
     "e": "Zhongshan Elem.",
@@ -792,7 +792,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O10": {
     "e": "Daqiaotou",
@@ -803,7 +803,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O13": {
     "e": "Taipei Bridge",
@@ -814,7 +814,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O14": {
     "e": "Cailiao",
@@ -825,7 +825,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O15": {
     "e": "Sanchong",
@@ -836,7 +836,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O16": {
     "e": "Xianse Temple",
@@ -847,7 +847,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O17": {
     "e": "Toupianzhhuang",
@@ -858,7 +858,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O18": {
     "e": "Xinzhuang",
@@ -869,7 +869,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O19": {
     "e": "Fu Jen University",
@@ -880,7 +880,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O20": {
     "e": "Danfeng",
@@ -891,7 +891,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O21": {
     "e": "Huilong",
@@ -902,7 +902,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O50": {
     "e": "Sanchong Elem.",
@@ -913,7 +913,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O51": {
     "e": "Sanhe Jr. HS",
@@ -924,7 +924,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O52": {
     "e": "St. Ignatius HS",
@@ -935,7 +935,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O53": {
     "e": "Sanmin Sr. HS",
@@ -946,7 +946,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "O54": {
     "e": "Luzhou",
@@ -957,7 +957,7 @@
       "O"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR01": {
     "e": "Taipei Zoo",
@@ -969,7 +969,7 @@
       "MK"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR02": {
     "e": "Muzha",
@@ -980,7 +980,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR03": {
     "e": "Wanfang Hospital",
@@ -991,7 +991,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR04": {
     "e": "Wanfang Community",
@@ -1002,7 +1002,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR05": {
     "e": "Xinhai",
@@ -1013,7 +1013,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR06": {
     "e": "Linguang",
@@ -1024,7 +1024,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR07": {
     "e": "Liuzhangli",
@@ -1035,7 +1035,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR08": {
     "e": "Technology Building",
@@ -1046,7 +1046,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR09": {
     "e": "Daan (Wenhu)",
@@ -1057,7 +1057,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR12": {
     "e": "Zhongshan Jr. HS",
@@ -1068,7 +1068,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR13": {
     "e": "Songshan Airport",
@@ -1079,7 +1079,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR14": {
     "e": "Dazhi",
@@ -1090,7 +1090,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR15": {
     "e": "Jiannan Rd.",
@@ -1101,7 +1101,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR16": {
     "e": "Xihu",
@@ -1112,7 +1112,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR17": {
     "e": "Gangqian",
@@ -1123,7 +1123,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR18": {
     "e": "Wende",
@@ -1134,7 +1134,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR19": {
     "e": "Neihu",
@@ -1145,7 +1145,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR20": {
     "e": "Dahu Park",
@@ -1156,7 +1156,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR21": {
     "e": "Huzhou",
@@ -1167,7 +1167,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR22": {
     "e": "Donghu",
@@ -1178,7 +1178,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "BR23": {
     "e": "Nangang Software Park",
@@ -1189,7 +1189,7 @@
       "BR"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y01": {
     "e": "New Taipei Industrial Pk",
@@ -1200,7 +1200,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y02": {
     "e": "Xinfu",
@@ -1211,7 +1211,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y03": {
     "e": "Taishan",
@@ -1222,7 +1222,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y04": {
     "e": "Taishan-Guihe",
@@ -1233,7 +1233,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y05": {
     "e": "Xinzhuang Hub",
@@ -1244,7 +1244,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y10": {
     "e": "Xinpu-Minsheng",
@@ -1255,7 +1255,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y12": {
     "e": "Zhongyuan",
@@ -1266,7 +1266,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y13": {
     "e": "Zhonghem",
@@ -1277,7 +1277,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y14": {
     "e": "Zhonghe",
@@ -1288,7 +1288,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y15": {
     "e": "Jingan (Y)",
@@ -1299,7 +1299,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y16": {
     "e": "Jingping",
@@ -1310,7 +1310,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y17": {
     "e": "Xiulang Bridge",
@@ -1321,7 +1321,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y18": {
     "e": "Shizhang",
@@ -1332,7 +1332,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "Y19": {
     "e": "Dapinglin",
@@ -1343,7 +1343,7 @@
       "Y"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V11": {
     "e": "Shazun",
@@ -1354,7 +1354,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V10": {
     "e": "Kanding",
@@ -1365,7 +1365,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V09": {
     "e": "Danhai",
@@ -1376,7 +1376,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V08": {
     "e": "Xinshi 1st Rd.",
@@ -1387,7 +1387,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V07": {
     "e": "Danhai New Town",
@@ -1398,7 +1398,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V06": {
     "e": "Xinshi 3rd Rd.",
@@ -1409,7 +1409,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V05": {
     "e": "Tamsui Admin. Ctr.",
@@ -1420,7 +1420,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V04": {
     "e": "Tamsui Culture Univ.",
@@ -1431,7 +1431,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V03": {
     "e": "Danjiang University",
@@ -1442,7 +1442,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V02": {
     "e": "Ganzhenlin",
@@ -1453,7 +1453,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "V01": {
     "e": "Hongshulin (V)",
@@ -1464,7 +1464,7 @@
       "V"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "K01": {
     "e": "Shizhang (K)",
@@ -1475,7 +1475,7 @@
       "K"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "K02": {
     "e": "Shuangcheng",
@@ -1486,7 +1486,7 @@
       "K"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "K03": {
     "e": "Rose China Town",
@@ -1497,7 +1497,7 @@
       "K"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "K04": {
     "e": "Taipei Xiaocheng",
@@ -1508,7 +1508,7 @@
       "K"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "K05": {
     "e": "Cardinal Tien Hospital",
@@ -1519,7 +1519,7 @@
       "K"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "K06": {
     "e": "Ankeng",
@@ -1530,7 +1530,7 @@
       "K"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "MK02": {
     "e": "Zoo South",
@@ -1541,7 +1541,7 @@
       "MK"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "MK03": {
     "e": "Zhinan Temple",
@@ -1552,7 +1552,7 @@
       "MK"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "MK04": {
     "e": "Maokong",
@@ -1563,7 +1563,7 @@
       "MK"
     ],
     "t": "station",
-    "km": 0.0
+    "km": 0
   },
   "R10": {
     "e": "Taipei Main Station",
@@ -1574,7 +1574,7 @@
       "R"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   },
   "R08": {
     "e": "Ximen",
@@ -1585,6 +1585,6 @@
       "R"
     ],
     "t": "main_station",
-    "km": 0.0
+    "km": 0
   }
 }

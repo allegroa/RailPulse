@@ -8,6 +8,13 @@
         "type": "Concrete_Monoblock",
         "color": "#C0C0C0",
         "id": "306a5e26-65cf-4ea0-a5e0-80e0dfe09291"
+      },
+      {
+        "startKm": 101,
+        "endKm": 110,
+        "type": "Wood",
+        "color": "#960d0d",
+        "id": "6e7d043b-5708-4127-8628-26df1b967eac"
       }
     ],
     "slab": [],
