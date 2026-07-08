@@ -1,0 +1,145 @@
+{
+  "lineId": "xdl",
+  "gisLayers": {
+    "sleepers": [],
+    "slab": [],
+    "ballast": [],
+    "curvatures": [],
+    "tonnage": [],
+    "switches": [
+      {
+        "km": "",
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "endKm": 97.316,
+        "startKm": 97.274,
+        "id": "bdade0fb-46d9-4829-ad6f-9a75ac64f374"
+      },
+      {
+        "km": "",
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "endKm": 96.4065,
+        "startKm": 96.367,
+        "id": "eefd8242-dff2-4a1f-9452-191fa3e16c44"
+      },
+      {
+        "startKm": 97.2745,
+        "endKm": 97.31675,
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "id": "00742aac-2eb3-4eab-9d0e-81c126e44f71"
+      },
+      {
+        "startKm": 90.7815,
+        "endKm": 90.83725,
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "id": "68215e9b-0bb6-43f4-a006-6addcb2ce794"
+      },
+      {
+        "startKm": 91.33225,
+        "endKm": 91.3675,
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "id": "87352d29-42ab-4efa-92e5-df58ed3d753c"
+      },
+      {
+        "startKm": 91.67525,
+        "endKm": 91.71675,
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "id": "b67041d5-56a3-4205-80a7-80c5d7fb1fbd"
+      },
+      {
+        "startKm": 93.63,
+        "endKm": 93.66575,
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "id": "c30544da-149c-4bcd-92e7-d31365130051"
+      },
+      {
+        "startKm": 93.72275,
+        "endKm": 93.761,
+        "switchId": "",
+        "switchType": "Simple",
+        "angle": "1:12",
+        "condition": "Good",
+        "color": "#2196F3",
+        "id": "e0dff27b-bcdd-432e-9749-07029ef501a8"
+      }
+    ],
+    "stations": [
+      {
+        "startKm": 97.383,
+        "endKm": 97.4985,
+        "stationCode": "G01",
+        "color": "#3b82f6",
+        "id": "08a9c09d-2cb5-4728-a4fb-d3a7ec6ccecd"
+      },
+      {
+        "startKm": 96.50375,
+        "endKm": 96.643,
+        "stationCode": "G02",
+        "color": "#3b82f6",
+        "id": "2f0d1fc8-fd9b-4c78-b1cd-fea4cf64cbaa"
+      },
+      {
+        "startKm": 95.6025,
+        "endKm": 95.74175,
+        "stationCode": "G03",
+        "color": "#3b82f6",
+        "id": "1d870f82-6e4b-4adf-a7ce-677fce9350a9"
+      },
+      {
+        "startKm": 94.041,
+        "endKm": 94.18,
+        "stationCode": "G04",
+        "color": "#3b82f6",
+        "id": "82124fee-7d33-46b7-a3d4-b2d510938ed7"
+      },
+      {
+        "startKm": 94.041,
+        "endKm": 94.18,
+        "stationCode": "BR17",
+        "color": "#3b82f6",
+        "id": "508774db-5e1c-4f0d-8772-f11b4680c5ed"
+      },
+      {
+        "startKm": 92.9875,
+        "endKm": 93.12575,
+        "stationCode": "G06",
+        "color": "#3b82f6",
+        "id": "a3988d00-5283-4a1c-b3de-67af69263405"
+      },
+      {
+        "startKm": 90.9825,
+        "endKm": 91.1215,
+        "stationCode": "G07",
+        "color": "#3b82f6",
+        "id": "274dc042-7223-4838-ae2a-9a34290a6a53"
+      }
+    ]
+  }
+}

@@ -4,6 +4,8 @@ Il presente documento definisce le specifiche funzionali, la struttura dati e le
 
 In futuro, questo modulo sarà interfacciato e integrato all'interno della piattaforma centrale `WebOne`.
 
+> **Nota sul Layout**: L'interfaccia utente e il layout di questo modulo devono seguire rigorosamente le regole e direttive descritte nel documento condiviso [`gen_layout.md`](gen_layout.md).
+
 ---
 
 ## 1. Requisiti Funzionali
@@ -16,8 +18,15 @@ Il modulo gestisce le seguenti aree di configurazione:
 
 ### GCB – Database Linee e Binari (Railway Lines GIS Database)
 * Gestire l'elenco delle linee ferroviarie abilitate nel sistema.
-* Per ciascuna linea, associare l'intervallo chilometrico di competenza (es. `startKm` e `endKm`) e i singoli binari attivi (es. "Binario 1", "Binario 2", "Pari", "Dispari").
-* Consentire l'aggiunta, la modifica e l'eliminazione di linee e dei relativi binari.
+* Per ciascuna linea, associare un colore identificativo (`color`), l'intervallo chilometrico di competenza (es. `startKm` e `endKm`) e i singoli binari attivi (es. "Binario 1", "Binario 2", "Pari", "Dispari").
+* Consentire l'aggiunta, la modifica e l'eliminazione di linee e dei relativi binari. Nell'interfaccia di aggiunta ("Add Line"), l'input per il "Line ID Code" occupa lo spazio principale, mentre sulla sua destra è posizionato un selettore "Color Line". Il "Line ID Code" viene forzato e salvato in maiuscolo.
+* **Formattazione Chilometrica**: Nell'interfaccia utente (es. colonna "KM range" del tab Lines & Tracks), i valori chilometrici devono essere sempre formattati e visualizzati con 3 cifre decimali dopo il separatore decimale (es. `12.340`).
+
+> **Nota**: Le specifiche di dettaglio per il tab GIS DATABASE sono trattate separatamente nel documento [`gc_gis_spec.md`](gc_gis_spec.md).
+
+### GCE – Infrastructure GIS Database (Integrazione Stazioni)
+* Nel sottomenu "Infrastructure GIS Database", dovrà essere presente un tab (o layer) denominato **Station** posizionato alla sinistra della voce **Sleepers**.
+* Questo pannello consentirà all'utente di posizionare stazioni lungo la linea. Le stazioni disponibili per la selezione non dovranno essere digitate liberamente, ma dovranno essere preventivamente lette ed estratte dal database centralizzato `stations.json`.
 
 ### GCC – Database Operatori e Appaltatori (Operators Database)
 * Gestire l'anagrafica comune delle ditte appaltatrici e degli operatori che eseguono gli interventi di manutenzione sulla rete.
@@ -32,7 +41,7 @@ Il modulo gestisce le seguenti aree di configurazione:
 
 ## 2. Struttura del Database JSON (`config_db.json`)
 
-Tutte le configurazioni persistono in un file JSON denominato `config_db.json` situato nella directory `general-configuration_web/database/`.
+Le configurazioni generali persistono in un file JSON denominato `config_db.json` situato nella directory `general-configuration_web/database/`. Le configurazioni specifiche per le linee sono invece state migrate e isolate nel file `lines.json` situato in `\DATABASE\`.
 
 Lo schema JSON è strutturato come segue:
 
@@ -65,8 +74,11 @@ Lo schema JSON è strutturato come segue:
       "items": {
         "type": "object",
         "properties": {
-          "id": { "type": "string", "description": "ID unico della linea (es. line_a)" },
+          "id": { "type": "string", "description": "ID unico della linea (es. LINE_A), salvato in formato maiuscolo" },
+          "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$", "description": "Colore HEX identificativo della linea" },
           "name": { "type": "string", "description": "Nome della linea (es. Linea A)" },
+          "stationSymbol": { "type": "string", "maxLength": 1, "description": "Lettera dell'alfabeto identificativa per le stazioni (es. 'A')" },
+          "stationNumber": { "type": "integer", "description": "Quantità totale di stazioni per questa linea" },
           "startKm": { "type": "number", "minimum": 0 },
           "endKm": { "type": "number", "minimum": 0 },
           "tracks": {
@@ -75,7 +87,7 @@ Lo schema JSON è strutturato come segue:
             "description": "Lista dei binari associati (es. ['Binario 1', 'Binario 2'])"
           }
         },
-        "required": ["id", "name", "startKm", "endKm", "tracks"]
+        "required": ["id", "color", "name", "startKm", "endKm", "tracks"]
       }
     },
     "operators": {
@@ -114,7 +126,7 @@ Il server backend (esposto sulla porta `5002`) fornisce i seguenti endpoint:
 ### B. Rotte Gestione Linee e Binari
 * **`GET /api/config/lines`**: Restituisce la lista di tutte le linee.
 * **`POST /api/config/lines`**: Crea una nuova linea.
-  * *Request Body*: `{ "id": "line_c", "name": "Linea C", "startKm": 0, "endKm": 50, "tracks": ["Pari", "Dispari"] }`
+  * *Request Body*: `{ "id": "LINE_C", "color": "#0000FF", "name": "Linea C", "startKm": 0, "endKm": 50, "tracks": ["Pari", "Dispari"] }`
 * **`PUT /api/config/lines/:id`**: Aggiorna una linea esistente.
 * **`DELETE /api/config/lines/:id`**: Elimina una linea.
 
@@ -138,6 +150,7 @@ Il server backend (esposto sulla porta `5002`) fornisce i seguenti endpoint:
 graph TD
     subgraph general-configuration_web [general-configuration_web Module]
         ConfigDB[(database/config_db.json)]
+        LinesDB[(../DATABASE/lines.json)]
         ConfigAPI[Express API - Port 5002]
         ConfigUI[React UI Dashboard]
     end
@@ -152,6 +165,7 @@ graph TD
     end
 
     ConfigAPI -->|Legge/Scrive| ConfigDB
+    ConfigAPI -->|Legge/Scrive| LinesDB
     ConfigUI -->|Chiamate API| ConfigAPI
 
     %% Integrazioni
@@ -169,3 +183,5 @@ graph TD
 ### B. Integrazione con `WebOne`
 * **Reverse Proxy**: Il server `WebOne` utilizzerà `http-proxy-middleware` per reindirizzare `/api/config/*` verso il server `general-configuration_web` in esecuzione sulla porta `5002`.
 * **Centralizzazione**: `WebOne` agirà da punto d'accesso unico per l'utente, incorporando la Dashboard di configurazione come un tab o sottomenu all'interno del pannello "Impostazioni di Sistema".
+
+

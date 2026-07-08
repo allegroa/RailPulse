@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5002;
 const DB_PATH = path.join(__dirname, 'database', 'config_db.json');
+const LINES_DB_PATH = path.join(__dirname, '..', 'DATABASE', 'lines.json');
 
 app.use(cors());
 app.use(express.json());
@@ -58,6 +59,36 @@ async function readConfig() {
   }
 }
 
+// Helper per leggere il database delle linee
+async function readLinesDB() {
+  try {
+    const data = await fs.readFile(LINES_DB_PATH, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      // Migrate from config_db.json if possible
+      const config = await readConfig();
+      const lines = config && config.lines ? config.lines : [];
+      await fs.mkdir(path.dirname(LINES_DB_PATH), { recursive: true });
+      await fs.writeFile(LINES_DB_PATH, JSON.stringify(lines, null, 2), 'utf-8');
+      return lines;
+    }
+    console.error('Errore durante la lettura di lines.json:', error);
+    return [];
+  }
+}
+
+// Helper per scrivere sul database delle linee
+async function writeLinesDB(lines) {
+  try {
+    await fs.mkdir(path.dirname(LINES_DB_PATH), { recursive: true });
+    await fs.writeFile(LINES_DB_PATH, JSON.stringify(lines, null, 2), 'utf-8');
+  } catch (error) {
+    console.error('Errore durante la scrittura su lines.json:', error);
+    throw error;
+  }
+}
+
 // Helper per scrivere sul database
 async function writeConfig(config) {
   try {
@@ -80,6 +111,7 @@ async function readGis(lineId) {
       const defaultGis = {
         lineId,
         gisLayers: {
+          stations:   [],
           sleepers:   [],
           slab:       [],
           ballast:    [],
@@ -115,6 +147,8 @@ app.get('/api/config', async (req, res) => {
   if (!config) {
     return res.status(500).json({ error: 'Errore interno del server' });
   }
+  const lines = await readLinesDB();
+  config.lines = lines || [];
   res.json(config);
 });
 
@@ -166,33 +200,36 @@ app.post('/api/config/language', async (req, res) => {
 
 // GET /api/config/lines - Ottiene linee
 app.get('/api/config/lines', async (req, res) => {
-  const config = await readConfig();
-  res.json(config ? config.lines : []);
+  const lines = await readLinesDB();
+  res.json(lines || []);
 });
 
 // POST /api/config/lines - Crea una linea
 app.post('/api/config/lines', async (req, res) => {
   try {
-    const { id, name, startKm, endKm, tracks } = req.body;
+    const { id, name, color, stationSymbol, stationNumber, startKm, endKm, tracks } = req.body;
     if (!id || !name || startKm === undefined || endKm === undefined || !tracks) {
-      return res.status(400).json({ error: 'Tutti i campi (id, name, startKm, endKm, tracks) sono obbligatori.' });
+      return res.status(400).json({ error: 'Tutti i campi principali sono obbligatori.' });
     }
 
-    const config = await readConfig();
-    if (config.lines.some(l => l.id === id)) {
+    const lines = await readLinesDB();
+    if (lines.some(l => l.id === id)) {
       return res.status(400).json({ error: `Una linea con ID '${id}' esiste già.` });
     }
 
     const newLine = {
       id,
       name,
+      color: color || '#2196f3',
+      stationSymbol: stationSymbol ? stationSymbol.toUpperCase() : '',
+      stationNumber: stationNumber ? parseInt(stationNumber, 10) : 0,
       startKm: parseFloat(startKm),
       endKm: parseFloat(endKm),
       tracks: Array.isArray(tracks) ? tracks : [tracks]
     };
 
-    config.lines.push(newLine);
-    await writeConfig(config);
+    lines.push(newLine);
+    await writeLinesDB(lines);
     res.status(201).json(newLine);
   } catch (error) {
     res.status(500).json({ error: 'Errore durante la creazione della linea.' });
@@ -203,25 +240,28 @@ app.post('/api/config/lines', async (req, res) => {
 app.put('/api/config/lines/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, startKm, endKm, tracks } = req.body;
+    const { name, color, stationSymbol, stationNumber, startKm, endKm, tracks } = req.body;
 
-    const config = await readConfig();
-    const index = config.lines.findIndex(l => l.id === id);
+    const lines = await readLinesDB();
+    const index = lines.findIndex(l => l.id === id);
 
     if (index === -1) {
       return res.status(404).json({ error: 'Linea non trovata.' });
     }
 
     const updatedLine = {
-      ...config.lines[index],
-      name: name || config.lines[index].name,
-      startKm: startKm !== undefined ? parseFloat(startKm) : config.lines[index].startKm,
-      endKm: endKm !== undefined ? parseFloat(endKm) : config.lines[index].endKm,
-      tracks: tracks || config.lines[index].tracks
+      ...lines[index],
+      name: name || lines[index].name,
+      color: color || lines[index].color || '#2196f3',
+      stationSymbol: stationSymbol !== undefined ? stationSymbol.toUpperCase() : lines[index].stationSymbol,
+      stationNumber: stationNumber !== undefined ? parseInt(stationNumber, 10) : lines[index].stationNumber,
+      startKm: startKm !== undefined ? parseFloat(startKm) : lines[index].startKm,
+      endKm: endKm !== undefined ? parseFloat(endKm) : lines[index].endKm,
+      tracks: tracks || lines[index].tracks
     };
 
-    config.lines[index] = updatedLine;
-    await writeConfig(config);
+    lines[index] = updatedLine;
+    await writeLinesDB(lines);
     res.json(updatedLine);
   } catch (error) {
     res.status(500).json({ error: 'Errore durante l\'aggiornamento della linea.' });
@@ -232,15 +272,14 @@ app.put('/api/config/lines/:id', async (req, res) => {
 app.delete('/api/config/lines/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const config = await readConfig();
-    const filtered = config.lines.filter(l => l.id !== id);
+    const lines = await readLinesDB();
+    const filtered = lines.filter(l => l.id !== id);
 
-    if (config.lines.length === filtered.length) {
+    if (lines.length === filtered.length) {
       return res.status(404).json({ error: 'Linea non trovata.' });
     }
 
-    config.lines = filtered;
-    await writeConfig(config);
+    await writeLinesDB(filtered);
     res.json({ success: true, message: 'Linea eliminata con successo.' });
   } catch (error) {
     res.status(500).json({ error: 'Errore durante l\'eliminazione della linea.' });
@@ -425,7 +464,7 @@ app.delete('/api/config/stations/:code', async (req, res) => {
 // Configurazione multer per l'upload temporaneo in memoria
 const upload = multer({ storage: multer.memoryStorage() });
 
-const VALID_LAYERS = ['sleepers', 'slab', 'ballast', 'curvatures', 'tonnage', 'switches'];
+const VALID_LAYERS = ['stations', 'sleepers', 'slab', 'ballast', 'curvatures', 'tonnage', 'switches'];
 
 // GET tutti i layer GIS di una linea
 app.get('/api/config/gis/:lineId', async (req, res) => {
@@ -457,7 +496,7 @@ app.post('/api/config/gis/:lineId/import-railml', upload.single('file'), async (
 
     const overwrite = req.body.overwrite === 'true';
     if (overwrite) {
-      gis.gisLayers = { sleepers: [], slab: [], ballast: [], curvatures: [], tonnage: [], switches: [], topology: { nodes: [], edges: [] } };
+      gis.gisLayers = { stations: [], sleepers: [], slab: [], ballast: [], curvatures: [], tonnage: [], switches: [], topology: { nodes: [], edges: [] } };
     }
     if (!gis.gisLayers.topology) {
       gis.gisLayers.topology = { nodes: [], edges: [] };
@@ -868,17 +907,17 @@ app.post('/api/config/gis/:lineId/:layer', async (req, res) => {
     const segment = { ...req.body, id: uuidv4() };
 
     // Validazione base
-    if (layer !== 'switches' && (segment.startKm === undefined || segment.endKm === undefined)) {
-      return res.status(400).json({ success: false, error: 'startKm e endKm sono obbligatori' });
+    if (segment.startKm === undefined || segment.endKm === undefined) {
+      return res.status(400).json({ success: false, error: "startKm e endKm sono obbligatori" });
     }
-    if (layer !== 'switches' && parseFloat(segment.startKm) >= parseFloat(segment.endKm)) {
-      return res.status(400).json({ success: false, error: 'startKm deve essere minore di endKm' });
-    }
-    if (layer === 'switches' && segment.km === undefined) {
-      return res.status(400).json({ success: false, error: 'km è obbligatorio per gli scambi' });
+    if (parseFloat(segment.startKm) >= parseFloat(segment.endKm)) {
+      return res.status(400).json({ success: false, error: "startKm deve essere minore di endKm" });
     }
 
     const gis = await readGis(lineId);
+    if (!gis.gisLayers[layer]) {
+      gis.gisLayers[layer] = [];
+    }
     gis.gisLayers[layer].push(segment);
     await writeGis(lineId, gis);
     res.status(201).json({ success: true, segment });
@@ -896,6 +935,9 @@ app.put('/api/config/gis/:lineId/:layer/:segmentId', async (req, res) => {
     }
 
     const gis = await readGis(lineId);
+    if (!gis.gisLayers[layer]) {
+      gis.gisLayers[layer] = [];
+    }
     const idx = gis.gisLayers[layer].findIndex(s => s.id === segmentId);
     if (idx === -1) {
       return res.status(404).json({ success: false, error: 'Segmento non trovato' });
@@ -903,8 +945,8 @@ app.put('/api/config/gis/:lineId/:layer/:segmentId', async (req, res) => {
 
     // Validazione
     const updated = { ...gis.gisLayers[layer][idx], ...req.body, id: segmentId };
-    if (layer !== 'switches' && parseFloat(updated.startKm) >= parseFloat(updated.endKm)) {
-      return res.status(400).json({ success: false, error: 'startKm deve essere minore di endKm' });
+    if (parseFloat(updated.startKm) >= parseFloat(updated.endKm)) {
+      return res.status(400).json({ success: false, error: "startKm deve essere minore di endKm" });
     }
 
     gis.gisLayers[layer][idx] = updated;
@@ -924,6 +966,9 @@ app.delete('/api/config/gis/:lineId/:layer/:segmentId', async (req, res) => {
     }
 
     const gis = await readGis(lineId);
+    if (!gis.gisLayers[layer]) {
+      gis.gisLayers[layer] = [];
+    }
     const initial = gis.gisLayers[layer].length;
     gis.gisLayers[layer] = gis.gisLayers[layer].filter(s => s.id !== segmentId);
 

@@ -6,13 +6,15 @@ import json
 import os
 import networkx as nx
 
-BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 DATA = os.path.join(BASE, 'DATABASE', 'Taipei')
 
 
 def load_data():
-    with open(os.path.join(DATA, 'stations.json'), encoding='utf-8') as f:
-        stations = json.load(f)
+    with open(os.path.join(BASE, 'DATABASE', 'station.json'), encoding='utf-8') as f:
+        stations_list = json.load(f)
+        # Convert list to dict indexed by code
+        stations = { s['code']: s for s in stations_list }
     with open(os.path.join(DATA, 'lines.json'), encoding='utf-8') as f:
         lines = json.load(f)
     return stations, lines
@@ -24,13 +26,13 @@ def build_graph(stations: dict, lines: list) -> nx.Graph:
     # Add nodes
     for sid, s in stations.items():
         G.add_node(sid,
-                   name_en=s.get('e', ''),
-                   name_zh=s.get('z', ''),
+                   name_en=s.get('name_en', ''),
+                   name_zh=s.get('name_zh', ''),
                    x=s.get('x', 0),
                    y=s.get('y', 0),
-                   lines=s.get('ln', []),
-                   type=s.get('t', 'station'),
-                   km=s.get('km', 0.0))
+                   lines=s.get('LineName', []),
+                   type=s.get('stationType', 'station'),
+                   km=s.get('kmPosition', s.get('kmStart', 0.0)))
 
     def add_edges(id_list: list, line_id: str):
         for i in range(len(id_list) - 1):

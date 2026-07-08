@@ -33,11 +33,13 @@ function ClientFilesPage({ level = 'project' }) {
         navigate('/taipei');
       } else if (folder === 'railprofile') {
         navigate('/railprofile');
+      } else if (folder === 'database_view') {
+        navigate('/files');
       } else {
-        navigate(`/files/${folder}`); // Go to systems
+        navigate(`/projects/${folder}`); // Go to systems
       }
     } else {
-      navigate(`/files/${project}/${folder}`); // Go to files
+      navigate(`/projects/${project}/${folder}`); // Go to files
     }
   };
 
@@ -65,6 +67,7 @@ function ClientFilesPage({ level = 'project' }) {
     if (!displayFolders.includes('general-configuration_web')) displayFolders.push('general-configuration_web');
     if (!displayFolders.includes('taipei-scaffold')) displayFolders.push('taipei-scaffold');
     if (!displayFolders.includes('railprofile')) displayFolders.push('railprofile');
+    if (!displayFolders.includes('database_view')) displayFolders.push('database_view');
   }
 
   let filteredFolders = displayFolders.filter(f => 
@@ -80,7 +83,7 @@ function ClientFilesPage({ level = 'project' }) {
       <div className="mb-8 text-center relative">
         {!isProjectLevel && (
            <button
-             onClick={() => navigate('/files')}
+             onClick={() => navigate('/projects')}
              className="absolute left-0 top-0 mt-1 inline-flex items-center px-3 py-1.5 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
            >
              Back to Projects
@@ -170,6 +173,7 @@ function ClientFilesPage({ level = 'project' }) {
                      folder === 'general-configuration_web' ? 'General Configuration' : 
                      folder === 'taipei-scaffold' ? 'Taipei Scaffold' :
                      folder === 'railprofile' ? 'Rail Profile' :
+                     folder === 'database_view' ? 'Database View' :
                      folder}
                   </h3>
                   <p className="mt-1 text-sm text-slate-500">
@@ -178,10 +182,11 @@ function ClientFilesPage({ level = 'project' }) {
                      folder === 'general-configuration_web' ? 'General configuration of lines, tracks, operators and language' : 
                      folder === 'taipei-scaffold' ? 'Interactive map and stations management (Taipei)' :
                      folder === 'railprofile' ? 'Cross-sectional rail profile analysis' :
+                     folder === 'database_view' ? 'Visualizzatore centralizzato acquisizioni' :
                      `View ${folder}`}
                   </p>
                   <span className={`mt-4 inline-flex items-center px-3 py-1 rounded border border-slate-200 text-xs font-medium bg-white text-slate-700`}>
-                    {isSpecialModule ? 'Open Module' : 'Open'}
+                    {isSpecialModule || folder === 'database_view' ? 'Open Module' : 'Open'}
                   </span>
                 </div>
               </div>

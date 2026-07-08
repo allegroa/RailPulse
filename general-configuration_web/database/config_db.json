@@ -18,31 +18,30 @@
   },
   "lines": [
     {
-      "id": "line_nord",
-      "name": "Linea Nord",
-      "startKm": 0,
-      "endKm": 150,
-      "tracks": [
-        "Binario 1",
-        "Binario 2"
-      ]
-    },
-    {
-      "id": "line_sud",
-      "name": "Linea Sud",
-      "startKm": 0,
-      "endKm": 100,
-      "tracks": [
-        "Binario Unico",
-        "Binario 1",
-        "Binario 2"
-      ]
-    },
-    {
       "id": "test_line",
       "name": "Ale Line",
       "startKm": 100,
       "endKm": 200,
+      "tracks": [
+        "Binario 1"
+      ]
+    },
+    {
+      "id": "xdl",
+      "name": "Songshan-Xindian Line",
+      "color": "#008659",
+      "startKm": 89,
+      "endKm": 97.5,
+      "tracks": [
+        "Binario 1"
+      ]
+    },
+    {
+      "id": "XYL",
+      "name": "Tamsui-Xinyi Line",
+      "color": "#ff0000",
+      "startKm": 92.576,
+      "endKm": 101.8,
       "tracks": [
         "Binario 1"
       ]
@@ -165,7 +164,7 @@
   ],
   "systemPrefs": {
     "dataLocationType": "local",
-    "dataLocationPath": "D:\\004_Software\\RailPulse\\DATABASE",
+    "dataLocationPath": "E:\\Software\\RailPulse\\DATABASE",
     "serverIp": ""
   }
 }

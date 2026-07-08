@@ -215,7 +215,10 @@ export default function App() {
   
   // Line form states
   const [lineId, setLineId] = useState('');
+  const [lineColor, setLineColor] = useState('#2196f3');
   const [lineName, setLineName] = useState('');
+  const [lineStationSymbol, setLineStationSymbol] = useState('');
+  const [lineStationNumber, setLineStationNumber] = useState('');
   const [lineStartKm, setLineStartKm] = useState('0');
   const [lineEndKm, setLineEndKm] = useState('100');
   const [lineTracksInput, setLineTracksInput] = useState('');
@@ -298,8 +301,11 @@ export default function App() {
       .filter(t => t !== '');
 
     const payload = {
-      id: lineId.trim().toLowerCase().replace(/\s+/g, '_'),
+      id: lineId.trim().toUpperCase().replace(/\s+/g, '_'),
       name: lineName.trim(),
+      color: lineColor,
+      stationSymbol: lineStationSymbol.trim(),
+      stationNumber: lineStationNumber,
       startKm: parseFloat(lineStartKm),
       endKm: parseFloat(lineEndKm),
       tracks: tracksArray.length > 0 ? tracksArray : ['Binario 1']
@@ -333,7 +339,10 @@ export default function App() {
   const handleEditLine = (line) => {
     setEditingLineId(line.id);
     setLineId(line.id);
+    setLineColor(line.color || '#2196f3');
     setLineName(line.name);
+    setLineStationSymbol(line.stationSymbol || '');
+    setLineStationNumber(line.stationNumber !== undefined ? line.stationNumber.toString() : '');
     setLineStartKm(line.startKm.toString());
     setLineEndKm(line.endKm.toString());
     setLineTracksInput(line.tracks.join(', '));
@@ -357,7 +366,10 @@ export default function App() {
   const resetLineForm = () => {
     setEditingLineId(null);
     setLineId('');
+    setLineColor('#2196f3');
     setLineName('');
+    setLineStationSymbol('');
+    setLineStationNumber('');
     setLineStartKm('0');
     setLineEndKm('100');
     setLineTracksInput('');
@@ -545,18 +557,32 @@ export default function App() {
                   {editingLineId ? t('editLineTitle') : t('addLineTitle')}
                 </h2>
                 <form onSubmit={handleSaveLine}>
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="line-id">{t('lineIdLabel')}</label>
-                    <input 
-                      id="line-id"
-                      type="text" 
-                      className="form-input" 
-                      placeholder="e.g. line_nord"
-                      value={lineId}
-                      onChange={(e) => setLineId(e.target.value)}
-                      disabled={!!editingLineId}
-                      required
-                    />
+                  <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '1rem', marginBottom: '1.25rem' }}>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" htmlFor="line-color">{t('colorLineLabel', 'Color Line')}</label>
+                      <input 
+                        id="line-color"
+                        type="color" 
+                        className="form-input" 
+                        style={{ height: '38px', padding: '0 4px', cursor: 'pointer' }}
+                        value={lineColor}
+                        onChange={(e) => setLineColor(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" htmlFor="line-id">{t('lineIdLabel')}</label>
+                      <input 
+                        id="line-id"
+                        type="text" 
+                        className="form-input" 
+                        placeholder="e.g. line_nord"
+                        value={lineId}
+                        onChange={(e) => setLineId(e.target.value)}
+                        disabled={!!editingLineId}
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div className="form-group">
@@ -570,6 +596,33 @@ export default function App() {
                       onChange={(e) => setLineName(e.target.value)}
                       required
                     />
+                  </div>
+
+                  <div className="grid-cols-2" style={{ gap: '1rem', marginBottom: '1.25rem' }}>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" htmlFor="line-station-symbol">Station Symbol (A-Z)</label>
+                      <input 
+                        id="line-station-symbol"
+                        type="text" 
+                        maxLength="1"
+                        className="form-input" 
+                        placeholder="e.g. A"
+                        value={lineStationSymbol}
+                        onChange={(e) => setLineStationSymbol(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" htmlFor="line-station-number">Total Stations</label>
+                      <input 
+                        id="line-station-number"
+                        type="number" 
+                        min="0"
+                        className="form-input" 
+                        placeholder="e.g. 15"
+                        value={lineStationNumber}
+                        onChange={(e) => setLineStationNumber(e.target.value)}
+                      />
+                    </div>
                   </div>
 
                   <div className="grid-cols-2" style={{ gap: '1rem', marginBottom: '1.25rem' }}>
@@ -652,11 +705,16 @@ export default function App() {
                         config?.lines?.map(line => (
                           <tr key={line.id}>
                             <td>
-                              <strong>{line.name}</strong>
-                              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{line.id}</div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span className="swatch" style={{ backgroundColor: line.color || '#2196f3', width: '16px', height: '16px', display: 'inline-block', borderRadius: '4px' }}></span>
+                                <div>
+                                  <strong>{line.name}</strong>
+                                  <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }} className="uppercase">{line.id}</div>
+                                </div>
+                              </div>
                             </td>
                             <td>
-                              {line.startKm} - {line.endKm}
+                              {Number(line.startKm).toFixed(3)} - {Number(line.endKm).toFixed(3)}
                             </td>
                             <td>
                               <div className="tag-container">

@@ -44,7 +44,7 @@ REM ============================================================================
 REM [1/3] Backend
 REM ============================================================================
 echo [1/3] Avvio Backend (porta 5000)...
-start "WebOne - Backend" cmd /k "cd /d "%BACKEND_DIR%" && echo === BACKEND WEBONE PORT 5000 === && echo. && node server.js"
+start "WebOne - Backend" cmd /k "cd /d %BACKEND_DIR% && echo === BACKEND WEBONE PORT 5000 === && echo. && node server.js"
 
 ping -n 4 127.0.0.1 > nul 2>&1
 
@@ -52,8 +52,8 @@ REM ============================================================================
 REM [2/3] General-Configuration (skip se non presente)
 REM ============================================================================
 if exist "%GEN_CONFIG_DIR%" (
-    echo [2/3] Avvio General-Config (porta 5002)...
-    start "RailPulse - GenConfig" cmd /k "cd /d "%GEN_CONFIG_DIR%" && echo === GEN-CONFIG PORT 5002 === && echo. && node server.js"
+    echo [2/3] Avvio General-Config porta 5002...
+    start "RailPulse - GenConfig" cmd /k "cd /d %GEN_CONFIG_DIR% && echo === GEN-CONFIG PORT 5002 === && echo. && node server.js"
     ping -n 4 127.0.0.1 > nul 2>&1
 ) else (
     echo [2/3] General-Config non trovato, saltato.
@@ -64,7 +64,7 @@ REM [3/3] Frontend
 REM FIX locale: usa npm.cmd invece di npm (blocco execution policy PowerShell)
 REM ============================================================================
 echo [3/3] Avvio Frontend dev server (npm.cmd)...
-start "WebOne - Frontend" cmd /k "cd /d "%FRONTEND_DIR%" && echo === FRONTEND WEBONE DEV === && echo. && npm.cmd run dev"
+start "WebOne - Frontend" cmd /k "cd /d %FRONTEND_DIR% && echo === FRONTEND WEBONE DEV === && echo. && npm.cmd run dev"
 
 echo.
 echo ==========================================================================

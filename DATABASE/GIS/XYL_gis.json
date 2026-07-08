@@ -1,0 +1,441 @@
+{
+  "lineId": "XYL",
+  "gisLayers": {
+    "sleepers": [],
+    "slab": [],
+    "ballast": [],
+    "curvatures": [],
+    "tonnage": [],
+    "switches": [],
+    "topology": {
+      "nodes": [
+        {
+          "id": "tr01",
+          "name": "track a02",
+          "type": "secondaryTrack",
+          "length": 500,
+          "features": {
+            "signals": [
+              {
+                "id": "sig02",
+                "name": "68N1",
+                "pos": 450,
+                "dir": "up",
+                "function": "exit",
+                "type": "main"
+              }
+            ],
+            "levelCrossings": [],
+            "platformEdges": [
+              {
+                "id": "tr01pe01",
+                "name": "Gleis 2",
+                "pos": 200,
+                "length": 200,
+                "side": "left"
+              }
+            ],
+            "derailers": [],
+            "speedChanges": []
+          }
+        },
+        {
+          "id": "tr02",
+          "name": "track a01",
+          "type": "mainTrack",
+          "length": 500,
+          "features": {
+            "signals": [
+              {
+                "id": "sig01",
+                "name": "68N2",
+                "pos": 450,
+                "dir": "up",
+                "function": "exit",
+                "type": "main"
+              }
+            ],
+            "levelCrossings": [],
+            "platformEdges": [
+              {
+                "id": "tr02pe01",
+                "name": "Gleis 3",
+                "pos": 200,
+                "length": 200,
+                "side": "right"
+              }
+            ],
+            "derailers": [],
+            "speedChanges": []
+          }
+        },
+        {
+          "id": "tr04",
+          "name": "track b05",
+          "type": "sidingTrack",
+          "length": 200,
+          "features": {
+            "signals": [
+              {
+                "id": "sig08",
+                "name": "69W04Y",
+                "pos": 100,
+                "dir": "up",
+                "function": "main",
+                "type": "shunting"
+              }
+            ],
+            "levelCrossings": [],
+            "platformEdges": [],
+            "derailers": [
+              {
+                "id": "der01",
+                "name": "69GS04",
+                "pos": 150,
+                "side": "right"
+              }
+            ],
+            "speedChanges": []
+          }
+        },
+        {
+          "id": "tr05",
+          "name": "track b04",
+          "type": "secondaryTrack",
+          "length": 50,
+          "features": {
+            "signals": [],
+            "levelCrossings": [],
+            "platformEdges": [],
+            "derailers": [],
+            "speedChanges": []
+          }
+        },
+        {
+          "id": "tr06",
+          "name": "track b02",
+          "type": "secondaryTrack",
+          "length": 450,
+          "features": {
+            "signals": [
+              {
+                "id": "sig06",
+                "name": "69P1",
+                "pos": 50,
+                "dir": "down",
+                "function": "exit",
+                "type": "main"
+              }
+            ],
+            "levelCrossings": [],
+            "platformEdges": [
+              {
+                "id": "tr06pe01",
+                "name": "Gleis 1",
+                "pos": 100,
+                "length": 250,
+                "side": "right"
+              }
+            ],
+            "derailers": [],
+            "speedChanges": []
+          }
+        },
+        {
+          "id": "tr07",
+          "name": "track b01",
+          "type": "mainTrack",
+          "length": 500,
+          "features": {
+            "signals": [
+              {
+                "id": "sig05",
+                "name": "69P2",
+                "pos": 100,
+                "dir": "down",
+                "function": "exit",
+                "type": "main"
+              }
+            ],
+            "levelCrossings": [],
+            "platformEdges": [
+              {
+                "id": "tr07pe01",
+                "name": "Gleis 2",
+                "pos": 150,
+                "length": 200,
+                "side": "left"
+              }
+            ],
+            "derailers": [],
+            "speedChanges": []
+          }
+        },
+        {
+          "id": "tr03",
+          "name": "track a03",
+          "type": "mainTrack",
+          "length": 200,
+          "features": {
+            "signals": [
+              {
+                "id": "sig09",
+                "name": "sig09",
+                "pos": 100,
+                "dir": "up",
+                "function": "main",
+                "type": "main"
+              }
+            ],
+            "levelCrossings": [],
+            "platformEdges": [],
+            "derailers": [],
+            "speedChanges": [
+              {
+                "id": "tr03sc01",
+                "pos": 100,
+                "vMax": "80"
+              }
+            ]
+          }
+        },
+        {
+          "id": "tr08",
+          "name": "track x01",
+          "type": "mainTrack",
+          "length": 3265,
+          "features": {
+            "signals": [
+              {
+                "id": "sig03",
+                "name": "sig03",
+                "pos": 0,
+                "dir": "down",
+                "function": "home",
+                "type": "main"
+              },
+              {
+                "id": "sig11",
+                "name": "sig11",
+                "pos": 300,
+                "dir": "up",
+                "function": "main",
+                "type": "main"
+              },
+              {
+                "id": "sig12",
+                "name": "sig12",
+                "pos": 1700,
+                "dir": "up",
+                "function": "main",
+                "type": "main"
+              },
+              {
+                "id": "sig13",
+                "name": "sig13",
+                "pos": 1850,
+                "dir": "up",
+                "function": "main",
+                "type": "main"
+              },
+              {
+                "id": "sig07",
+                "name": "sig07",
+                "pos": 2265,
+                "dir": "up",
+                "function": "home",
+                "type": "distant"
+              }
+            ],
+            "levelCrossings": [
+              {
+                "id": "lcr01",
+                "pos": 1800,
+                "protection": "barriers",
+                "angle": 90
+              }
+            ],
+            "platformEdges": [],
+            "derailers": [],
+            "speedChanges": [
+              {
+                "id": "tr08sc02",
+                "pos": 1700,
+                "vMax": "20"
+              },
+              {
+                "id": "tr08sc03",
+                "pos": 1850,
+                "vMax": "end"
+              }
+            ]
+          }
+        },
+        {
+          "id": "tr09",
+          "name": "track b03",
+          "type": "mainTrack",
+          "length": 535,
+          "features": {
+            "signals": [
+              {
+                "id": "sig04",
+                "name": "sig04",
+                "pos": 0,
+                "dir": "up",
+                "function": "home",
+                "type": "combined"
+              },
+              {
+                "id": "sig10",
+                "name": "sig10",
+                "pos": 435,
+                "dir": "down",
+                "function": "main",
+                "type": "main"
+              }
+            ],
+            "levelCrossings": [],
+            "platformEdges": [],
+            "derailers": [],
+            "speedChanges": [
+              {
+                "id": "tr09sc01",
+                "pos": 435,
+                "vMax": "80"
+              }
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "tr01c01_tr03c03",
+          "source": "tr01",
+          "target": "tr03",
+          "sourceConn": "tr01c01",
+          "targetConn": "tr03c03",
+          "sourceType": "end",
+          "targetType": "switch",
+          "sourcePos": 500,
+          "targetPos": 0,
+          "switchId": "swi01"
+        },
+        {
+          "id": "tr02c01_tr03c01",
+          "source": "tr02",
+          "target": "tr03",
+          "sourceConn": "tr02c01",
+          "targetConn": "tr03c01",
+          "sourceType": "end",
+          "targetType": "begin",
+          "sourcePos": 500,
+          "targetPos": 0,
+          "switchId": null
+        },
+        {
+          "id": "tr04c01_tr06c01",
+          "source": "tr04",
+          "target": "tr06",
+          "sourceConn": "tr04c01",
+          "targetConn": "tr06c01",
+          "sourceType": "end",
+          "targetType": "begin",
+          "sourcePos": 200,
+          "targetPos": 0,
+          "switchId": null
+        },
+        {
+          "id": "tr05c01_tr09c03",
+          "source": "tr05",
+          "target": "tr09",
+          "sourceConn": "tr05c01",
+          "targetConn": "tr09c03",
+          "sourceType": "begin",
+          "targetType": "switch",
+          "sourcePos": 0,
+          "targetPos": 535,
+          "switchId": "swi02"
+        },
+        {
+          "id": "tr05c02_tr06c02",
+          "source": "tr05",
+          "target": "tr06",
+          "sourceConn": "tr05c02",
+          "targetConn": "tr06c02",
+          "sourceType": "end",
+          "targetType": "switch",
+          "sourcePos": 50,
+          "targetPos": 0,
+          "switchId": "swi03"
+        },
+        {
+          "id": "tr07c01_tr09c02",
+          "source": "tr07",
+          "target": "tr09",
+          "sourceConn": "tr07c01",
+          "targetConn": "tr09c02",
+          "sourceType": "begin",
+          "targetType": "end",
+          "sourcePos": 0,
+          "targetPos": 535,
+          "switchId": null
+        },
+        {
+          "id": "tr03c02_tr08c01",
+          "source": "tr03",
+          "target": "tr08",
+          "sourceConn": "tr03c02",
+          "targetConn": "tr08c01",
+          "sourceType": "end",
+          "targetType": "begin",
+          "sourcePos": 200,
+          "targetPos": 0,
+          "switchId": null
+        },
+        {
+          "id": "tr08c02_tr09c01",
+          "source": "tr08",
+          "target": "tr09",
+          "sourceConn": "tr08c02",
+          "targetConn": "tr09c01",
+          "sourceType": "end",
+          "targetType": "begin",
+          "sourcePos": 3265,
+          "targetPos": 0,
+          "switchId": null
+        }
+      ],
+      "ocps": [
+        {
+          "id": "ocp01",
+          "name": "Bf Cstadt",
+          "lat": 51,
+          "lon": 16,
+          "tracks": [
+            "tr06",
+            "tr07"
+          ]
+        },
+        {
+          "id": "ocp02",
+          "name": "Bf Arnau",
+          "lat": 52,
+          "lon": 15,
+          "tracks": [
+            "tr01",
+            "tr02",
+            "tr03"
+          ]
+        }
+      ],
+      "mainLine": [
+        "tr02",
+        "tr03",
+        "tr08",
+        "tr09",
+        "tr07"
+      ]
+    }
+  }
+}
