@@ -99,8 +99,17 @@ async function checkNewEmails(emailConfig) {
       try {
         const headerPart = message.parts?.find(part => part.which === 'HEADER.FIELDS (FROM TO SUBJECT DATE)');
         if (headerPart && headerPart.body) {
-          const parsedHeader = await simpleParser(headerPart.body);
-          sender = parsedHeader.from?.text || parsedHeader.from?.value?.[0]?.address || 'Sconosciuto';
+          if (typeof headerPart.body === 'object' && headerPart.body !== null && !Buffer.isBuffer(headerPart.body)) {
+            const fromField = headerPart.body.from || headerPart.body.From;
+            if (Array.isArray(fromField) && fromField.length > 0) {
+              sender = fromField[0];
+            } else if (typeof fromField === 'string') {
+              sender = fromField;
+            }
+          } else {
+            const parsedHeader = await simpleParser(headerPart.body);
+            sender = parsedHeader.from?.text || parsedHeader.from?.value?.[0]?.address || 'Sconosciuto';
+          }
         }
       } catch (err) {
         console.error('Error parsing email header:', err);
