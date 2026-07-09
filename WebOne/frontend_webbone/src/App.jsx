@@ -20,6 +20,7 @@ import TGMConfiguration from "./pages/tgm/components/ConfigurationPage";
 import GeneralConfigurationPage from "./pages/general-configuration/GeneralConfigurationPage";
 import MaintenancePage from "./pages/maintenance/MaintenancePage";
 import TaipeiScaffoldPage from "./pages/taipei/TaipeiScaffoldPage";
+import DatabaseViewPage from "./pages/database_view/DatabaseViewPage";
 
 function App() {
   const token = localStorage.getItem('token');
@@ -38,9 +39,10 @@ function App() {
         <Route path='/Dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
         <Route path='/product/:id' element={<ProtectedRoute><ProductDetail/></ProtectedRoute>}/>
         <Route path='/productedit' element={<ProtectedRoute><ProductsAdminPage/></ProtectedRoute>} />
-        <Route path="/files" element={<ProtectedRoute><ClientFilesPage level="project" /></ProtectedRoute>} />
-        <Route path="/files/:project" element={<ProtectedRoute><ClientFilesPage level="system" /></ProtectedRoute>} />
-        <Route path="/files/:project/:system" element={<ProtectedRoute><ClientFolderPage /></ProtectedRoute>} />
+        <Route path="/projects" element={<ProtectedRoute><ClientFilesPage level="project" /></ProtectedRoute>} />
+        <Route path="/projects/:project" element={<ProtectedRoute><ClientFilesPage level="system" /></ProtectedRoute>} />
+        <Route path="/projects/:project/:system" element={<ProtectedRoute><ClientFolderPage /></ProtectedRoute>} />
+        <Route path="/files" element={<ProtectedRoute><DatabaseViewPage /></ProtectedRoute>} />
         <Route path="/visualizer" element={<ProtectedRoute><DataVisualizer /></ProtectedRoute>} />
         <Route path="/visualizer/:fileId" element={<ProtectedRoute><DataVisualizer /></ProtectedRoute>} />
         <Route path="/railprofile" element={<ProtectedRoute><RailProfilePage /></ProtectedRoute>} />

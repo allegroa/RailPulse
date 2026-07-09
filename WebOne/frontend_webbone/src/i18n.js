@@ -28,7 +28,23 @@ const resources = {
       "noLocation": "Dati Lat/Lon non disponibili per questo punto.",
       "savingSuccess": "Database Linee salvato con successo!",
       "savingError": "Errore durante il salvataggio",
-      "language": "Lingua"
+      "language": "Lingua",
+      "dbViewTitle": "Database View",
+      "dbViewSubtitle": "Visualizzatore centralizzato acquisizioni",
+      "dbViewNoAcquisitions": "Nessuna acquisizione trovata con i filtri correnti.",
+      "dbViewSystem": "Sistema",
+      "dbViewDate": "Data",
+      "dbViewTime": "Ora",
+      "dbViewStartStation": "Stazione Iniziale",
+      "dbViewDirection": "Direzione",
+      "dbViewStartKm": "Km Iniziale",
+      "dbViewEndKm": "Km Finale",
+      "dbViewLength": "Lunghezza (Km)",
+      "dbViewCommonTrack": "acquisizioni in comune",
+      "dbViewAll": "Tutti/e",
+      "dbViewSearchStation": "Cerca stazione...",
+      "dbViewGroupAction": "Azione Gruppo",
+      "dbViewDetails": "Dettagli"
     }
   },
   en: {
@@ -56,7 +72,23 @@ const resources = {
       "noLocation": "Lat/Lon data not available for this point.",
       "savingSuccess": "Line Database saved successfully!",
       "savingError": "Error saving",
-      "language": "Language"
+      "language": "Language",
+      "dbViewTitle": "Database View",
+      "dbViewSubtitle": "Centralized acquisitions visualizer",
+      "dbViewNoAcquisitions": "No acquisitions found with the current filters.",
+      "dbViewSystem": "System",
+      "dbViewDate": "Date",
+      "dbViewTime": "Time",
+      "dbViewStartStation": "Start Station",
+      "dbViewDirection": "Direction",
+      "dbViewStartKm": "Start Km",
+      "dbViewEndKm": "End Km",
+      "dbViewLength": "Length (Km)",
+      "dbViewCommonTrack": "common acquisitions",
+      "dbViewAll": "All",
+      "dbViewSearchStation": "Search station...",
+      "dbViewGroupAction": "Group Action",
+      "dbViewDetails": "Details"
     }
   },
   zh: {
@@ -84,7 +116,23 @@ const resources = {
       "noLocation": "该点没有可用的经纬度数据。",
       "savingSuccess": "线路数据库保存成功！",
       "savingError": "保存时出错",
-      "language": "语言"
+      "language": "语言",
+      "dbViewTitle": "数据库视图 (Database View)",
+      "dbViewSubtitle": "集中采集数据可视化",
+      "dbViewNoAcquisitions": "当前筛选条件未找到采集数据。",
+      "dbViewSystem": "系统",
+      "dbViewDate": "日期",
+      "dbViewTime": "时间",
+      "dbViewStartStation": "起始站",
+      "dbViewDirection": "方向",
+      "dbViewStartKm": "起始公里",
+      "dbViewEndKm": "结束公里",
+      "dbViewLength": "长度 (Km)",
+      "dbViewCommonTrack": "个共同采集",
+      "dbViewAll": "全部",
+      "dbViewSearchStation": "搜索车站...",
+      "dbViewGroupAction": "批量操作",
+      "dbViewDetails": "详情"
     }
   },
   'zh-TW': {
@@ -112,7 +160,23 @@ const resources = {
       "noLocation": "該點沒有可用的經緯度資料。",
       "savingSuccess": "路線資料庫儲存成功！",
       "savingError": "儲存時出錯",
-      "language": "語言"
+      "language": "語言",
+      "dbViewTitle": "資料庫檢視 (Database View)",
+      "dbViewSubtitle": "集中採集資料視覺化",
+      "dbViewNoAcquisitions": "當前篩選條件未找到採集資料。",
+      "dbViewSystem": "系統",
+      "dbViewDate": "日期",
+      "dbViewTime": "時間",
+      "dbViewStartStation": "起始站",
+      "dbViewDirection": "方向",
+      "dbViewStartKm": "起始公里",
+      "dbViewEndKm": "結束公里",
+      "dbViewLength": "長度 (Km)",
+      "dbViewCommonTrack": "個共同採集",
+      "dbViewAll": "全部",
+      "dbViewSearchStation": "搜尋車站...",
+      "dbViewGroupAction": "批次操作",
+      "dbViewDetails": "詳情"
     }
   }
 };

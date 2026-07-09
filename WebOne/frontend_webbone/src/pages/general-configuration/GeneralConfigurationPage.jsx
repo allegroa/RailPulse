@@ -10,6 +10,8 @@ const translations = {
     headerTitle: "Configurazione di Sistema",
     headerBadge: "V2.0",
     headerSubtitle: "Gestione centralizzata e persistente delle configurazioni",
+    topoNoLineSelected: "Seleziona una linea per visualizzare la topologia e l'asse chilometrico.",
+    topoMainTrack: "Linea Principale",
     tabLanguage: "Lingua",
     tabLines: "Linee e Binari",
     tabOperators: "Operatori",
@@ -119,7 +121,7 @@ const translations = {
     gisDesc: "Registro manuale dei parametri infrastrutturali per tratta chilometrica.",
     gisSelectLine: "Seleziona Linea",
     gisNoLines: "Nessuna linea disponibile. Crea prima una linea nella tab Linee e Binari.",
-    gisLayerSleepers: "Traverse", gisLayerSlab: "Slab Track", gisLayerBallast: "Massicciata",
+    gisLayerStation: "Stazione", gisStation: "Seleziona Stazione", gisLayerSleepers: "Traverse", gisLayerSlab: "Slab Track", gisLayerBallast: "Massicciata",
     gisLayerCurvatures: "Curvature", gisLayerTonnage: "Tonnellaggio", gisLayerSwitches: "Scambi",
     gisStartKm: "Km Inizio", gisEndKm: "Km Fine", gisKm: "Km (posizione)",
     gisType: "Tipo", gisCondition: "Condizione", gisColor: "Colore",
@@ -140,8 +142,10 @@ const translations = {
     headerTitle: "System Configuration",
     headerBadge: "V2.0",
     headerSubtitle: "Centralized and persistent configuration management",
+    topoNoLineSelected: "Select a line to view topology and kilometric axis.",
+    topoMainTrack: "Main Line",
     tabLanguage: "Language",
-    tabLines: "Lines & Tracks",
+    tabLines: "Lines and Tracks",
     tabOperators: "Operators",
     tabTaskTypes: "Task Types",
     tabStations: "Stations",
@@ -248,7 +252,7 @@ const translations = {
     gisDesc: "Manual register of infrastructure parameters per km range.",
     gisSelectLine: "Select Line",
     gisNoLines: "No lines available. Create a line first in the Lines & Tracks tab.",
-    gisLayerSleepers: "Sleepers", gisLayerSlab: "Slab Track", gisLayerBallast: "Ballast",
+    gisLayerStation: "Station", gisStation: "Select Station", gisLayerSleepers: "Sleepers", gisLayerSlab: "Slab Track", gisLayerBallast: "Ballast",
     gisLayerCurvatures: "Curvatures", gisLayerTonnage: "Tonnage", gisLayerSwitches: "Switches",
     gisStartKm: "Start Km", gisEndKm: "End Km", gisKm: "Km (position)",
     gisType: "Type", gisCondition: "Condition", gisColor: "Color",
@@ -376,7 +380,7 @@ const translations = {
     gisDesc: "按公里范围手动登记基础设施参数。",
     gisSelectLine: "选择线路",
     gisNoLines: "没有可用线路。请先在线路与轨道标签页创建线路。",
-    gisLayerSleepers: "枕木", gisLayerSlab: "板式轨道", gisLayerBallast: "道碴",
+    gisLayerStation: "车站", gisStation: "选择车站", gisLayerSleepers: "枕木", gisLayerSlab: "板式轨道", gisLayerBallast: "道碴",
     gisLayerCurvatures: "曲线", gisLayerTonnage: "吨位", gisLayerSwitches: "道岔",
     gisStartKm: "起点里程", gisEndKm: "终点里程", gisKm: "里程 (位置)",
     gisType: "类型", gisCondition: "状态", gisColor: "颜色",
@@ -504,7 +508,7 @@ const translations = {
     gisDesc: "按公里範圍手動登錄基礎設施參數。",
     gisSelectLine: "選擇路線",
     gisNoLines: "沒有可用路線。請先在路線與軌道標籤頁建立路線。",
-    gisLayerSleepers: "枕木", gisLayerSlab: "版式軌道", gisLayerBallast: "道碴",
+    gisLayerStation: "車站", gisStation: "選擇車站", gisLayerSleepers: "枕木", gisLayerSlab: "版式軌道", gisLayerBallast: "道碴",
     gisLayerCurvatures: "曲線", gisLayerTonnage: "噸位", gisLayerSwitches: "道岔",
     gisStartKm: "起點里程", gisEndKm: "終點里程", gisKm: "里程 (位置)",
     gisType: "類型", gisCondition: "狀態", gisColor: "顏色",
@@ -545,7 +549,10 @@ export default function GeneralConfigurationPage() {
   const [selectedLanguage, setSelectedLanguage] = useState('it');
   
   const [lineId, setLineId] = useState('');
+  const [lineColor, setLineColor] = useState('#1e293b');
   const [lineName, setLineName] = useState('');
+  const [lineStationSymbol, setLineStationSymbol] = useState('');
+  const [lineStationNumber, setLineStationNumber] = useState('');
   const [lineStartKm, setLineStartKm] = useState('0');
   const [lineEndKm, setLineEndKm] = useState('100');
   const [lineTracksInput, setLineTracksInput] = useState('');
@@ -675,8 +682,11 @@ export default function GeneralConfigurationPage() {
     }
     const tracksArray = lineTracksInput.split(',').map(tr => tr.trim()).filter(tr => tr !== '');
     const payload = {
-      id: lineId.trim().toLowerCase().replace(/\s+/g, '_'),
+      id: lineId.trim().toUpperCase().replace(/\s+/g, '_'),
       name: lineName.trim(),
+      color: lineColor,
+      stationSymbol: lineStationSymbol.trim(),
+      stationNumber: lineStationNumber,
       startKm: parseFloat(lineStartKm),
       endKm: parseFloat(lineEndKm),
       tracks: tracksArray.length > 0 ? tracksArray : ['Binario 1']
@@ -698,7 +708,10 @@ export default function GeneralConfigurationPage() {
   const handleEditLine = (line) => {
     setEditingLineId(line.id);
     setLineId(line.id);
+    setLineColor(line.color || '#1e293b');
     setLineName(line.name);
+    setLineStationSymbol(line.stationSymbol || '');
+    setLineStationNumber(line.stationNumber !== undefined ? line.stationNumber.toString() : '');
     setLineStartKm(line.startKm.toString());
     setLineEndKm(line.endKm.toString());
     setLineTracksInput(line.tracks.join(', '));
@@ -719,7 +732,10 @@ export default function GeneralConfigurationPage() {
   const resetLineForm = () => {
     setEditingLineId(null);
     setLineId('');
+    setLineColor('#1e293b');
     setLineName('');
+    setLineStationSymbol('');
+    setLineStationNumber('');
     setLineStartKm('0');
     setLineEndKm('100');
     setLineTracksInput('');
@@ -903,12 +919,13 @@ export default function GeneralConfigurationPage() {
 
   const getDefaultGisForm = (layer) => {
     const d = {
+      stations:   { startKm: '', endKm: '', stationCode: '', color: '#3b82f6' },
       sleepers:   { startKm: '', endKm: '', type: 'Concrete_Monoblock', color: '#C0C0C0' },
       slab:       { startKm: '', endKm: '', isSlabTrack: true, slabType: 'RHEDA', color: '#607D8B' },
       ballast:    { startKm: '', endKm: '', ballastType: 'Granite', condition: 'Good', color: '#9E9E9E' },
       curvatures: { startKm: '', endKm: '', radius: '', superElevation: '', transitionType: 'Clothoid', transitionLength: '', color: '#FFC107' },
       tonnage:    { startKm: '', endKm: '', annualTraffic_MGT: '', axleLoad_t: '', trafficType: 'Mixed', color: '#4CAF50' },
-      switches:   { km: '', switchId: '', switchType: 'Simple', angle: '1:12', condition: 'Good', color: '#2196F3' }
+      switches:   { startKm: '', endKm: '', switchId: '', switchType: 'Simple', angle: '1:12', condition: 'Good', color: '#2196F3' }
     };
     return d[layer] || {};
   };
@@ -982,12 +999,13 @@ export default function GeneralConfigurationPage() {
         <div className="mt-5"><input type="color" value={gisForm.color ?? '#888888'} onChange={e => setF('color', e.target.value)} className="w-10 h-10 rounded cursor-pointer border border-slate-200" /></div>
       </div>
     );
+    if (gisActiveLayer === 'stations') return <div className="space-y-3">{kmRow}<div><label className={labelCls}>{t('gisStation')}</label><select value={gisForm.stationCode ?? ''} onChange={e => setF('stationCode', e.target.value)} className={inputCls}><option value="">-- {t('gisStation')} --</option>{stations.map(s => <option key={s.code} value={s.code}>{s.name} ({s.code})</option>)}</select></div>{colorRow}</div>;
     if (gisActiveLayer === 'sleepers') return <div className="space-y-3">{kmRow}<div><label className={labelCls}>{t('gisType')}</label><select value={gisForm.type ?? 'Concrete_Monoblock'} onChange={e => setF('type', e.target.value)} className={inputCls}><option value="Wood">Wood</option><option value="Concrete_Monoblock">Concrete Monoblock</option><option value="Concrete_Biblock">Concrete Biblock</option><option value="Steel">Steel</option><option value="Composite">Composite</option></select></div>{colorRow}</div>;
     if (gisActiveLayer === 'slab') return <div className="space-y-3">{kmRow}<div className="flex items-center gap-3"><label className={labelCls}>{t('gisIsSlabTrack')}</label><input type="checkbox" checked={!!gisForm.isSlabTrack} onChange={e => setF('isSlabTrack', e.target.checked)} className="w-4 h-4 text-blue-600" /></div><div><label className={labelCls}>{t('gisSlabType')}</label><select value={gisForm.slabType ?? 'RHEDA'} onChange={e => setF('slabType', e.target.value)} className={inputCls}><option value="RHEDA">RHEDA</option><option value="LVT">LVT</option><option value="Stedef">Stedef</option><option value="Heitkamp">Heitkamp</option><option value="Other">Other</option></select></div>{colorRow}</div>;
     if (gisActiveLayer === 'ballast') return <div className="space-y-3">{kmRow}<div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisType')}</label><select value={gisForm.ballastType ?? 'Granite'} onChange={e => setF('ballastType', e.target.value)} className={inputCls}><option value="Granite">Granite</option><option value="Limestone">Limestone</option><option value="Mixed">Mixed</option><option value="None">None</option></select></div><div><label className={labelCls}>{t('gisCondition')}</label><select value={gisForm.condition ?? 'Good'} onChange={e => setF('condition', e.target.value)} className={inputCls}><option value="Good">Good</option><option value="Fouled">Fouled</option><option value="To_Replace">To Replace</option></select></div></div>{colorRow}</div>;
     if (gisActiveLayer === 'curvatures') return <div className="space-y-3">{kmRow}<div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisRadius')}</label><input type="number" value={gisForm.radius ?? ''} onChange={e => setF('radius', parseFloat(e.target.value))} className={inputCls} placeholder="0=straight" /></div><div><label className={labelCls}>{t('gisSuperElev')}</label><input type="number" value={gisForm.superElevation ?? ''} onChange={e => setF('superElevation', parseFloat(e.target.value))} className={inputCls} /></div></div><div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisTransition')}</label><select value={gisForm.transitionType ?? 'Clothoid'} onChange={e => setF('transitionType', e.target.value)} className={inputCls}><option value="Clothoid">Clothoid</option><option value="Cubic_Parabola">Cubic Parabola</option><option value="None">None</option></select></div><div><label className={labelCls}>{t('gisTransitionLen')}</label><input type="number" value={gisForm.transitionLength ?? ''} onChange={e => setF('transitionLength', parseFloat(e.target.value))} className={inputCls} /></div></div>{colorRow}</div>;
     if (gisActiveLayer === 'tonnage') return <div className="space-y-3">{kmRow}<div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisAnnualMGT')}</label><input type="number" step="0.1" value={gisForm.annualTraffic_MGT ?? ''} onChange={e => setF('annualTraffic_MGT', parseFloat(e.target.value))} className={inputCls} /></div><div><label className={labelCls}>{t('gisAxleLoad')}</label><input type="number" step="0.5" value={gisForm.axleLoad_t ?? ''} onChange={e => setF('axleLoad_t', parseFloat(e.target.value))} className={inputCls} /></div></div><div><label className={labelCls}>{t('gisTrafficType')}</label><select value={gisForm.trafficType ?? 'Mixed'} onChange={e => setF('trafficType', e.target.value)} className={inputCls}><option value="Passenger">Passenger</option><option value="Freight">Freight</option><option value="Mixed">Mixed</option></select></div>{colorRow}</div>;
-    if (gisActiveLayer === 'switches') return <div className="space-y-3"><div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisKm')}</label><input type="number" step="0.001" value={gisForm.km ?? ''} onChange={e => setF('km', parseFloat(e.target.value))} className={inputCls} required /></div><div><label className={labelCls}>{t('gisSwitchId')}</label><input type="text" value={gisForm.switchId ?? ''} onChange={e => setF('switchId', e.target.value)} className={inputCls} placeholder="SW-001" /></div></div><div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisType')}</label><select value={gisForm.switchType ?? 'Simple'} onChange={e => setF('switchType', e.target.value)} className={inputCls}><option value="Simple">Simple</option><option value="Double">Double</option><option value="Trailing">Trailing</option><option value="Facing">Facing</option><option value="Scissor">Scissor</option></select></div><div><label className={labelCls}>{t('gisSwitchAngle')}</label><select value={gisForm.angle ?? '1:12'} onChange={e => setF('angle', e.target.value)} className={inputCls}><option value="1:9">1:9</option><option value="1:12">1:12</option><option value="1:15">1:15</option><option value="1:18.5">1:18.5</option></select></div></div><div><label className={labelCls}>{t('gisCondition')}</label><select value={gisForm.condition ?? 'Good'} onChange={e => setF('condition', e.target.value)} className={inputCls}><option value="Good">Good</option><option value="Warning">Warning</option><option value="Critical">Critical</option></select></div>{colorRow}</div>;
+    if (gisActiveLayer === 'switches') return <div className="space-y-3"><div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisSwitchId')}</label><input type="text" value={gisForm.switchId ?? ''} onChange={e => setF('switchId', e.target.value)} className={inputCls} placeholder="SW-001" /></div><div><label className={labelCls}>{t('gisType')}</label><select value={gisForm.switchType ?? 'Simple'} onChange={e => setF('switchType', e.target.value)} className={inputCls}><option value="Simple">Simple</option><option value="Double">Double</option><option value="Trailing">Trailing</option><option value="Facing">Facing</option><option value="Scissor">Scissor</option></select></div></div>{kmRow}<div className="grid grid-cols-2 gap-3"><div><label className={labelCls}>{t('gisSwitchAngle')}</label><select value={gisForm.angle ?? '1:12'} onChange={e => setF('angle', e.target.value)} className={inputCls}><option value="1:9">1:9</option><option value="1:12">1:12</option><option value="1:15">1:15</option><option value="1:18.5">1:18.5</option></select></div><div><label className={labelCls}>{t('gisCondition')}</label><select value={gisForm.condition ?? 'Good'} onChange={e => setF('condition', e.target.value)} className={inputCls}><option value="Good">Good</option><option value="Warning">Warning</option><option value="Critical">Critical</option></select></div></div>{colorRow}</div>;
     return null;
   };
 
@@ -1001,10 +1019,18 @@ export default function GeneralConfigurationPage() {
       <div className="mt-4 mb-2">
         <div className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">{t('gisStripChart')} — {line.name} ({lineStart} – {line.endKm} km)</div>
         <div className="relative h-8 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
-          {gisActiveLayer === 'switches'
-            ? segments.map(s => <div key={s.id} title={`${s.switchId || ''} @ ${s.km} km`} className="absolute top-0 h-full w-1" style={{ left: `${((s.km - lineStart) / range) * 100}%`, backgroundColor: s.color || '#2196F3' }} />)
-            : segments.map(s => <div key={s.id} title={`${s.startKm}–${s.endKm} km`} className="absolute top-0 h-full opacity-80 hover:opacity-100 transition-opacity" style={{ left: `${((s.startKm - lineStart) / range) * 100}%`, width: `${((s.endKm - s.startKm) / range) * 100}%`, backgroundColor: s.color || '#888' }} />)
-          }
+          {segments.map(s => (
+            <div 
+              key={s.id} 
+              title={gisActiveLayer === 'switches' ? `${s.switchId || ''} (${s.startKm}-${s.endKm} km)` : `${s.startKm}–${s.endKm} km`} 
+              className="absolute top-0 h-full opacity-80 hover:opacity-100 transition-opacity" 
+              style={{ 
+                left: `${((s.startKm - lineStart) / range) * 100}%`, 
+                width: `${((s.endKm - s.startKm) / range) * 100}%`, 
+                backgroundColor: s.color || '#888' 
+              }} 
+            />
+          ))}
         </div>
         <div className="flex justify-between text-xs text-slate-400 mt-1"><span>{lineStart} km</span><span>{line.endKm} km</span></div>
       </div>
@@ -1012,6 +1038,7 @@ export default function GeneralConfigurationPage() {
   };
 
   const fmtParams = (seg, layer) => {
+    if (layer === 'stations') return stations.find(s => s.code === seg.stationCode)?.name || seg.stationCode || '-';
     if (layer === 'sleepers') return seg.type || '-';
     if (layer === 'slab') return `${seg.slabType || '-'}${seg.isSlabTrack ? '' : ' (no slab)'}`;
     if (layer === 'ballast') return `${seg.ballastType || '-'} / ${seg.condition || '-'}`;
@@ -1043,6 +1070,7 @@ export default function GeneralConfigurationPage() {
   ];
 
   const gisLayers = [
+    { id: 'stations',   label: t('gisLayerStation') },
     { id: 'sleepers',   label: t('gisLayerSleepers') },
     { id: 'slab',       label: t('gisLayerSlab') },
     { id: 'ballast',    label: t('gisLayerBallast') },
@@ -1143,13 +1171,29 @@ export default function GeneralConfigurationPage() {
                   {editingLineId ? t('editLineTitle') : t('addLineTitle')}
                 </h2>
                 <form onSubmit={handleSaveLine} className="space-y-5">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">{t('lineIdLabel')}</label>
-                    <input type="text" value={lineId} onChange={e => setLineId(e.target.value)} disabled={!!editingLineId} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none disabled:opacity-50" />
+                  <div className="grid grid-cols-[1fr_auto] gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">{t('lineIdLabel')}</label>
+                      <input type="text" value={lineId} onChange={e => setLineId(e.target.value)} disabled={!!editingLineId} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none disabled:opacity-50" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2 whitespace-nowrap">Color Line</label>
+                      <input type="color" value={lineColor} onChange={e => setLineColor(e.target.value)} className="w-full bg-white border border-slate-200 rounded-lg h-[46px] px-1 py-1 cursor-pointer outline-none" />
+                    </div>
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">{t('lineNameLabel')}</label>
                     <input type="text" value={lineName} onChange={e => setLineName(e.target.value)} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">Station Symbol (A-Z)</label>
+                      <input type="text" maxLength="1" value={lineStationSymbol} onChange={e => setLineStationSymbol(e.target.value)} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">Total Stations</label>
+                      <input type="number" min="0" value={lineStationNumber} onChange={e => setLineStationNumber(e.target.value)} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none" />
+                    </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
@@ -1195,11 +1239,16 @@ export default function GeneralConfigurationPage() {
                     ) : config?.lines?.map(line => (
                       <tr key={line.id} className="hover:bg-slate-50 transition-colors">
                         <td className="px-6 py-4">
-                          <div className="font-bold text-slate-800">{line.name}</div>
-                          <div className="text-xs text-slate-500 font-mono mt-1">{line.id}</div>
+                          <div className="flex items-center gap-3">
+                            <div className="w-4 h-4 rounded shadow-sm border border-slate-200 shrink-0" style={{ backgroundColor: line.color || '#1e293b' }}></div>
+                            <div>
+                              <div className="font-bold text-slate-800">{line.name}</div>
+                              <div className="text-xs text-slate-500 font-mono mt-1 uppercase">{line.id}</div>
+                            </div>
+                          </div>
                         </td>
                         <td className="px-6 py-4 text-sm text-slate-600 font-mono">
-                          {line.startKm} - {line.endKm}
+                          {Number(line.startKm).toFixed(3)} - {Number(line.endKm).toFixed(3)}
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex flex-wrap gap-2">
@@ -1684,7 +1733,12 @@ export default function GeneralConfigurationPage() {
                       
                       {gisViewMode === 'topo' ? (
                         <div className="lg:col-span-12 mt-4">
-                          <RailMLTopologyViewer topology={gisData?.gisLayers?.topology} />
+                          <RailMLTopologyViewer 
+                            topology={gisData?.gisLayers?.topology} 
+                            gisLayers={gisData?.gisLayers}
+                            line={config?.lines?.find(l => l.id === selectedGisLineId)} 
+                            t={t}
+                          />
                         </div>
                       ) : (
                       <div className="lg:col-span-8">
@@ -1693,7 +1747,7 @@ export default function GeneralConfigurationPage() {
                           <table className="w-full text-left">
                             <thead>
                               <tr className="bg-slate-50 border-b border-slate-200">
-                                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{gisActiveLayer === 'switches' ? t('gisKm') : t('gisTableKmRange')}</th>
+                                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('gisTableKmRange')}</th>
                                 <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('gisTableParams')}</th>
                                 <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('gisColor')}</th>
                                 <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">{t('gisTableActions')}</th>
@@ -1705,7 +1759,7 @@ export default function GeneralConfigurationPage() {
                               ) : (
                                 (gisData?.gisLayers?.[gisActiveLayer] || []).map(seg => (
                                   <tr key={seg.id} className="hover:bg-slate-50 transition-colors">
-                                    <td className="px-4 py-3 text-sm font-mono text-slate-700">{gisActiveLayer === 'switches' ? `${seg.km} km` : `${seg.startKm} – ${seg.endKm} km`}</td>
+                                    <td className="px-4 py-3 text-sm font-mono text-slate-700">{seg.startKm} – {seg.endKm} km</td>
                                     <td className="px-4 py-3 text-sm text-slate-600">{fmtParams(seg, gisActiveLayer)}</td>
                                     <td className="px-4 py-3"><div className="w-6 h-6 rounded border border-slate-200" style={{ backgroundColor: seg.color || '#888' }} /></td>
                                     <td className="px-4 py-3 text-right">

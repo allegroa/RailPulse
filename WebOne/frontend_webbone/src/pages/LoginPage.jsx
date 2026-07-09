@@ -13,8 +13,8 @@ export default function LoginPage() {
     setError('');
     try {
       const res = await api.post('/api/auth/login', {
-        email,
-        password,
+        email: email.trim(),
+        password: password.trim(),
       });
       localStorage.setItem('token', res.data.token);
       if (res.data.user && res.data.user.role) {

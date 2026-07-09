@@ -67,7 +67,7 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
       baseDbPathRef.current = targetPath;
 
       try {
-        const stationsRes = await fetch(`/api/tgm/stations?path=${encodeURIComponent(targetPath)}`);
+        const stationsRes = await fetch(`/api/config/stations`);
         if (stationsRes.ok) {
            const stationsJson = await stationsRes.json();
            setStationsList(stationsJson.stations || []);

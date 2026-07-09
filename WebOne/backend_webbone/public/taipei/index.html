@@ -6,6 +6,11 @@
   <meta name="description" content="Interactive vectorial Taipei MRT Metro Map — zoom, pan, search stations, route planning and dynamic line highlighting.">
   <title>Taipei Metro 台北捷運 — Interactive Map</title>
   <link rel="stylesheet" href="style.css">
+  <script>
+    if (window.location.search.includes('hideSidebar=true')) {
+      document.documentElement.classList.add('hide-sidebar');
+    }
+  </script>
 </head>
 <body>
 <div id="app">

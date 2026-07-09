@@ -1,0 +1,119 @@
+[
+  {
+    "id": "XYL",
+    "name": "Tamsui-Xinyi Line",
+    "color": "#E3002C",
+    "stationSymbol": "R",
+    "stationNumber": 27,
+    "startKm": 92.576,
+    "endKm": 101.8,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "BL",
+    "name": "Bannan Line",
+    "color": "#0070BD",
+    "stationSymbol": "BL",
+    "stationNumber": 23,
+    "startKm": 0,
+    "endKm": 100,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "XDL",
+    "name": "Songshan-Xindian Line",
+    "color": "#008659",
+    "stationSymbol": "G",
+    "stationNumber": 17,
+    "startKm": 89,
+    "endKm": 97.5,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "O",
+    "name": "Zhonghe-Xinlu Line",
+    "color": "#F8A500",
+    "stationSymbol": "O",
+    "stationNumber": 20,
+    "startKm": 0,
+    "endKm": 100,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "BR",
+    "name": "Wenhu Line",
+    "color": "#C48A00",
+    "stationSymbol": "BR",
+    "stationNumber": 24,
+    "startKm": 0,
+    "endKm": 100,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "Y",
+    "name": "Circular Line",
+    "color": "#FFCB00",
+    "stationSymbol": "Y",
+    "stationNumber": 15,
+    "startKm": 0,
+    "endKm": 100,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "V",
+    "name": "Danhai LRT",
+    "color": "#00ABDE",
+    "stationSymbol": "V",
+    "stationNumber": 12,
+    "startKm": 0,
+    "endKm": 100,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "K",
+    "name": "Ankeng LRT",
+    "color": "#A0785A",
+    "stationSymbol": "K",
+    "stationNumber": 6,
+    "startKm": 0,
+    "endKm": 100,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "MK",
+    "name": "Maokong Gondola",
+    "color": "#7B5B3A",
+    "stationSymbol": "MK",
+    "stationNumber": 4,
+    "startKm": 0,
+    "endKm": 100,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  }
+]

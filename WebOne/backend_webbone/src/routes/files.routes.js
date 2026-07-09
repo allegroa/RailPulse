@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const verifyToken = require('../middlewares/auth.middleware');
-const fileController = require('../controllers/file.controller'); // <-- questo file deve esistere
+const fileController = require('../controllers/file.controller');
+const databaseViewController = require('../controllers/databaseView.controller');
+
+router.get('/database-view/acquisitions', verifyToken, databaseViewController.getAllAcquisitions);
 
 router.get('/available', verifyToken, fileController.getAvailableFolders);
 router.post('/singularities/save', verifyToken, fileController.saveSingularities);

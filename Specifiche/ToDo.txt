@@ -12,3 +12,4 @@ email: attraverso check-box dentro configEmail dare la possibiita di abilitare o
 
 - quando si preme l'icona del cestino per cancellare bisogna richiedere doppia conferma prima di cancellare. Quando si cancella bisgona scrivere l'operazione in un file di log locale dentro database
 - http://localhost:5173/webone/files rimuovi la cartella upload, manuals e config
+perchè GenConfig è diverso dagli altri e richiede la porta 5002?

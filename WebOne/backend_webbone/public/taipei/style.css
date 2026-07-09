@@ -48,6 +48,10 @@ body {
   z-index: 10;
 }
 
+html.hide-sidebar #sidebar {
+  display: none !important;
+}
+
 #map-container {
   flex: 1;
   height: 100%;
