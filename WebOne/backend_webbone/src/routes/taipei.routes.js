@@ -9,7 +9,7 @@ const execAsync = promisify(exec);
 
 const DB_DIR = path.resolve(process.cwd(), '..', '..', 'DATABASE');
 const GLOBAL_STATIONS_FILE = path.join(DB_DIR, 'station.json');
-const LINES_FILE = path.join(DB_DIR, 'Taipei', 'lines.json');
+const LINES_FILE = path.join(DB_DIR, 'lines.json');
 
 // Helper to write DB (handles concurrent saves simply by awaiting)
 async function writeGlobalStations(stations) {
