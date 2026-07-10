@@ -39,3 +39,26 @@ Per rendere il sistema affidabile, l'architettura deve abbandonare l'approccio i
 2. **Fetch Iniziale**: All'avvio, `app.js` deve caricare i dati delle stazioni interrogando un endpoint GET del backend (es. `/api/taipei/stations`), il quale leggerà dal file ufficiale `DATABASE/Taipei/stations.json`.
 3. **Salvataggio Unificato**: Ogni modifica (spostamento X/Y, rinomina ID, modifica metadati) deve essere inviata al backend, che aggiornerà il file JSON. Non ci sarà più bisogno di modificare il codice sorgente di `app.js` tramite RegExp.
 4. **Rimozione LocalStorage**: Rimuovere l'uso del `localStorage` come fonte di verità per la topologia persistente. La singola fonte di verità deve essere il backend (`stations.json`).
+
+## 4. Diagramma di Flusso (Nuova Architettura)
+
+```mermaid
+sequenceDiagram
+    participant F as Frontend (app.js)
+    participant B as Backend (/api/taipei)
+    participant D as DATABASE/Taipei/stations.json
+
+    Note over F, D: Fase di Inizializzazione
+    F->>B: GET /api/taipei/stations
+    B->>D: Lettura file JSON
+    D-->>B: Ritorna Dati (STATIONS, LINES)
+    B-->>F: Dati JSON (200 OK)
+    F->>F: Renderizzazione della mappa (D3.js)
+
+    Note over F, D: Modifica da parte dell'utente (es. Drag Nodo)
+    F->>F: Utente sposta il nodo "R28"
+    F->>B: POST /api/taipei/stations (body: id, x, y, metadati)
+    B->>D: Aggiornamento record nel file JSON
+    D-->>B: Salvataggio completato
+    B-->>F: Conferma salvataggio (200 OK)
+```

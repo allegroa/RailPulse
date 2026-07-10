@@ -13,6 +13,7 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
   const currentSubFolderRef = useRef('');
   const [sessions, setSessions] = useState([]);
   const [stationsList, setStationsList] = useState([]);
+  const [linesList, setLinesList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [viewMode, setViewMode] = useState('database'); // 'database' | 'maintenance'
@@ -74,6 +75,16 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
         }
       } catch(e) {
         console.warn('Errore fetch stazioni', e);
+      }
+
+      try {
+        const linesRes = await fetch(`/api/config/lines`);
+        if (linesRes.ok) {
+           const linesJson = await linesRes.json();
+           setLinesList(linesJson || []);
+        }
+      } catch(e) {
+        console.warn('Errore fetch linee', e);
       }
     } catch (err) {
       setError(err.message);
@@ -612,6 +623,7 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
         <TGMDatabaseVisualizer 
           sessions={sessions} 
           stationsList={stationsList}
+          linesList={linesList}
           currentSubFolder={currentSubFolder}
           onNavigate={handleNavigate}
           onPlaySession={(s, dbPath) => onPlaySession(s, baseDbPath + (currentSubFolder ? '/' + currentSubFolder : ''))}

@@ -99,16 +99,16 @@ async function checkNewEmails(emailConfig) {
       try {
         const headerPart = message.parts?.find(part => part.which === 'HEADER.FIELDS (FROM TO SUBJECT DATE)');
         if (headerPart && headerPart.body) {
-          if (typeof headerPart.body === 'object' && headerPart.body !== null && !Buffer.isBuffer(headerPart.body)) {
+if (typeof headerPart.body === 'string' || Buffer.isBuffer(headerPart.body)) {
+            const parsedHeader = await simpleParser(headerPart.body);
+            sender = parsedHeader.from?.text || parsedHeader.from?.value?.[0]?.address || 'Sconosciuto';
+          } else if (typeof headerPart.body === 'object') {
             const fromField = headerPart.body.from || headerPart.body.From;
             if (Array.isArray(fromField) && fromField.length > 0) {
               sender = fromField[0];
             } else if (typeof fromField === 'string') {
               sender = fromField;
             }
-          } else {
-            const parsedHeader = await simpleParser(headerPart.body);
-            sender = parsedHeader.from?.text || parsedHeader.from?.value?.[0]?.address || 'Sconosciuto';
           }
         }
       } catch (err) {

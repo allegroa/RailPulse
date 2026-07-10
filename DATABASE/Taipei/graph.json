@@ -4,56 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "name_en": "",
-      "name_zh": "",
-      "x": 0,
-      "y": 0,
-      "lines": [],
-      "type": "station",
-      "km": 10,
-      "id": "NKL"
-    },
-    {
-      "name_en": "",
-      "name_zh": "",
-      "x": 0,
-      "y": 0,
-      "lines": [],
-      "type": "station",
-      "km": 0,
-      "id": "TAL"
-    },
-    {
-      "name_en": "",
-      "name_zh": "",
-      "x": 0,
-      "y": 0,
-      "lines": [],
-      "type": "station",
-      "km": 0,
-      "id": "XBTL"
-    },
-    {
-      "name_en": "",
-      "name_zh": "",
-      "x": 0,
-      "y": 0,
-      "lines": [],
-      "type": "station",
-      "km": 0,
-      "id": "XDL"
-    },
-    {
-      "name_en": "",
-      "name_zh": "",
-      "x": 0,
-      "y": 0,
-      "lines": [],
-      "type": "station",
-      "km": 0,
-      "id": "XYL"
-    },
-    {
       "name_en": "Tamsui",
       "name_zh": "淡水",
       "x": 133,
@@ -277,12 +227,12 @@
       "x": 403,
       "y": 752,
       "lines": [
-        "R",
-        "G"
+        "G",
+        "R"
       ],
       "type": "main_station",
       "km": 0,
-      "id": "R11"
+      "id": "G14"
     },
     {
       "name_en": "Taipei Main Station",
@@ -300,44 +250,45 @@
     {
       "name_en": "Beimen",
       "name_zh": "北門",
-      "x": 396,
-      "y": 850,
+      "x": 340,
+      "y": 795,
       "lines": [
-        "R"
+        "G"
       ],
       "type": "station",
       "km": 0,
-      "id": "R09"
+      "id": "G13"
     },
     {
       "name_en": "Ximen",
       "name_zh": "西門",
-      "x": 278,
-      "y": 858,
+      "x": 350,
+      "y": 847,
       "lines": [
+        "G",
         "BL"
       ],
       "type": "main_station",
       "km": 0,
-      "id": "BL11"
+      "id": "G12"
     },
     {
-      "name_en": "Chiang Kai-shek Memorial",
+      "name_en": "Chiang Kai-shek Memorial Hall",
       "name_zh": "中正紀念堂",
-      "x": 452,
-      "y": 885,
+      "x": 392,
+      "y": 886,
       "lines": [
-        "R",
-        "G"
+        "G",
+        "R"
       ],
       "type": "main_station",
       "km": 0,
-      "id": "R07"
+      "id": "G10"
     },
     {
       "name_en": "Dongmen",
       "name_zh": "東門",
-      "x": 497,
+      "x": 499,
       "y": 888,
       "lines": [
         "R",
@@ -654,8 +605,20 @@
     {
       "name_en": "Songshan",
       "name_zh": "松山",
-      "x": 620,
-      "y": 648,
+      "x": 714,
+      "y": 751,
+      "lines": [
+        "G"
+      ],
+      "type": "station",
+      "km": 0,
+      "id": "G19"
+    },
+    {
+      "name_en": "Nanjing Sanmin",
+      "name_zh": "南京三民",
+      "x": 647,
+      "y": 752,
       "lines": [
         "G"
       ],
@@ -664,10 +627,10 @@
       "id": "G18"
     },
     {
-      "name_en": "Nanjing Sanmin",
-      "name_zh": "南京三民",
-      "x": 580,
-      "y": 682,
+      "name_en": "Taipei Arena",
+      "name_zh": "台北小巨蛋",
+      "x": 585,
+      "y": 752,
       "lines": [
         "G"
       ],
@@ -676,48 +639,36 @@
       "id": "G17"
     },
     {
-      "name_en": "Taipei Arena",
-      "name_zh": "台北小巨蛋",
-      "x": 548,
-      "y": 712,
-      "lines": [
-        "G"
-      ],
-      "type": "station",
-      "km": 0,
-      "id": "G16"
-    },
-    {
       "name_en": "Nanjing Fuxing",
       "name_zh": "南京復興",
-      "x": 515,
-      "y": 712,
+      "x": 528,
+      "y": 752,
       "lines": [
         "G",
         "BR"
       ],
       "type": "main_station",
       "km": 0,
-      "id": "G15"
+      "id": "G16"
     },
     {
       "name_en": "Songjiang Nanjing",
       "name_zh": "松江南京",
-      "x": 480,
-      "y": 712,
+      "x": 463,
+      "y": 752,
       "lines": [
         "G",
         "O"
       ],
       "type": "main_station",
       "km": 0,
-      "id": "G14"
+      "id": "G15"
     },
     {
       "name_en": "Xiaonanmen",
       "name_zh": "小南門",
-      "x": 305,
-      "y": 765,
+      "x": 352,
+      "y": 885,
       "lines": [
         "G"
       ],
@@ -728,8 +679,8 @@
     {
       "name_en": "Guting",
       "name_zh": "古亭",
-      "x": 282,
-      "y": 838,
+      "x": 420,
+      "y": 914,
       "lines": [
         "G",
         "O"
@@ -741,8 +692,8 @@
     {
       "name_en": "Taipower Building",
       "name_zh": "台電大樓",
-      "x": 385,
-      "y": 870,
+      "x": 464,
+      "y": 953,
       "lines": [
         "G"
       ],
@@ -753,8 +704,8 @@
     {
       "name_en": "Gongguan",
       "name_zh": "公館",
-      "x": 388,
-      "y": 912,
+      "x": 493,
+      "y": 982,
       "lines": [
         "G"
       ],
@@ -765,8 +716,8 @@
     {
       "name_en": "Wanlong",
       "name_zh": "萬隆",
-      "x": 395,
-      "y": 952,
+      "x": 523,
+      "y": 1019,
       "lines": [
         "G"
       ],
@@ -777,8 +728,8 @@
     {
       "name_en": "Jingmei",
       "name_zh": "景美",
-      "x": 459,
-      "y": 1037,
+      "x": 516,
+      "y": 1057,
       "lines": [
         "G"
       ],
@@ -802,19 +753,19 @@
     {
       "name_en": "Xiaobitan",
       "name_zh": "小碧潭",
-      "x": 532,
-      "y": 1107,
+      "x": 472,
+      "y": 1157,
       "lines": [
         "G"
       ],
       "type": "station",
       "km": 0,
-      "id": "G04"
+      "id": "G03A"
     },
     {
       "name_en": "Xindian District Office",
       "name_zh": "新店區公所",
-      "x": 525,
+      "x": 522,
       "y": 1188,
       "lines": [
         "G"
@@ -1511,14 +1462,15 @@
     {
       "name_en": "Dapinglin",
       "name_zh": "大坪林",
-      "x": 518,
-      "y": 1092,
+      "x": 528,
+      "y": 1108,
       "lines": [
+        "G",
         "Y"
       ],
-      "type": "station",
+      "type": "main_station",
       "km": 0,
-      "id": "Y19"
+      "id": "G04"
     },
     {
       "name_en": "Shazun",
@@ -1773,16 +1725,232 @@
       "id": "R10"
     },
     {
-      "name_en": "Ximen",
-      "name_zh": "西門",
-      "x": 401,
-      "y": 888,
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
       "lines": [
-        "R"
+        "XDL"
       ],
-      "type": "main_station",
-      "km": 0,
-      "id": "R08"
+      "type": "station",
+      "km": 89.151,
+      "id": "XDL_ST_1"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "station",
+      "km": 90.983,
+      "id": "XDL_ST_2"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "station",
+      "km": 91.831,
+      "id": "XDL_ST_3"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "station",
+      "km": 92.983,
+      "id": "XDL_ST_4"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "station",
+      "km": 94.047,
+      "id": "XDL_ST_5"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "station",
+      "km": 95.611,
+      "id": "XDL_ST_6"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "station",
+      "km": 96.516,
+      "id": "XDL_ST_7"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "station",
+      "km": 97.388,
+      "id": "XDL_ST_8"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 90.133,
+      "id": "XDL_SW_1"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 90.25,
+      "id": "XDL_SW_3"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 90.87,
+      "id": "XDL_SW_4"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 91.332,
+      "id": "XDL_SW_5"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 91.635,
+      "id": "XDL_SW_6"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 93.635,
+      "id": "XDL_SW_7"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 96.025,
+      "id": "XDL_SW_9"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 96.359,
+      "id": "XDL_SW_10"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 97.289,
+      "id": "XDL_SW_11"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 90.192,
+      "id": "XDL_SW_90.192"
+    },
+    {
+      "name_en": "",
+      "name_zh": "",
+      "x": 0,
+      "y": 0,
+      "lines": [
+        "XDL"
+      ],
+      "type": "switch",
+      "km": 93.729,
+      "id": "XDL_SW_93.729"
     }
   ],
   "edges": [
@@ -1910,25 +2078,25 @@
       "line": "R",
       "weight": 1,
       "source": "R12",
-      "target": "R11"
+      "target": "G14"
     },
     {
       "line": "R",
       "weight": 1,
-      "source": "R11",
+      "source": "G14",
       "target": "R10"
     },
     {
       "line": "G",
       "weight": 1,
-      "source": "R11",
-      "target": "G14"
+      "source": "G14",
+      "target": "G15"
     },
     {
       "line": "G",
       "weight": 1,
-      "source": "R11",
-      "target": "BL12"
+      "source": "G14",
+      "target": "G13"
     },
     {
       "line": "BL",
@@ -1940,54 +2108,48 @@
       "line": "BL",
       "weight": 1,
       "source": "BL12",
-      "target": "BL11"
+      "target": "G12"
     },
     {
       "line": "G",
       "weight": 1,
-      "source": "BL12",
+      "source": "G13",
+      "target": "G12"
+    },
+    {
+      "line": "BL",
+      "weight": 1,
+      "source": "G12",
+      "target": "BL10"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G12",
       "target": "G11"
     },
     {
       "line": "R",
       "weight": 1,
-      "source": "R09",
+      "source": "G10",
       "target": "R10"
     },
     {
       "line": "R",
       "weight": 1,
-      "source": "R09",
-      "target": "R08"
-    },
-    {
-      "line": "BL",
-      "weight": 1,
-      "source": "BL11",
-      "target": "BL10"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R07",
-      "target": "R08"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R07",
+      "source": "G10",
       "target": "R06"
     },
     {
       "line": "G",
       "weight": 1,
-      "source": "R07",
+      "source": "G10",
       "target": "G11"
     },
     {
       "line": "G",
       "weight": 1,
-      "source": "R07",
+      "source": "G10",
       "target": "G09"
     },
     {
@@ -2108,7 +2270,7 @@
       "line": "O",
       "weight": 1,
       "source": "BL14",
-      "target": "G14"
+      "target": "G15"
     },
     {
       "line": "BL",
@@ -2126,7 +2288,7 @@
       "line": "BR",
       "weight": 1,
       "source": "BL15",
-      "target": "G15"
+      "target": "G16"
     },
     {
       "line": "BL",
@@ -2179,6 +2341,12 @@
     {
       "line": "G",
       "weight": 1,
+      "source": "G19",
+      "target": "G18"
+    },
+    {
+      "line": "G",
+      "weight": 1,
       "source": "G18",
       "target": "G17"
     },
@@ -2195,21 +2363,15 @@
       "target": "G15"
     },
     {
-      "line": "G",
-      "weight": 1,
-      "source": "G15",
-      "target": "G14"
-    },
-    {
       "line": "BR",
       "weight": 1,
-      "source": "G15",
+      "source": "G16",
       "target": "BR12"
     },
     {
       "line": "O",
       "weight": 1,
-      "source": "G14",
+      "source": "G15",
       "target": "O08"
     },
     {
@@ -2246,7 +2408,13 @@
       "line": "G",
       "weight": 1,
       "source": "G05",
-      "target": "G03"
+      "target": "G04"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G03",
+      "target": "G04"
     },
     {
       "line": "G",
@@ -2258,12 +2426,18 @@
       "line": "G",
       "weight": 1,
       "source": "G03",
-      "target": "G04"
+      "target": "G03A"
     },
     {
       "line": "Y",
       "weight": 1,
       "source": "G03",
+      "target": "Y18"
+    },
+    {
+      "line": "Y",
+      "weight": 1,
+      "source": "G03A",
       "target": "Y18"
     },
     {
@@ -2318,7 +2492,7 @@
       "line": "O",
       "weight": 1,
       "source": "O14",
-      "target": "O50"
+      "target": "O53"
     },
     {
       "line": "O",
@@ -2371,6 +2545,12 @@
     {
       "line": "O",
       "weight": 1,
+      "source": "O50",
+      "target": "O53"
+    },
+    {
+      "line": "O",
+      "weight": 1,
       "source": "O51",
       "target": "O52"
     },
@@ -2378,12 +2558,6 @@
       "line": "O",
       "weight": 1,
       "source": "O52",
-      "target": "O53"
-    },
-    {
-      "line": "O",
-      "weight": 1,
-      "source": "O53",
       "target": "O54"
     },
     {
@@ -2571,12 +2745,6 @@
       "weight": 1,
       "source": "Y17",
       "target": "Y18"
-    },
-    {
-      "line": "Y",
-      "weight": 1,
-      "source": "Y18",
-      "target": "Y19"
     },
     {
       "line": "V",

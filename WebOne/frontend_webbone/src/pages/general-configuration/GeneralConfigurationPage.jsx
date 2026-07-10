@@ -1698,7 +1698,15 @@ export default function GeneralConfigurationPage() {
                         </button>
                       ))}
                     </div>
-                    <div>
+                    <div className="flex gap-3">
+                      {!gisShowForm && (
+                        <button 
+                          onClick={() => { setGisShowForm(true); setGisEditingId(null); setGisForm(getDefaultGisForm(gisActiveLayer)); }}
+                          className="px-4 py-2 bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100 rounded-md text-sm font-semibold transition-all shadow-sm"
+                        >
+                          + {t('gisBtnAdd')}
+                        </button>
+                      )}
                       <label className="cursor-pointer px-4 py-2 bg-indigo-50 text-indigo-600 border border-indigo-200 hover:bg-indigo-100 rounded-md text-sm font-semibold transition-all shadow-sm">
                         <span>📤 Importa da RailML</span>
                         <input type="file" accept=".xml,.railml" onChange={handleRailMLImport} className="hidden" />
@@ -1710,12 +1718,7 @@ export default function GeneralConfigurationPage() {
                   ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                       <div className="lg:col-span-4">
-                        {!gisShowForm ? (
-                          <button onClick={() => { setGisShowForm(true); setGisEditingId(null); setGisForm(getDefaultGisForm(gisActiveLayer)); }}
-                            className="w-full py-3 border-2 border-dashed border-blue-200 hover:border-blue-400 text-blue-500 hover:text-blue-600 rounded-xl text-sm font-semibold transition-all">
-                            + {t('gisBtnAdd')}
-                          </button>
-                        ) : (
+                        {gisShowForm && (
                           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
                             <h3 className="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">
                               {gisEditingId ? t('gisBtnEdit') : t('gisBtnAdd')} – {gisLayers.find(l => l.id === gisActiveLayer)?.label}

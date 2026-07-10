@@ -227,12 +227,14 @@
       "x": 358,
       "y": 695,
       "lines": [
-        "R",
-        "G"
+        "G",
+        "R"
       ],
       "type": "main_station",
       "km": 0.0,
-      "id": "R11"
+      "id": "G14",
+      "stationNumber": "14",
+      "stationType": "main_station"
     },
     {
       "name_en": "Taipei Main Station",
@@ -253,11 +255,13 @@
       "x": 308,
       "y": 730,
       "lines": [
-        "R"
+        "G"
       ],
       "type": "station",
       "km": 0.0,
-      "id": "R09"
+      "id": "G13",
+      "stationNumber": "13",
+      "stationType": "station"
     },
     {
       "name_en": "Ximen",
@@ -265,24 +269,29 @@
       "x": 278,
       "y": 858,
       "lines": [
+        "G",
         "BL"
       ],
       "type": "main_station",
       "km": 0.0,
-      "id": "BL11"
+      "id": "G12",
+      "stationNumber": "12",
+      "stationType": "main_station"
     },
     {
-      "name_en": "Chiang Kai-shek Memorial",
+      "name_en": "Chiang Kai-shek Memorial Hall",
       "name_zh": "中正紀念堂",
       "x": 345,
       "y": 858,
       "lines": [
-        "R",
-        "G"
+        "G",
+        "R"
       ],
       "type": "main_station",
       "km": 0.0,
-      "id": "R07"
+      "id": "G10",
+      "stationNumber": "10",
+      "stationType": "main_station"
     },
     {
       "name_en": "Dongmen",
@@ -611,7 +620,9 @@
       ],
       "type": "station",
       "km": 0.0,
-      "id": "G18"
+      "id": "G19",
+      "stationNumber": "19",
+      "stationType": "station"
     },
     {
       "name_en": "Nanjing Sanmin",
@@ -623,7 +634,9 @@
       ],
       "type": "station",
       "km": 0.0,
-      "id": "G17"
+      "id": "G18",
+      "stationNumber": "18",
+      "stationType": "station"
     },
     {
       "name_en": "Taipei Arena",
@@ -635,7 +648,9 @@
       ],
       "type": "station",
       "km": 0.0,
-      "id": "G16"
+      "id": "G17",
+      "stationNumber": "17",
+      "stationType": "station"
     },
     {
       "name_en": "Nanjing Fuxing",
@@ -648,7 +663,9 @@
       ],
       "type": "main_station",
       "km": 0.0,
-      "id": "G15"
+      "id": "G16",
+      "stationNumber": "16",
+      "stationType": "main_station"
     },
     {
       "name_en": "Songjiang Nanjing",
@@ -661,7 +678,9 @@
       ],
       "type": "main_station",
       "km": 0.0,
-      "id": "G14"
+      "id": "G15",
+      "stationNumber": "15",
+      "stationType": "main_station"
     },
     {
       "name_en": "Xiaonanmen",
@@ -759,7 +778,9 @@
       ],
       "type": "station",
       "km": 0.0,
-      "id": "G04"
+      "id": "G03A",
+      "stationNumber": "03A",
+      "stationType": "station"
     },
     {
       "name_en": "Xindian District Office",
@@ -1464,11 +1485,14 @@
       "x": 518,
       "y": 1092,
       "lines": [
+        "G",
         "Y"
       ],
       "type": "station",
       "km": 0.0,
-      "id": "Y19"
+      "id": "G04",
+      "stationNumber": "04",
+      "stationType": "main_station"
     },
     {
       "name_en": "Shazun",
@@ -1721,128 +1745,14 @@
       "type": "main_station",
       "km": 0.0,
       "id": "R10"
-    },
-    {
-      "name_en": "Ximen",
-      "name_zh": "西門",
-      "x": 278,
-      "y": 858,
-      "lines": [
-        "R"
-      ],
-      "type": "main_station",
-      "km": 0.0,
-      "id": "R08"
     }
   ],
   "edges": [
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R28",
-      "target": "R27"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R27",
-      "target": "R26"
-    },
     {
       "line": "V",
       "weight": 1,
       "source": "R27",
       "target": "V01"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R26",
-      "target": "R25"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R25",
-      "target": "R24"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R24",
-      "target": "R23"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R23",
-      "target": "R22"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R22",
-      "target": "R21"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R22",
-      "target": "R22A"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R21",
-      "target": "R20"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R20",
-      "target": "R19"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R19",
-      "target": "R18"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R18",
-      "target": "R17"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R17",
-      "target": "R16"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R16",
-      "target": "R15"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R15",
-      "target": "R14"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R14",
-      "target": "R13"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R13",
-      "target": "R12"
     },
     {
       "line": "O",
@@ -1857,30 +1767,6 @@
       "target": "O09"
     },
     {
-      "line": "R",
-      "weight": 1,
-      "source": "R12",
-      "target": "R11"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R11",
-      "target": "R10"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "R11",
-      "target": "G14"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "R11",
-      "target": "BL12"
-    },
-    {
       "line": "BL",
       "weight": 1,
       "source": "BL12",
@@ -1890,61 +1776,13 @@
       "line": "BL",
       "weight": 1,
       "source": "BL12",
-      "target": "BL11"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "BL12",
-      "target": "G11"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R09",
-      "target": "R10"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R09",
-      "target": "R08"
+      "target": "G12"
     },
     {
       "line": "BL",
       "weight": 1,
-      "source": "BL11",
+      "source": "G12",
       "target": "BL10"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R07",
-      "target": "R08"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R07",
-      "target": "R06"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "R07",
-      "target": "G11"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "R07",
-      "target": "G09"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R06",
-      "target": "R05"
     },
     {
       "line": "O",
@@ -1957,24 +1795,6 @@
       "weight": 1,
       "source": "R06",
       "target": "G09"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R05",
-      "target": "R04"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R04",
-      "target": "R03"
-    },
-    {
-      "line": "R",
-      "weight": 1,
-      "source": "R03",
-      "target": "R02"
     },
     {
       "line": "BL",
@@ -2058,7 +1878,7 @@
       "line": "O",
       "weight": 1,
       "source": "BL14",
-      "target": "G14"
+      "target": "G15"
     },
     {
       "line": "BL",
@@ -2076,7 +1896,7 @@
       "line": "BR",
       "weight": 1,
       "source": "BL15",
-      "target": "G15"
+      "target": "G16"
     },
     {
       "line": "BL",
@@ -2127,46 +1947,16 @@
       "target": "BR23"
     },
     {
-      "line": "G",
-      "weight": 1,
-      "source": "G18",
-      "target": "G17"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G17",
-      "target": "G16"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G16",
-      "target": "G15"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G15",
-      "target": "G14"
-    },
-    {
       "line": "BR",
       "weight": 1,
-      "source": "G15",
+      "source": "G16",
       "target": "BR12"
     },
     {
       "line": "O",
       "weight": 1,
-      "source": "G14",
+      "source": "G15",
       "target": "O08"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G09",
-      "target": "G08"
     },
     {
       "line": "O",
@@ -2175,52 +1965,10 @@
       "target": "O05"
     },
     {
-      "line": "G",
-      "weight": 1,
-      "source": "G08",
-      "target": "G07"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G07",
-      "target": "G06"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G06",
-      "target": "G05"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G05",
-      "target": "G03"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G03",
-      "target": "G02"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G03",
-      "target": "G04"
-    },
-    {
       "line": "Y",
       "weight": 1,
       "source": "G03",
       "target": "Y18"
-    },
-    {
-      "line": "G",
-      "weight": 1,
-      "source": "G02",
-      "target": "G01"
     },
     {
       "line": "O",
@@ -2526,7 +2274,7 @@
       "line": "Y",
       "weight": 1,
       "source": "Y18",
-      "target": "Y19"
+      "target": "G04"
     },
     {
       "line": "V",
@@ -2629,6 +2377,270 @@
       "weight": 1,
       "source": "MK03",
       "target": "MK04"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G01",
+      "target": "G02"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G02",
+      "target": "G03"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G03",
+      "target": "G04"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G04",
+      "target": "G05"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G05",
+      "target": "G06"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G06",
+      "target": "G07"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G07",
+      "target": "G08"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G08",
+      "target": "G09"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G09",
+      "target": "G10"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G10",
+      "target": "G11"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G11",
+      "target": "G12"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G12",
+      "target": "G13"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G13",
+      "target": "G14"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G14",
+      "target": "G15"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G15",
+      "target": "G16"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G16",
+      "target": "G17"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G17",
+      "target": "G18"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G18",
+      "target": "G19"
+    },
+    {
+      "line": "G",
+      "weight": 1,
+      "source": "G03",
+      "target": "G03A"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R28",
+      "target": "R27"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R27",
+      "target": "R26"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R26",
+      "target": "R25"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R25",
+      "target": "R24"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R24",
+      "target": "R23"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R23",
+      "target": "R22"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R22",
+      "target": "R21"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R21",
+      "target": "R20"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R20",
+      "target": "R19"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R19",
+      "target": "R18"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R18",
+      "target": "R17"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R17",
+      "target": "R16"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R16",
+      "target": "R15"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R15",
+      "target": "R14"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R14",
+      "target": "R13"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R13",
+      "target": "R12"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R12",
+      "target": "G14"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "G14",
+      "target": "R10"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R10",
+      "target": "G10"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "G10",
+      "target": "R06"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R06",
+      "target": "R05"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R05",
+      "target": "R04"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R04",
+      "target": "R03"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R03",
+      "target": "R02"
+    },
+    {
+      "line": "R",
+      "weight": 1,
+      "source": "R22",
+      "target": "R22A"
     }
   ]
 }

@@ -46,7 +46,18 @@ async function extractArchive(filePath, outputDir) {
           const sevenZipCmd = process.env.SEVENZIP_PATH || '7z';
           await execAsync(`"${sevenZipCmd}" x -y -o"${outputDir}" "${filePath}"`);
         } catch (sevenZipErr) {
-          throw new Error('Extraction failed: Unable to extract RAR file. Please ensure tar (Windows 11+), unrar, or 7-Zip is configured in your system PATH or environment variables (UNRAR_PATH / SEVENZIP_PATH).');
+          console.warn('Comando 7-Zip fallito, tentativo con node-unrar-js:', sevenZipErr);
+          try {
+            const unrarJs = require('node-unrar-js');
+            const extractor = await unrarJs.createExtractorFromFile({
+              filepath: filePath,
+              targetPath: outputDir
+            });
+            const extracted = extractor.extract();
+            const resultFiles = [...extracted.files];
+          } catch (unrarJsErr) {
+            throw new Error('Extraction failed: Unable to extract RAR file using any method (tar, unrar, 7z, node-unrar-js). Error: ' + unrarJsErr.message);
+          }
         }
       }
     }

@@ -5,10 +5,21 @@ const RailMLTopologyViewer = ({ topology, gisLayers = {}, line, t = (k) => k }) 
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [tooltip, setTooltip] = useState(null);
+  const containerRef = React.useRef(null);
 
   const startKm = line && line.startKm !== undefined ? Number(line.startKm) : 0;
   const endKm = line && line.endKm !== undefined ? Number(line.endKm) : 5;
   const totalKm = endKm - startKm;
+
+  const getRelativeCoords = (clientX, clientY) => {
+    if (!containerRef.current) return { x: 0, y: 0 };
+    const rect = containerRef.current.getBoundingClientRect();
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  };
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -16,8 +27,21 @@ const RailMLTopologyViewer = ({ topology, gisLayers = {}, line, t = (k) => k }) 
   };
 
   const handleMouseMove = (e) => {
+    if (tooltip) {
+      const { x, y } = getRelativeCoords(e.clientX, e.clientY);
+      setTooltip(t => ({ ...t, x, y }));
+    }
     if (!isDragging) return;
     setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+  };
+
+  const handleElementMouseEnter = (e, data) => {
+    const { x, y } = getRelativeCoords(e.clientX, e.clientY);
+    setTooltip({ x, y, data });
+  };
+
+  const handleElementMouseLeave = () => {
+    setTooltip(null);
   };
 
   const handleMouseUp = () => setIsDragging(false);
@@ -82,7 +106,7 @@ const RailMLTopologyViewer = ({ topology, gisLayers = {}, line, t = (k) => k }) 
   }, [topology, startKm, endKm]);
 
   return (
-    <div className="relative w-full border border-slate-300 bg-slate-50 rounded-xl overflow-hidden shadow-inner">
+    <div ref={containerRef} className="relative w-full border border-slate-300 bg-slate-50 rounded-xl overflow-hidden shadow-inner">
       <div className="absolute top-4 right-4 z-10 flex gap-2">
         <button onClick={() => setZoom(z => Math.min(z * 1.2, 3))} className="px-3 py-1 bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-md shadow-sm text-sm">+</button>
         <button onClick={() => setZoom(z => Math.max(z / 1.2, 0.5))} className="px-3 py-1 bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-md shadow-sm text-sm">-</button>
@@ -165,7 +189,13 @@ const RailMLTopologyViewer = ({ topology, gisLayers = {}, line, t = (k) => k }) 
                     const sx2 = getScreenX(ekm);
                     const w = Math.max(sx2 - sx1, 10);
                     return (
-                      <g key={st.id} transform={`translate(${sx1}, -18)`}>
+                      <g 
+                        key={st.id} 
+                        transform={`translate(${sx1}, -18)`}
+                        onMouseEnter={(e) => handleElementMouseEnter(e, { type: 'Stazione', code: st.stationCode, name: st.name, startKm: skm, endKm: ekm })}
+                        onMouseLeave={handleElementMouseLeave}
+                        className="cursor-pointer transition-opacity hover:opacity-80"
+                      >
                         <rect x={0} y={-12} width={w} height={8} fill="#f97316" rx={2} stroke="#c2410c" strokeWidth={1} />
                         <text x={w/2} y={-16} textAnchor="middle" fontSize={10} fontWeight="bold" fill="#ea580c">
                           {st.stationCode}
@@ -184,7 +214,12 @@ const RailMLTopologyViewer = ({ topology, gisLayers = {}, line, t = (k) => k }) 
                     const isFacing = sw.switchType === 'Facing' || idx % 2 === 0;
                     const offset = isFacing ? 20 : -20;
                     return (
-                      <g key={sw.id}>
+                      <g 
+                        key={sw.id}
+                        onMouseEnter={(e) => handleElementMouseEnter(e, { type: 'Scambio', id: sw.switchId, switchType: sw.switchType, angle: sw.angle, startKm: skm, endKm: ekm })}
+                        onMouseLeave={handleElementMouseLeave}
+                        className="cursor-pointer transition-opacity hover:opacity-80"
+                      >
                         {/* Branch line */}
                         <path 
                           d={`M ${sx1} 0 Q ${(sx1+sx2)/2} ${offset} ${sx2} ${offset}`} 
@@ -257,6 +292,38 @@ const RailMLTopologyViewer = ({ topology, gisLayers = {}, line, t = (k) => k }) 
           </g>
         </svg>
       </div>
+
+      {/* Tooltip Overlay */}
+      {tooltip && tooltip.data && (
+        <div 
+          className="absolute z-50 bg-slate-800 text-white px-3 py-2 rounded-lg shadow-xl text-xs pointer-events-none border border-slate-600"
+          style={{ left: tooltip.x, top: tooltip.y - 20, transform: 'translate(-50%, -100%)' }}
+        >
+          <div className="font-bold text-sm mb-1 text-slate-100 uppercase tracking-wider">{tooltip.data.type}</div>
+          
+          {tooltip.data.type === 'Stazione' && (
+            <>
+              <div className="mb-1">
+                <span className="text-slate-400">Codice:</span> <span className="font-mono text-orange-300 font-semibold">{tooltip.data.code}</span>
+                {tooltip.data.name && <span className="ml-1">- {tooltip.data.name}</span>}
+              </div>
+              <div><span className="text-slate-400">Tratta Km:</span> {tooltip.data.startKm.toFixed(3)} - {tooltip.data.endKm.toFixed(3)}</div>
+            </>
+          )}
+
+          {tooltip.data.type === 'Scambio' && (
+            <>
+              <div className="mb-1">
+                <span className="text-slate-400">ID:</span> <span className="font-mono text-sky-300 font-semibold">{tooltip.data.id}</span>
+              </div>
+              <div className="mb-1">
+                <span className="text-slate-400">Tipo:</span> {tooltip.data.switchType || 'N/A'} <span className="text-slate-400 ml-2">Angolo:</span> {tooltip.data.angle || 'N/A'}
+              </div>
+              <div><span className="text-slate-400">Posizione Km:</span> {tooltip.data.startKm.toFixed(3)}</div>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };

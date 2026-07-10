@@ -24,6 +24,10 @@ In questa sezione viene visualizzata in modo grafico la topologia o la struttura
 In conformità con la tecnica RailML, la Topologia 2D deve renderizzare gli elementi infrastrutturali inseriti nei layer GIS nel seguente modo:
 * **Stazioni (Stations / OCPs)**: Devono essere rappresentate come piattaforme/banchine rettangolari (es. colore arancione o grigio scuro) posizionate in parallelo, appena sopra o appena sotto l'asse del binario principale. Si estendono graficamente da `startKm` a `endKm`. L'etichetta identificativa della stazione (es. il Codice Stazione) deve essere visibile al centro o in prossimità della piattaforma.
 * **Scambi (Switches)**: Devono essere rappresentati come linee di derivazione/deviazione (branching lines) che si distaccano diagonalmente dal binario principale partendo da `startKm` e terminando a `endKm` (con un offset verticale, es. 20px). L'etichetta identificativa (`switchId`) e l'angolo (es. `1:12`) devono essere riportati accanto al punto di deviazione.
+* **Interattività e Tooltip (Fumetti)**: Al passaggio del mouse (hover) sopra agli elementi infrastrutturali rappresentati nel grafico (es. Stazioni, Scambi), deve apparire un tooltip informativo (fumetto) vicino al cursore del mouse, contenente i dettagli dell'elemento:
+  * **Per le Stazioni**: Tipo elemento ("Stazione"), Codice Stazione (e Nome se presente), Km Inizio e Km Fine.
+  * **Per gli Scambi**: Tipo elemento ("Scambio"), ID Scambio, Tipologia, Angolo e chilometrica di riferimento.
+
 
 ### 2.2 Inserimento Elementi Infrastrutturali (GIS Form)
 * **Layer "Station"**: All'interno della lista dei layer modificabili, deve essere sempre presente il tab **Station** posizionato come prima scelta (alla sinistra di *Sleepers*).

@@ -1,70 +1,5 @@
 [
   {
-    "code": "NKL",
-    "name": "",
-    "kmStart": 10,
-    "kmEnd": 20,
-    "tracks": 0,
-    "lineCode": "",
-    "stationNumber": "",
-    "x": 0,
-    "y": 0,
-    "stationType": "station",
-    "LineName": []
-  },
-  {
-    "code": "TAL",
-    "name": "",
-    "kmStart": 0,
-    "kmEnd": 0,
-    "tracks": 0,
-    "lineCode": "",
-    "stationNumber": "",
-    "x": 0,
-    "y": 0,
-    "stationType": "station",
-    "LineName": []
-  },
-  {
-    "code": "XBTL",
-    "name": "",
-    "kmStart": 0,
-    "kmEnd": 0,
-    "tracks": 0,
-    "lineCode": "",
-    "stationNumber": "",
-    "x": 0,
-    "y": 0,
-    "stationType": "station",
-    "LineName": []
-  },
-  {
-    "code": "XDL",
-    "name": "",
-    "kmStart": 0,
-    "kmEnd": 0,
-    "tracks": 0,
-    "lineCode": "",
-    "stationNumber": "",
-    "x": 0,
-    "y": 0,
-    "stationType": "station",
-    "LineName": []
-  },
-  {
-    "code": "XYL",
-    "name": "Xinyi Line",
-    "kmStart": 0,
-    "kmEnd": 0,
-    "tracks": 0,
-    "lineCode": "R",
-    "stationNumber": "04",
-    "x": 0,
-    "y": 0,
-    "stationType": "station",
-    "LineName": []
-  },
-  {
     "code": "R28",
     "name": "Tamsui - 淡水",
     "kmStart": 0,
@@ -391,19 +326,19 @@
     "kmPosition": 0
   },
   {
-    "code": "R11",
+    "code": "G14",
     "name": "Zhongshan - 中山",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "R",
-    "stationNumber": "11",
+    "lineCode": "G,R",
+    "stationNumber": "14",
     "x": 403,
     "y": 752,
     "stationType": "main_station",
     "LineName": [
-      "R",
-      "G"
+      "G",
+      "R"
     ],
     "name_en": "Zhongshan",
     "name_zh": "中山",
@@ -429,35 +364,36 @@
     "kmPosition": 0
   },
   {
-    "code": "R09",
+    "code": "G13",
     "name": "Beimen - 北門",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "R",
-    "stationNumber": "09",
-    "x": 396,
-    "y": 850,
+    "lineCode": "G",
+    "stationNumber": "13",
+    "x": 340,
+    "y": 795,
     "stationType": "station",
     "LineName": [
-      "R"
+      "G"
     ],
     "name_en": "Beimen",
     "name_zh": "北門",
     "kmPosition": 0
   },
   {
-    "code": "BL11",
-    "name": "Ximen",
+    "code": "G12",
+    "name": "Ximen - 西門",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "BL",
-    "stationNumber": "11",
-    "x": 278,
-    "y": 858,
+    "lineCode": "G",
+    "stationNumber": "12",
+    "x": 350,
+    "y": 847,
     "stationType": "main_station",
     "LineName": [
+      "G",
       "BL"
     ],
     "name_en": "Ximen",
@@ -465,21 +401,21 @@
     "kmPosition": 0
   },
   {
-    "code": "R07",
-    "name": "Chiang Kai-shek Memorial",
+    "code": "G10",
+    "name": "Chiang Kai-shek Memorial Hall - 中正紀念堂",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "R",
-    "stationNumber": "07",
-    "x": 452,
-    "y": 885,
+    "lineCode": "G",
+    "stationNumber": "1",
+    "x": 392,
+    "y": 886,
     "stationType": "main_station",
     "LineName": [
-      "R",
-      "G"
+      "G",
+      "R"
     ],
-    "name_en": "Chiang Kai-shek Memorial",
+    "name_en": "Chiang Kai-shek Memorial Hall",
     "name_zh": "中正紀念堂",
     "kmPosition": 0
   },
@@ -491,7 +427,7 @@
     "tracks": 0,
     "lineCode": "R",
     "stationNumber": "06",
-    "x": 497,
+    "x": 499,
     "y": 888,
     "stationType": "station",
     "LineName": [
@@ -957,15 +893,15 @@
     "kmPosition": 0
   },
   {
-    "code": "G18",
-    "name": "Songshan",
+    "code": "G19",
+    "name": "Songshan - 松山",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
-    "stationNumber": "18",
-    "x": 620,
-    "y": 648,
+    "stationNumber": "19",
+    "x": 714,
+    "y": 751,
     "stationType": "station",
     "LineName": [
       "G"
@@ -975,15 +911,15 @@
     "kmPosition": 0
   },
   {
-    "code": "G17",
-    "name": "Nanjing Sanmin",
+    "code": "G18",
+    "name": "Nanjing Sanmin - 南京三民",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
-    "stationNumber": "17",
-    "x": 580,
-    "y": 682,
+    "stationNumber": "18",
+    "x": 647,
+    "y": 752,
     "stationType": "station",
     "LineName": [
       "G"
@@ -993,15 +929,15 @@
     "kmPosition": 0
   },
   {
-    "code": "G16",
-    "name": "Taipei Arena",
+    "code": "G17",
+    "name": "Taipei Arena - 台北小巨蛋",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
-    "stationNumber": "16",
-    "x": 548,
-    "y": 712,
+    "stationNumber": "17",
+    "x": 585,
+    "y": 752,
     "stationType": "station",
     "LineName": [
       "G"
@@ -1011,15 +947,15 @@
     "kmPosition": 0
   },
   {
-    "code": "G15",
-    "name": "Nanjing Fuxing",
+    "code": "G16",
+    "name": "Nanjing Fuxing - 南京復興",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "G,BR",
-    "stationNumber": "15",
-    "x": 515,
-    "y": 712,
+    "lineCode": "G",
+    "stationNumber": "16",
+    "x": 528,
+    "y": 752,
     "stationType": "main_station",
     "LineName": [
       "G",
@@ -1030,15 +966,15 @@
     "kmPosition": 0
   },
   {
-    "code": "G14",
-    "name": "Songjiang Nanjing",
+    "code": "G15",
+    "name": "Songjiang Nanjing - 松江南京",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "G,O",
-    "stationNumber": "14",
-    "x": 480,
-    "y": 712,
+    "lineCode": "G",
+    "stationNumber": "15",
+    "x": 463,
+    "y": 752,
     "stationType": "main_station",
     "LineName": [
       "G",
@@ -1050,14 +986,14 @@
   },
   {
     "code": "G11",
-    "name": "Xiaonanmen",
+    "name": "Xiaonanmen - 小南門",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
     "stationNumber": "11",
-    "x": 305,
-    "y": 765,
+    "x": 352,
+    "y": 885,
     "stationType": "station",
     "LineName": [
       "G"
@@ -1068,14 +1004,14 @@
   },
   {
     "code": "G09",
-    "name": "Guting",
+    "name": "Guting - 古亭",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "G,O",
+    "lineCode": "G",
     "stationNumber": "09",
-    "x": 282,
-    "y": 838,
+    "x": 420,
+    "y": 914,
     "stationType": "main_station",
     "LineName": [
       "G",
@@ -1087,14 +1023,14 @@
   },
   {
     "code": "G08",
-    "name": "Taipower Building",
+    "name": "Taipower Building - 台電大樓",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
     "stationNumber": "08",
-    "x": 385,
-    "y": 870,
+    "x": 464,
+    "y": 953,
     "stationType": "station",
     "LineName": [
       "G"
@@ -1105,14 +1041,14 @@
   },
   {
     "code": "G07",
-    "name": "Gongguan",
+    "name": "Gongguan - 公館",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
     "stationNumber": "07",
-    "x": 388,
-    "y": 912,
+    "x": 493,
+    "y": 982,
     "stationType": "station",
     "LineName": [
       "G"
@@ -1123,14 +1059,14 @@
   },
   {
     "code": "G06",
-    "name": "Wanlong",
+    "name": "Wanlong - 萬隆",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
     "stationNumber": "06",
-    "x": 395,
-    "y": 952,
+    "x": 523,
+    "y": 1019,
     "stationType": "station",
     "LineName": [
       "G"
@@ -1147,8 +1083,8 @@
     "tracks": 0,
     "lineCode": "G",
     "stationNumber": "05",
-    "x": 459,
-    "y": 1037,
+    "x": 516,
+    "y": 1057,
     "stationType": "station",
     "LineName": [
       "G"
@@ -1177,15 +1113,15 @@
     "kmPosition": 0
   },
   {
-    "code": "G04",
+    "code": "G03A",
     "name": "Xiaobitan - 小碧潭",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
     "lineCode": "G",
-    "stationNumber": "04",
-    "x": 532,
-    "y": 1107,
+    "stationNumber": "03A",
+    "x": 472,
+    "y": 1157,
     "stationType": "station",
     "LineName": [
       "G"
@@ -1202,7 +1138,7 @@
     "tracks": 0,
     "lineCode": "G",
     "stationNumber": "02",
-    "x": 525,
+    "x": 522,
     "y": 1188,
     "stationType": "station",
     "LineName": [
@@ -2240,17 +2176,18 @@
     "kmPosition": 0
   },
   {
-    "code": "Y19",
-    "name": "Dapinglin",
+    "code": "G04",
+    "name": "Dapinglin - 大坪林",
     "kmStart": 0,
     "kmEnd": 0,
     "tracks": 0,
-    "lineCode": "Y",
-    "stationNumber": "19",
-    "x": 518,
-    "y": 1092,
-    "stationType": "station",
+    "lineCode": "G",
+    "stationNumber": "4",
+    "x": 528,
+    "y": 1108,
+    "stationType": "main_station",
     "LineName": [
+      "G",
       "Y"
     ],
     "name_en": "Dapinglin",
@@ -2636,21 +2573,288 @@
     "kmPosition": 0
   },
   {
-    "code": "R08",
-    "name": "Ximen - 西門",
-    "kmStart": 0,
-    "kmEnd": 0,
+    "code": "XDL_ST_1",
+    "name": "XDL Station 1",
+    "kmStart": 89.151,
+    "kmEnd": 89.178,
     "tracks": 0,
-    "lineCode": "R",
-    "stationNumber": "08",
-    "x": 401,
-    "y": 888,
-    "stationType": "main_station",
+    "lineCode": "XDL",
+    "stationNumber": "1",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
     "LineName": [
-      "R"
-    ],
-    "name_en": "Ximen",
-    "name_zh": "西門",
-    "kmPosition": 0
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_ST_2",
+    "name": "XDL Station 2",
+    "kmStart": 90.983,
+    "kmEnd": 91.121,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "2",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_ST_3",
+    "name": "XDL Station 3",
+    "kmStart": 91.831,
+    "kmEnd": 91.968,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "3",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_ST_4",
+    "name": "XDL Station 4",
+    "kmStart": 92.983,
+    "kmEnd": 93.123,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "4",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_ST_5",
+    "name": "XDL Station 5",
+    "kmStart": 94.047,
+    "kmEnd": 94.182,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "5",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_ST_6",
+    "name": "XDL Station 6",
+    "kmStart": 95.611,
+    "kmEnd": 95.749,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "6",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_ST_7",
+    "name": "XDL Station 7",
+    "kmStart": 96.516,
+    "kmEnd": 96.654,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "7",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_ST_8",
+    "name": "XDL Station 8",
+    "kmStart": 97.388,
+    "kmEnd": 97.505,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "8",
+    "x": 0,
+    "y": 0,
+    "stationType": "station",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_1",
+    "name": "XDL Switch 1",
+    "kmStart": 90.133,
+    "kmEnd": 90.165,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_3",
+    "name": "XDL Switch 3",
+    "kmStart": 90.25,
+    "kmEnd": 90.284,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_4",
+    "name": "XDL Switch 4",
+    "kmStart": 90.87,
+    "kmEnd": 90.929,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_5",
+    "name": "XDL Switch 5",
+    "kmStart": 91.332,
+    "kmEnd": 91.369,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_6",
+    "name": "XDL Switch 6",
+    "kmStart": 91.635,
+    "kmEnd": 91.675,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_7",
+    "name": "XDL Switch 7",
+    "kmStart": 93.635,
+    "kmEnd": 93.672,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_9",
+    "name": "XDL Switch 9",
+    "kmStart": 96.025,
+    "kmEnd": 96.063,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_10",
+    "name": "XDL Switch 10",
+    "kmStart": 96.359,
+    "kmEnd": 96.396,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_11",
+    "name": "XDL Switch 11",
+    "kmStart": 97.289,
+    "kmEnd": 97.328,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_90.192",
+    "name": "XDL Switch 2",
+    "kmStart": 90.192,
+    "kmEnd": 90.227,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
+  },
+  {
+    "code": "XDL_SW_93.729",
+    "name": "XDL Switch 8",
+    "kmStart": 93.729,
+    "kmEnd": 93.766,
+    "tracks": 0,
+    "lineCode": "XDL",
+    "stationNumber": "",
+    "x": 0,
+    "y": 0,
+    "stationType": "switch",
+    "LineName": [
+      "XDL"
+    ]
   }
 ]

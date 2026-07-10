@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 const isDebugMode = true;
 
-export default function TGMDatabaseVisualizer({ sessions, stationsList = [], currentSubFolder, onNavigate, onPlaySession, onMoveFolder, onDeleteSession, baseDbPath = 'DATABASE/TGM' }) {
+export default function TGMDatabaseVisualizer({ sessions, stationsList = [], linesList = [], currentSubFolder, onNavigate, onPlaySession, onMoveFolder, onDeleteSession, baseDbPath = 'DATABASE/TGM' }) {
   const { t } = useTranslation();
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'desc' });
   const [selectedIds, setSelectedIds] = useState(new Set());
@@ -64,10 +64,9 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], cur
     }
   };
 
-  const isStationInvalid = (name) => {
+  const isLineInvalid = (name) => {
     if (!name || name === '-') return true;
-    // Solo lettere (inclusi eventuali spazi/trattini) permesse, no numeri
-    return /[0-9]/.test(name);
+    return false; // Permettiamo qualsiasi testo alfanumerico per le linee
   };
 
   const handleSort = (key) => {
@@ -144,14 +143,14 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], cur
     <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden flex flex-col h-full">
 
       <div className="overflow-x-auto flex-1">
-        <table className="w-full text-sm text-left text-slate-600">
+        <table className="w-full text-sm text-center text-slate-600">
           <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-100 sticky top-0 z-10">
             <tr>
               <th className="w-12 text-center p-3 font-semibold text-xs tracking-wider">
                 SELECT
               </th>
               <th className="p-3 cursor-pointer hover:bg-slate-100 transition" onClick={() => handleSort('date')}>
-                MEASUREMENT / FOLDER {getSortIcon('date')}
+                DATA {getSortIcon('date')}
               </th>
               <th className="p-3 cursor-pointer hover:bg-slate-100 transition" onClick={() => handleSort('time')}>
                 TIME {getSortIcon('time')}
@@ -165,7 +164,7 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], cur
               <th className="p-3 cursor-pointer hover:bg-slate-100 transition" onClick={() => handleSort('length')}>
                 LENGTH (KM) {getSortIcon('length')}
               </th>
-              <th className="p-3">START STATION</th>
+              <th className="p-3">LINE</th>
               <th className="p-3 text-center">DIR.</th>
               <th className="p-3">FILES PRESENT</th>
               <th className="p-3 text-right">ACTIONS</th>
@@ -184,9 +183,9 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], cur
                   onChange={e => handleFilterChange('stazionePartenza', e.target.value)}
                 >
                   <option value="">{t('all', 'All')}</option>
-                  {stationsList.map((station, idx) => (
-                    <option key={idx} value={station.code}>
-                      {station.code}{station.name ? ` - ${station.name}` : ''}
+                  {linesList.map((line, idx) => (
+                    <option key={idx} value={line.id}>
+                      {line.id}{line.name ? ` - ${line.name}` : ''}
                     </option>
                   ))}
                 </select>
@@ -247,31 +246,35 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], cur
                     <td className="p-3">{Math.abs((session.endKm || 0) - (session.startKm || 0)).toFixed(3)}</td>
                     <td className="p-3 font-semibold text-slate-700">
                       {editSessionId === session.id ? (
-                        <select
-                          className="border border-slate-300 rounded px-2 py-1 text-xs w-36 focus:outline-none focus:border-blue-500 bg-white"
-                          value={editStationValue}
-                          onChange={(e) => setEditStationValue(e.target.value)}
-                          autoFocus
-                        >
-                          <option value="">-- Seleziona --</option>
-                          {stationsList.map((s, idx) => (
-                            <option key={idx} value={s.code}>
-                              {s.code}{s.name ? ` - ${s.name}` : ''}
-                            </option>
-                          ))}
-                        </select>
+                        <>
+                          <input
+                            list={`linesDataList-${session.id}`}
+                            className="border border-slate-300 rounded px-2 py-1 text-xs w-36 focus:outline-none focus:border-blue-500 bg-white"
+                            value={editStationValue}
+                            onChange={(e) => setEditStationValue(e.target.value)}
+                            placeholder="Seleziona o digita"
+                            autoFocus
+                          />
+                          <datalist id={`linesDataList-${session.id}`}>
+                            {linesList.map((l, idx) => (
+                              <option key={idx} value={l.id}>
+                                {l.id}{l.name ? ` - ${l.name}` : ''}
+                              </option>
+                            ))}
+                          </datalist>
+                        </>
                       ) : (
                         <div className="flex items-center gap-2">
-                          <span className={isStationInvalid(session.stazionePartenza) ? 'text-red-600 border-b border-red-300 border-dashed pb-0.5' : ''}>
+                          <span className={isLineInvalid(session.stazionePartenza) ? 'text-red-600 border-b border-red-300 border-dashed pb-0.5' : ''}>
                             {(() => {
-                              const found = stationsList.find(s => s.code === session.stazionePartenza);
+                              const found = linesList.find(l => l.id === session.stazionePartenza);
                               return found
-                                ? `${found.code}${found.name ? ` - ${found.name}` : ''}`
+                                ? `${found.id}${found.name ? ` - ${found.name}` : ''}`
                                 : (session.stazionePartenza || '-');
                             })()}
                           </span>
-                          {isStationInvalid(session.stazionePartenza) && (
-                            <span title={t('invalidStationName', 'Valore non valido. Usa la matita nelle azioni per modificare.')} className="text-red-500 cursor-help text-xs">!</span>
+                          {isLineInvalid(session.stazionePartenza) && (
+                            <span title={t('invalidLineName', 'Valore non valido. Usa la matita nelle azioni per modificare.')} className="text-red-500 cursor-help text-xs">!</span>
                           )}
                         </div>
                       )}

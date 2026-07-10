@@ -29,6 +29,7 @@
     "mailparser": "^3.9.12",
     "mime-types": "^3.0.2",
     "multer": "^2.0.2",
+    "node-unrar-js": "^2.0.2",
     "nodemailer": "^9.0.3",
     "papaparse": "^5.5.3",
     "uuid": "^14.0.1"
