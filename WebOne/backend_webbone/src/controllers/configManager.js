@@ -5,6 +5,7 @@ const path = require('path');
 const DB_PATH = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'config_db.json');
 const STATION_DB_PATH = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'station.json');
 const GIS_DIR = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'GIS');
+const LINES_DB_PATH = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'lines.json');
 
 // Helper per leggere il database delle configurazioni
 async function readConfig() {
@@ -126,11 +127,38 @@ async function writeGis(lineId, data) {
   }
 }
 
+async function readLines() {
+  try {
+    const data = await fs.readFile(LINES_DB_PATH, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      await fs.mkdir(path.dirname(LINES_DB_PATH), { recursive: true });
+      await fs.writeFile(LINES_DB_PATH, '[]', 'utf-8');
+      return [];
+    }
+    console.error('Errore durante la lettura di lines.json:', error);
+    return [];
+  }
+}
+
+async function writeLines(lines) {
+  try {
+    await fs.mkdir(path.dirname(LINES_DB_PATH), { recursive: true });
+    await fs.writeFile(LINES_DB_PATH, JSON.stringify(lines, null, 2), 'utf-8');
+  } catch (error) {
+    console.error('Errore durante la scrittura su lines.json:', error);
+    throw error;
+  }
+}
+
 module.exports = {
   readConfig,
   writeConfig,
   readStations,
   writeStations,
   readGis,
-  writeGis
+  writeGis,
+  readLines,
+  writeLines
 };

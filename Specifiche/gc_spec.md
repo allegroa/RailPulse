@@ -27,6 +27,7 @@ Il modulo gestisce le seguenti aree di configurazione:
 ### GCE – Infrastructure GIS Database (Integrazione Stazioni)
 * Nel sottomenu "Infrastructure GIS Database", dovrà essere presente un tab (o layer) denominato **Station** posizionato alla sinistra della voce **Sleepers**.
 * Questo pannello consentirà all'utente di posizionare stazioni lungo la linea. Le stazioni disponibili per la selezione non dovranno essere digitate liberamente, ma dovranno essere preventivamente lette ed estratte dal database centralizzato `stations.json`.
+* **Stations Registry**: l'interfaccia deve prevedere un registro delle stazioni ("Stations Registry") in cui poter censire e configurare le anagrafiche (codice, nome, colore, km, ecc.). In particolare, **nel campo "Line Code" deve essere inserito il codice della linea, che corrisponde esattamente al "Line ID Code"** definito nel tab "LINE AND TRACKS".
 
 ### GCC – Database Operatori e Appaltatori (Operators Database)
 * Gestire l'anagrafica comune delle ditte appaltatrici e degli operatori che eseguono gli interventi di manutenzione sulla rete.

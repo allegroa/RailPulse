@@ -33,6 +33,10 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
   const queueRef = useRef([]);
   const indexRef = useRef(0);
 
+  const [importReports, setImportReports] = useState([]);
+  const importReportsRef = useRef([]);
+  const [showReportModal, setShowReportModal] = useState(false);
+
   const filesRef = useRef(null);
   const isArchiveImportRef = useRef(false);
   const archiveInputRef = useRef(null);
@@ -114,18 +118,20 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
   const processNextInQueue = () => {
     const currentIndex = indexRef.current;
     if (currentIndex >= queueRef.current.length) {
-       // Coda terminata
-       setImportState(null);
-       setImportQueue([]);
-       setQueueIndex(0);
-       return;
+      setImportState(null);
+      setImportQueue([]);
+      setQueueIndex(0);
+      if (importReportsRef.current.length > 0) {
+        setShowReportModal(true);
+      }
+      return;
     }
     const currentItem = queueRef.current[currentIndex];
-    
+
     if (currentItem.isEmailImport) {
-      runImportFlow(currentItem, true);
+      runImportFlow(currentItem, true, currentItem.name);
     } else {
-      runImportFlow(currentItem.files, currentItem.isArchive);
+      runImportFlow(currentItem.files, currentItem.isArchive, currentItem.name);
     }
   };
   
@@ -161,6 +167,9 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
     setImportState(null);
     setImportQueue([]);
     setQueueIndex(0);
+    if (importReportsRef.current.length > 0) {
+      setShowReportModal(true);
+    }
   };
 
   const startEmailImportQueue = (filenames) => {
@@ -178,7 +187,7 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
     window.startEmailImportQueue = startEmailImportQueue;
   }); // Run on every render to avoid stale closures
 
-  const runImportFlow = async (filesArray, isArchiveImport) => {
+  const runImportFlow = async (filesArray, isArchiveImport, sessionName) => {
     if (filesArray.length === 0) return;
 
     filesRef.current = filesArray;
@@ -195,6 +204,11 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
     const currentSub = currentSubFolderRef.current;
     formData.append('path', currentBasePath + (currentSub ? '/' + currentSub : ''));
     formData.append('overwrite', 'false');
+    if (sessionName) formData.append('sessionName', sessionName);
+    
+    // Invia i percorsi relativi intatti per bypassare lo stripping di multer
+    const relPaths = filesArray.map(item => item.relPath || item.name || '');
+    formData.append('relPaths', JSON.stringify(relPaths));
 
     // Handle email import vs standard drag&drop
     const isEmailImport = filesArray.isEmailImport;
@@ -261,7 +275,7 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
         return;
       }
 
-      await proceedToFinalImport(serverResponse.folderName, cancelTokenSource);
+      await proceedToFinalImport(serverResponse.folderName, cancelTokenSource, serverResponse.report);
 
     } catch (err) {
       setImportState('error');
@@ -269,7 +283,7 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
     }
   };
 
-  const proceedToFinalImport = async (folderName, cancelTokenSource) => {
+  const proceedToFinalImport = async (folderName, cancelTokenSource, report) => {
     try {
       await transitionTo('parsing', 500);
       setImportProgress(99);
@@ -279,6 +293,12 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
 
       await transitionTo('registering', 500);
       await transitionTo('success', 750);
+
+      if (report) {
+        const newReports = [...importReportsRef.current, { folderName, ...report }];
+        setImportReports(newReports);
+        importReportsRef.current = newReports;
+      }
 
       setCancelSource(null);
       fetchSessions(currentSubFolder);
@@ -304,6 +324,14 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
     const currentSub = currentSubFolderRef.current;
     formData.append('path', currentBasePath + (currentSub ? '/' + currentSub : ''));
     formData.append('overwrite', 'true');
+      
+    const currentItem = queueRef.current[indexRef.current];
+    if (currentItem && currentItem.name) {
+      formData.append('sessionName', currentItem.name);
+    }
+
+    const relPaths = filesRef.current.map(item => item.relPath || item.name || '');
+    formData.append('relPaths', JSON.stringify(relPaths));
 
     const isEmailImport = filesRef.current.isEmailImport;
 
@@ -476,9 +504,9 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
       if (parts.length === 1 && (relPath.toLowerCase().endsWith('.zip') || relPath.toLowerCase().endsWith('.rar'))) {
         archives.push({ file, relPath, isArchive: true });
       } else {
-        const rootFolder = parts[0];
-        if (!grouped[rootFolder]) grouped[rootFolder] = [];
-        grouped[rootFolder].push({ file, relPath });
+        const parentDir = parts.length > 1 ? parts[parts.length - 2] : 'LooseFiles';
+        if (!grouped[parentDir]) grouped[parentDir] = [];
+        grouped[parentDir].push({ file, relPath });
       }
     });
 
@@ -506,9 +534,9 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
     const grouped = {};
     filesList.forEach(({ file, relPath }) => {
       const parts = relPath.split('/');
-      const rootFolder = parts[0];
-      if (!grouped[rootFolder]) grouped[rootFolder] = [];
-      grouped[rootFolder].push({ file, relPath });
+      const parentDir = parts.length > 1 ? parts[parts.length - 2] : 'LooseFiles';
+      if (!grouped[parentDir]) grouped[parentDir] = [];
+      grouped[parentDir].push({ file, relPath });
     });
     
     const newQueue = [];
@@ -727,6 +755,61 @@ export default function TGMDatabaseContainer({ onPlaySession, extraHeaderActions
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {showReportModal && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-slate-100 flex flex-col max-h-[80vh]">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 flex items-center gap-3 shrink-0">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="text-lg font-bold text-white tracking-wide">
+                Importazione Completata
+              </h3>
+            </div>
+            
+            <div className="p-6 overflow-y-auto space-y-4">
+              <p className="text-sm text-slate-600 mb-4">
+                Sono state importate con successo {importReports.length} sessioni. Ecco il resoconto dei dati GIS estratti:
+              </p>
+              
+              {importReports.map((report, idx) => (
+                <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                  <div className="font-semibold text-slate-800 text-sm mb-2">{report.folderName}</div>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <div className="text-slate-500">Linea:</div>
+                    <div className="font-medium text-slate-700 text-right">{report.lineId}</div>
+                    <div className="text-slate-500">Km Inizio:</div>
+                    <div className="font-medium text-slate-700 text-right">{report.startKm ? report.startKm.toFixed(3) : '-'}</div>
+                    <div className="text-slate-500">Km Fine:</div>
+                    <div className="font-medium text-slate-700 text-right">{report.endKm ? report.endKm.toFixed(3) : '-'}</div>
+                    <div className="col-span-2 my-1 border-t border-slate-200"></div>
+                    <div className="text-slate-500 flex items-center gap-1">Stazioni:</div>
+                    <div className="font-bold text-blue-600 text-right">+{report.addedStations || 0}</div>
+                    <div className="text-slate-500 flex items-center gap-1">Scambi:</div>
+                    <div className="font-bold text-indigo-600 text-right">+{report.addedSwitches || 0}</div>
+                    <div className="text-slate-500 flex items-center gap-1">Punti Noti:</div>
+                    <div className="font-bold text-purple-600 text-right">+{report.addedPoints || 0}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="p-4 bg-slate-50 border-t border-slate-100 flex justify-end shrink-0">
+              <button
+                onClick={() => {
+                  setShowReportModal(false);
+                  setImportReports([]);
+                  importReportsRef.current = [];
+                }}
+                className="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-sm font-semibold transition shadow-sm"
+              >
+                Chiudi Resoconto
+              </button>
+            </div>
           </div>
         </div>
       )}

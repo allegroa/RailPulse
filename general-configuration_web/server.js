@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5002;
-const DB_PATH = path.join(__dirname, 'database', 'config_db.json');
+const DB_PATH = path.join(__dirname, '..', 'DATABASE', 'config_db.json');
 const LINES_DB_PATH = path.join(__dirname, '..', 'DATABASE', 'lines.json');
 
 app.use(cors());
@@ -426,6 +426,7 @@ app.post('/api/config/stations', async (req, res) => {
       if (station.lineCode !== undefined) stations[idx].lineCode = station.lineCode;
       if (station.stationNumber !== undefined) stations[idx].stationNumber = station.stationNumber;
       if (station.stationType !== undefined) stations[idx].stationType = station.stationType;
+      if (station.colorCode !== undefined) stations[idx].colorCode = station.colorCode;
     } else {
       stations.push(station);
       stations.sort((a, b) => a.code.localeCompare(b.code));

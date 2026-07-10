@@ -72,6 +72,7 @@ stateDiagram-v2
   - **Directory**: Se è una directory, si ottiene la lista dei file preservando la struttura relativa dei percorsi (es. `NomeCartella/file.csv`).
   - **Archivio (ZIP/RAR)**: Se è un file compresso, viene caricato temporaneamente lato server.
   - **File sfusi**: Se vengono caricati 3 file CSV singolarmente fuori da una cartella, il sistema tenta di ricostruire la sessione se i nomi dei file contengono un timestamp coerente.
+  - **Correzione Codifica Nomi File (Mojibake)**: Poiché le intestazioni multipart (gestite da librerie come `multer` in Node.js) possono causare la corruzione dei caratteri non-ASCII forzandoli in Latin-1, il backend applica automaticamente un convertitore retroattivo (`Buffer.from(originalname, 'latin1').toString('utf8')`) su ogni nome di file caricato. Questo previene che i file con etichette in cinese (es. `超限報表.csv`) vengano scartati e garantisce un corretto riconoscimento.
 
 ### Stato 2: Estrazione e Preparazione
 - Gli archivi compressi vengono estratti in una directory temporanea sul server per analizzarne il contenuto.
@@ -85,12 +86,12 @@ Il sistema verifica se la cartella caricata (o estratta) corrisponde a un'acquis
    ```
    *Esempio valido*: `2026.02.27 00.22.18K100+000~K102+500`
    - Se il nome della cartella **non** rispetta il formato, il sistema non la riconosce come acquisizione valida e viene **Rigettato**.
-2. **Verifica File Interni**: All'interno della cartella devono essere presenti **esattamente 3 file CSV** con le desinenze cinesi specifiche per i report TGM:
+2. **Verifica File Interni**: All'interno della cartella devono essere presenti **almeno 3 file CSV** con le desinenze cinesi specifiche per i report TGM:
    - `*超限報表.csv` (Report Eccedenze)
    - `*軌道TQI報表.csv` (Report TQI)
    - `*軌道參數報表.csv` (Report Parametri Geometrici)
    
-   Se uno o più file sono mancanti, o se sono presenti file estranei non riconosciuti, l'importazione viene **Rigettata**.
+   Se uno o più file tra questi tre sono mancanti, l'importazione viene **Rigettata**. Eventuali altri file estranei (es. `*原始數據報表.csv`) presenti nella cartella verranno preservati e copiati integralmente nella cartella di destinazione finale.
 
 ### Stato 4: Analisi Metadati e Controllo Duplicati (De-duplicazione)
 - Il sistema estrae i metadati identificativi unici della sessione dal nome della cartella:
@@ -115,9 +116,10 @@ Se viene rilevata una sessione identica già esistente:
 - Prima della scrittura finale, il backend analizza i 3 file CSV:
   - Verifica che gli header corrispondano alle specifiche del modulo.
   - Verifica che i campi di coordinate chilometriche e geometriche contengano valori numerici validi (non vuoti o corrotti).
-  - Estrae il "Line Name" dal CSV dei parametri. Il parser utilizza un'espressione regolare tollerante (`/^(\d+)(.*?)(UP|DN)(\d*)$/i`) per scorporare eventuali cifre relative al binario in coda al nome (es. `1150328TALDN1` viene processato ignorando l'1 finale, estraendo `TAL` come stazione e `DN` come direzione).
-  - La stazione validata viene inserita automaticamente all'interno del dizionario dinamico di sistema (`DATABASE/station.json`) per essere resa disponibile ai filtri a tendina nel frontend.
-  - Se il parsing fallisce, l'importazione viene **Rigettata**.
+  - Estrae il "Line Name" dal CSV dei parametri. Il parser utilizza un'espressione regolare tollerante (`/^(\d+)(.*?)(UP|DN)(\d*)$/i`) per scorporare eventuali cifre relative al binario in coda al nome (es. `1150328TALDN1` viene processato ignorando l'1 finale, estraendo `TAL` come identificativo della Linea e `DN` come direzione).
+- La Linea validata viene inserita automaticamente all'interno del dizionario dinamico di sistema (file `DATABASE/lines.json`) per essere resa disponibile ai filtri a tendina nel frontend, e i suoi chilometri di Inizio e Fine vengono aggiornati dinamicamente in base ai punti GIS rilevati.
+- **Estrazione Elementi GIS (Stazioni, Scambi, Punti Noti)**: Il file `*.csv` viene scansionato riga per riga in modo asincrono. Il parser legge la 12esima colonna (Colonna L) estraendo le etichette. Elementi "lineari" predefiniti (es. `STATION`, `SWITCH`) vengono uniti a coppie per determinare `StartKm` ed `EndKm`. Qualsiasi altra etichetta viene trattata come elemento puntuale con singola coordinata. Tutti gli elementi estratti popolano automaticamente il database GIS associato alla linea (`DATABASE/GIS/{lineId}_gis.json`). Prima dell'inserimento, il sistema esegue un controllo anti-duplicati con una tolleranza di 1 metro (0.001 Km): se un elemento dello stesso tipo è già presente alle medesime coordinate, viene ignorato e non sovrascritto, preservando in via prioritaria gli elementi preesistenti e le relative modifiche manuali dell'utente. Se la linea viene inserita da zero, il file GIS viene sovrascritto/inizializzato vuoto per evitare residui storici di vecchie linee eliminate.
+- **Popolamento Registro Stazioni Globale (`station.json`)**: Durante l'estrazione GIS delle stazioni, queste vengono inserite automaticamente anche nel database anagrafico generale `DATABASE/station.json` (se non già presenti con lo stesso codice) con i rispettivi chilometri ed associazione alla linea (`lineCode`), consentendone la visualizzazione immediata nel registro delle stazioni ("Stations Registry").
 
 ### Stato 7: Scrittura a Filesystem e Registrazione
 - I file validati vengono copiati nella cartella finale di destinazione all'interno del database:

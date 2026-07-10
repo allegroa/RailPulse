@@ -390,6 +390,21 @@ function DataVisualizer() {
     if (clean === '25-3̪i' || clean.includes('25-3')) return '25m - 3m Wavelength';
     if (clean === 'q') return 'Measurement Date';
     if (clean === 'qɨ') return 'Measurement Time';
+    
+    // Nuovi fallback per file con diverse corruzioni Big5/ANSI
+    if (clean === '·Q' && isKey) return 'Line Name';
+    if (clean === '·Єe' && isKey) return 'Inspection Direction';
+    if (clean === 'Q' && isKey) return 'Start Station';
+    if (clean === '܉' && isKey) return 'End Station';
+    if (clean === 'yˆT' && isKey) return 'Track Category';
+    if (clean === '_ʼ' && isKey) return 'Start Mileage';
+    if (clean === 'Y' && isKey) return 'End Mileage';
+    if (clean === 'p' && isKey) return 'Gauge';
+    if (clean === '̜p' && isKey) return 'Curve Radius';
+    if (clean === 'L' && isKey) return 'Chord Length';
+    if (clean === 'y' && isKey) return 'Inspection Date';
+    if (clean === 'yr' && isKey) return 'Inspection Time';
+
     return text; // Fallback
   }
 

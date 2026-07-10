@@ -115,5 +115,45 @@
       "Binario 1",
       "Binario 2"
     ]
+  },
+  {
+    "id": "NKL",
+    "name": "NKL",
+    "startKm": 100.105,
+    "endKm": 112,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "CHLZL",
+    "name": "CHLZL",
+    "startKm": 101.311,
+    "endKm": 110.549,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "SSL",
+    "name": "SSL",
+    "startKm": 97.501,
+    "endKm": 107.9,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
+  },
+  {
+    "id": "XBTL",
+    "name": "XBTL",
+    "startKm": 90.194,
+    "endKm": 106.538,
+    "tracks": [
+      "Binario 1",
+      "Binario 2"
+    ]
   }
 ]

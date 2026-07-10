@@ -80,7 +80,7 @@ Svolge il ruolo di tabella di annotazione per registrare punti singolari, ostaco
 Svolge il ruolo di registro globale condiviso per l'anagrafica delle stazioni della linea.
 * **Percorso**: `DATABASE/station.json` (Condiviso a livello workspace)
 * **Struttura**: Un array di oggetti JSON contenenti l'anagrafica estesa delle stazioni per supportare mappe interattive, grafi e configurazioni geometriche.
-* **Campi Obbligatori**: `code`, `name`, `kmStart`, `kmEnd`, `tracks`, `lineCode`, `stationNumber`, `x`, `y`, `stationType`.
+* **Campi Obbligatori**: `code`, `name`, `kmStart`, `kmEnd`, `tracks`, `lineCode`, `stationNumber`, `colorCode`, `x`, `y`, `stationType`.
 * **Esempio**:
   ```json
   [
@@ -92,6 +92,7 @@ Svolge il ruolo di registro globale condiviso per l'anagrafica delle stazioni de
       "tracks": 0,
       "lineCode": "R",
       "stationNumber": "28",
+      "colorCode": "#FF0000",
       "x": 115,
       "y": 62,
       "stationType": "station"

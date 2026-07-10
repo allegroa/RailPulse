@@ -563,9 +563,11 @@ export default function GeneralConfigurationPage() {
   const [taskTypeName, setTaskTypeName] = useState('');
   const [taskTypeColor, setTaskTypeColor] = useState('#3b82f6');
 
-  const [stationForm, setStationForm] = useState({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', stationNumber: '', stationType: 'station' });
+  const [stationForm, setStationForm] = useState({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', colorCode: '', stationNumber: '', stationType: 'station' });
   const [editingStation, setEditingStation] = useState(null);
   const [stationSearch, setStationSearch] = useState('');
+  const [stationLineFilter, setStationLineFilter] = useState('');
+  const [stationTypeFilter, setStationTypeFilter] = useState('');
 
   const [systemStatus, setSystemStatus] = useState(null);
   const [statusLoading, setStatusLoading] = useState(false);
@@ -818,6 +820,7 @@ export default function GeneralConfigurationPage() {
       kmEnd: station.kmEnd != null ? station.kmEnd.toString() : '',
       tracks: station.tracks != null ? station.tracks.toString() : '',
       lineCode: station.lineCode || '',
+      colorCode: station.colorCode || '',
       stationNumber: station.stationNumber || '',
       stationType: station.stationType || 'station'
     });
@@ -839,6 +842,7 @@ export default function GeneralConfigurationPage() {
             kmEnd: parseFloat(stationForm.kmEnd) || 0,
             tracks: parseInt(stationForm.tracks) || 0,
             lineCode: stationForm.lineCode.trim(),
+            colorCode: stationForm.colorCode ? stationForm.colorCode.trim() : '',
             stationNumber: stationForm.stationNumber.trim(),
             stationType: stationForm.stationType
           }
@@ -847,7 +851,7 @@ export default function GeneralConfigurationPage() {
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.error || 'Error');
       setStations(data.stations);
-      setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', stationNumber: '', stationType: 'station' });
+      setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', colorCode: '', stationNumber: '', stationType: 'station' });
       setEditingStation(null);
       showToast(t('toastStationSuccess'));
       fetchStations();
@@ -865,7 +869,7 @@ export default function GeneralConfigurationPage() {
       showToast(t('toastStationDeleteSuccess'));
       if (editingStation === code) {
         setEditingStation(null);
-        setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', stationNumber: '', stationType: 'station' });
+        setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', colorCode: '', stationNumber: '', stationType: 'station' });
       }
     } catch (err) {
       showToast(err.message, true);
@@ -1408,10 +1412,14 @@ export default function GeneralConfigurationPage() {
                       <input type="number" step="0.001" value={stationForm.kmEnd} onChange={e => handleStationFormChange('kmEnd', e.target.value)} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none" />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-3 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">{t('stationFormLineCode')}</label>
                       <input type="text" value={stationForm.lineCode} onChange={e => handleStationFormChange('lineCode', e.target.value)} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">Color Code</label>
+                      <input type="text" value={stationForm.colorCode} onChange={e => handleStationFormChange('colorCode', e.target.value)} className="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 shadow-sm text-sm focus:border-blue-500 transition-all outline-none" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-widest text-slate-600 mb-2">{t('stationFormNumber')}</label>
@@ -1436,7 +1444,7 @@ export default function GeneralConfigurationPage() {
                       {t('btnSaveStation')}
                     </button>
                     {editingStation && (
-                      <button type="button" onClick={() => { setEditingStation(null); setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', stationNumber: '', stationType: 'station' }); }} className="border border-slate-300 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-md font-medium text-sm transition-all">
+                      <button type="button" onClick={() => { setEditingStation(null); setStationForm({ code: '', name: '', kmStart: '', kmEnd: '', tracks: '', lineCode: '', colorCode: '', stationNumber: '', stationType: 'station' }); }} className="border border-slate-300 hover:bg-slate-50 text-slate-700 px-4 py-2 rounded-md font-medium text-sm transition-all">
                         {t('btnCancel')}
                       </button>
                     )}
@@ -1446,7 +1454,7 @@ export default function GeneralConfigurationPage() {
             </div>
             <div className="lg:col-span-8">
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-                <div className="p-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+                <div className="p-4 border-b border-slate-200 bg-slate-50 flex flex-wrap gap-3 justify-between items-center">
                   <div className="relative w-full max-w-md">
                     <input
                       type="text"
@@ -1457,6 +1465,27 @@ export default function GeneralConfigurationPage() {
                     />
                     <svg className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                   </div>
+                  <div className="flex gap-2">
+                    <select
+                      value={stationLineFilter}
+                      onChange={e => setStationLineFilter(e.target.value)}
+                      className="bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:border-blue-500 transition-all outline-none"
+                    >
+                      <option value="">All Lines</option>
+                      {config?.lines?.map(l => (
+                        <option key={l.id} value={l.id}>{l.id}</option>
+                      ))}
+                    </select>
+                    <select
+                      value={stationTypeFilter}
+                      onChange={e => setStationTypeFilter(e.target.value)}
+                      className="bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm focus:border-blue-500 transition-all outline-none"
+                    >
+                      <option value="">All Types</option>
+                      <option value="station">Station</option>
+                      <option value="mainstation">Main Station</option>
+                    </select>
+                  </div>
                 </div>
                 <div className="overflow-y-auto max-h-[700px]">
                 <table className="w-full text-left border-collapse relative">
@@ -1466,13 +1495,19 @@ export default function GeneralConfigurationPage() {
                       <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderLineInfo')}</th>
                       <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderKmRange')}</th>
                       <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderType')}</th>
-                      <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderTracks')}</th>
+                      <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderLineCode')}</th>
                       <th className="px-6 py-3 font-semibold text-slate-500 text-right">{t('tableHeaderActions')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {(() => {
-                      const filteredStations = stations.filter(s => (s.code || '').toLowerCase().includes(stationSearch.toLowerCase()) || (s.name || '').toLowerCase().includes(stationSearch.toLowerCase()));
+                      const filteredStations = stations.filter(s => {
+                        const matchesSearch = (s.code || '').toLowerCase().includes(stationSearch.toLowerCase()) || 
+                                              (s.name || '').toLowerCase().includes(stationSearch.toLowerCase());
+                        const matchesLine = !stationLineFilter || s.lineCode === stationLineFilter;
+                        const matchesType = !stationTypeFilter || s.stationType === stationTypeFilter;
+                        return matchesSearch && matchesLine && matchesType;
+                      });
                       if (filteredStations.length === 0) {
                         return <tr><td colSpan="6" className="px-6 py-12 text-center text-slate-500 font-medium">{t('noStationsMsg')}</td></tr>;
                       }
@@ -1483,7 +1518,7 @@ export default function GeneralConfigurationPage() {
                           <div className="text-xs text-slate-500 mt-1">{s.name || '-'}</div>
                         </td>
                         <td className="px-6 py-4 text-sm text-slate-600 font-mono">
-                          <div className="font-bold">{(s.lineCode || '') + (s.stationNumber || '') || '-'}</div>
+                          <div className="font-bold">{[s.lineCode, s.colorCode, s.stationNumber].filter(Boolean).join(' - ') || '-'}</div>
                         </td>
                         <td className="px-6 py-4 text-sm text-slate-600 font-mono">
                           {s.kmStart} - {s.kmEnd}
@@ -1494,7 +1529,7 @@ export default function GeneralConfigurationPage() {
                           </span>
                         </td>
                         <td className="px-6 py-4 text-sm text-slate-600 font-mono">
-                          {s.tracks || '-'}
+                          {s.lineCode || '-'}
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="flex justify-end gap-2">

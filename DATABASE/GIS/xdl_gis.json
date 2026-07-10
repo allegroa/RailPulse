@@ -88,6 +88,132 @@
         "condition": "Good",
         "color": "#2196F3",
         "id": "e0dff27b-bcdd-432e-9749-07029ef501a8"
+      },
+      {
+        "id": "SWITCH_97.317",
+        "switchId": "SWITCH_97.317",
+        "type": "Turnout",
+        "startKm": 97.2805,
+        "endKm": 97.3175,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_96.403",
+        "switchId": "SWITCH_96.403",
+        "type": "Turnout",
+        "startKm": 96.352,
+        "endKm": 96.4035,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_96.056",
+        "switchId": "SWITCH_96.056",
+        "type": "Turnout",
+        "startKm": 96.0065,
+        "endKm": 96.056,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_93.764",
+        "switchId": "SWITCH_93.764",
+        "type": "Turnout",
+        "startKm": 93.7285,
+        "endKm": 93.7645,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_93.727",
+        "switchId": "SWITCH_93.727",
+        "type": "Turnout",
+        "startKm": 93.664,
+        "endKm": 93.727,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_93.625",
+        "switchId": "SWITCH_93.625",
+        "type": "Turnout",
+        "startKm": 91.715,
+        "endKm": 93.625,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_91.670",
+        "switchId": "SWITCH_91.670",
+        "type": "Turnout",
+        "startKm": 91.36375,
+        "endKm": 91.67,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_91.328",
+        "switchId": "SWITCH_91.328",
+        "type": "Turnout",
+        "startKm": 90.83725,
+        "endKm": 91.32775,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_90.776",
+        "switchId": "SWITCH_90.776",
+        "type": "Turnout",
+        "startKm": 89.4755,
+        "endKm": 90.7765,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_89.424",
+        "switchId": "SWITCH_89.424",
+        "type": "Turnout",
+        "startKm": 89.397,
+        "endKm": 89.4235,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_89.335",
+        "switchId": "SWITCH_89.335",
+        "type": "Turnout",
+        "startKm": 89.33525,
+        "endKm": 89.3825,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_89.387",
+        "switchId": "SWITCH_89.387",
+        "type": "Turnout",
+        "startKm": 89.38675,
+        "endKm": 89.409,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_89.417",
+        "switchId": "SWITCH_89.417",
+        "type": "Turnout",
+        "startKm": 89.41725,
+        "endKm": 89.46825,
+        "angle": "1:12",
+        "direction": "Left"
+      },
+      {
+        "id": "SWITCH_90.860",
+        "switchId": "SWITCH_90.860",
+        "type": "Turnout",
+        "startKm": 90.86025,
+        "endKm": 90.91825,
+        "angle": "1:12",
+        "direction": "Left"
       }
     ],
     "stations": [
@@ -139,7 +265,96 @@
         "stationCode": "G07",
         "color": "#3b82f6",
         "id": "274dc042-7223-4838-ae2a-9a34290a6a53"
+      },
+      {
+        "id": "STATION_97.500",
+        "type": "Station",
+        "stationCode": "STATION_97.500",
+        "startKm": 97.384,
+        "endKm": 97.49975,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_96.639",
+        "type": "Station",
+        "stationCode": "STATION_96.639",
+        "startKm": 96.501,
+        "endKm": 96.63925,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_95.737",
+        "type": "Station",
+        "stationCode": "STATION_95.737",
+        "startKm": 95.6045,
+        "endKm": 95.7375,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_94.182",
+        "type": "Station",
+        "stationCode": "STATION_94.182",
+        "startKm": 94.04175,
+        "endKm": 94.18225,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_93.124",
+        "type": "Station",
+        "stationCode": "STATION_93.124",
+        "startKm": 92.98575,
+        "endKm": 93.124,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_91.977",
+        "type": "Station",
+        "stationCode": "STATION_91.977",
+        "startKm": 91.83425,
+        "endKm": 91.9765,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_91.120",
+        "type": "Station",
+        "stationCode": "STATION_91.120",
+        "startKm": 90.985,
+        "endKm": 91.12025,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_90.225",
+        "type": "Station",
+        "stationCode": "STATION_90.225",
+        "startKm": 90.08525,
+        "endKm": 90.225,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_89.001",
+        "type": "Station",
+        "stationCode": "STATION_89.001",
+        "startKm": 89.0005,
+        "endKm": 89.13275,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_90.073",
+        "type": "Station",
+        "stationCode": "STATION_90.073",
+        "startKm": 90.07275,
+        "endKm": 90.21375,
+        "tracks": 1
+      },
+      {
+        "id": "STATION_90.972",
+        "type": "Station",
+        "stationCode": "STATION_90.972",
+        "startKm": 90.97225,
+        "endKm": 91.111,
+        "tracks": 1
       }
-    ]
+    ],
+    "points": []
   }
 }

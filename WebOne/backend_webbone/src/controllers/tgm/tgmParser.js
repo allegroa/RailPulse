@@ -1,5 +1,7 @@
 const fs = require('fs/promises');
+const fsSync = require('fs');
 const path = require('path');
+const readline = require('readline');
 const Papa = require('papaparse');
 
 /**
@@ -9,23 +11,42 @@ const Papa = require('papaparse');
  */
 function parseSessionFolderName(folderName) {
   const regex = /^(\d{4}\.\d{2}\.\d{2})\s+(\d{2}\.\d{2}\.\d{2})K(\d+)\+(\d{3})~K(\d+)\+(\d{3})$/;
-  const match = folderName.match(regex);
-  if (!match) return null;
+  const regexLoose = /^(\d{4}\.\d{2}\.\d{2})\s+(\d{2}\.\d{2}\.\d{2})$/;
 
-  const date = match[1].replace(/\./g, '-'); // YYYY-MM-DD
-  const time = match[2].replace(/\./g, ':'); // HH:MM:SS
-  const startKm = parseInt(match[3], 10) + parseInt(match[4], 10) / 1000;
-  const endKm = parseInt(match[5], 10) + parseInt(match[6], 10) / 1000;
+  let match = folderName.match(regex);
+  if (match) {
+    const date = match[1].replace(/\./g, '-'); // YYYY-MM-DD
+    const time = match[2].replace(/\./g, ':'); // HH:MM:SS
+    const startKm = parseInt(match[3], 10) + parseInt(match[4], 10) / 1000;
+    const endKm = parseInt(match[5], 10) + parseInt(match[6], 10) / 1000;
 
-  return {
-    id: folderName,
-    folderName,
-    date,
-    time,
-    startKm,
-    endKm,
-    label: `${date} ${time} (Km ${startKm.toFixed(3)} ~ Km ${endKm.toFixed(3)})`
-  };
+    return {
+      id: folderName,
+      folderName,
+      date,
+      time,
+      startKm,
+      endKm,
+      label: `${date} ${time} (Km ${startKm.toFixed(3)} ~ Km ${endKm.toFixed(3)})`
+    };
+  }
+
+  match = folderName.match(regexLoose);
+  if (match) {
+    const date = match[1].replace(/\./g, '-');
+    const time = match[2].replace(/\./g, ':');
+    return {
+      id: folderName,
+      folderName,
+      date,
+      time,
+      startKm: 0,
+      endKm: 0,
+      label: `${date} ${time}`
+    };
+  }
+
+  return null;
 }
 
 /**
@@ -170,9 +191,111 @@ async function extractLineNameData(csvFilePath) {
   return null;
 }
 
+/**
+ * Scansiona in stream il file CSV dei parametri ed estrae Stazioni, Scambi e altri Punti Noti.
+ */
+async function extractGisElementsFromParameters(csvFilePath) {
+  if (!csvFilePath) return { stations: [], switches: [], points: [] };
+  
+  return new Promise((resolve, reject) => {
+    const stations = [];
+    const switches = [];
+    const points = [];
+    
+    // Mappe per accoppiare Start ed End per elementi lineari (Stazioni e Scambi)
+    const activeLinears = {
+      STATION: null,
+      SWITCH: null
+    };
+
+    const LINEAR_ELEMENTS = ['STATION', 'SWITCH'];
+
+    const fileStream = fsSync.createReadStream(csvFilePath, { encoding: 'utf-8' });
+    const rl = readline.createInterface({
+      input: fileStream,
+      crlfDelay: Infinity
+    });
+
+    let lineIndex = 0;
+
+    rl.on('line', (line) => {
+      lineIndex++;
+      // Salta le prime 5 righe (3 di metadati, 1 vuota, 1 di intestazione)
+      if (lineIndex <= 5) return;
+
+      const cols = line.split(',');
+      if (cols.length >= 12) {
+        const kmStr = cols[1];
+        const label = cols[11] ? cols[11].trim() : '';
+
+        if (label && kmStr) {
+          const currentKm = parseFloat(kmStr);
+          if (isNaN(currentKm)) return;
+
+          const isLinear = LINEAR_ELEMENTS.includes(label.toUpperCase());
+
+          if (isLinear) {
+            const key = label.toUpperCase();
+            if (activeLinears[key] === null) {
+              // Apre l'elemento lineare
+              activeLinears[key] = currentKm;
+            } else {
+              // Chiude l'elemento lineare
+              const startKm = activeLinears[key];
+              const endKm = currentKm;
+              
+              const id = `${key}_${startKm.toFixed(3)}`;
+              
+              if (key === 'STATION') {
+                stations.push({
+                  id,
+                  type: 'Station',
+                  stationCode: id, // Nome temporaneo, da raffinare se possibile
+                  startKm: Math.min(startKm, endKm),
+                  endKm: Math.max(startKm, endKm),
+                  tracks: 1
+                });
+              } else if (key === 'SWITCH') {
+                switches.push({
+                  id,
+                  switchId: id,
+                  type: 'Turnout',
+                  startKm: Math.min(startKm, endKm),
+                  endKm: Math.max(startKm, endKm),
+                  angle: '1:12', // default
+                  direction: 'Left'
+                });
+              }
+              // Reset per il prossimo
+              activeLinears[key] = null;
+            }
+          } else {
+            // Elemento puntuale generico
+            points.push({
+              id: `${label}_${currentKm.toFixed(3)}`,
+              type: label,
+              km: currentKm
+            });
+          }
+        }
+      }
+    });
+
+    rl.on('close', () => {
+      resolve({ stations, switches, points });
+    });
+
+    rl.on('error', (err) => {
+      console.error('Errore stream estrazione GIS:', err);
+      reject(err);
+    });
+  });
+}
+
 module.exports = {
   parseSessionFolderName,
   parseCSVFile,
   findSessionFiles,
-  extractLineNameData
+  extractLineNameData,
+  extractGisElementsFromParameters
 };

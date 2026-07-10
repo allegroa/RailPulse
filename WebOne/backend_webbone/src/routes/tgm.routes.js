@@ -11,10 +11,10 @@ const Papa = require('papaparse');
 
 const { getSessions, getSessionData, getSessionExceedances, getSessionTQI } = require('../controllers/tgm/tgmController');
 const { getMaintenanceRecords, addMaintenanceRecord, updateMaintenanceRecord, deleteMaintenanceRecord } = require('../controllers/tgm/maintenanceManager');
-const { readStations, writeStations } = require('../controllers/configManager');
+const { readStations, writeStations, readGis, writeGis, readConfig: readGlobalConfig, writeConfig: writeGlobalConfig, readLines, writeLines } = require('../controllers/configManager');
 const { checkNewEmails } = require('../controllers/tgm/emailService');
 const { extractArchive } = require('../controllers/tgm/extractor');
-const { parseCSVFile, extractLineNameData } = require('../controllers/tgm/tgmParser');
+const { parseCSVFile, extractLineNameData, extractGisElementsFromParameters } = require('../controllers/tgm/tgmParser');
 
 const router = express.Router();
 const execAsync = promisify(exec);
@@ -23,20 +23,38 @@ const upload = multer({ dest: 'tmp_uploads/multer_temp/' });
 function resolveTargetPath(targetPath) {
   if (!targetPath) return '';
   if (path.isAbsolute(targetPath)) return targetPath;
-  return path.resolve(process.cwd(), '..', '..', targetPath);
+  // Utilizza __dirname per robustezza indipendente dalla directory di avvio del processo Node
+  return path.resolve(__dirname, '..', '..', '..', '..', targetPath);
 }
 
-const CONFIG_DIR = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'configuration');
+const CONFIG_DIR = path.resolve(__dirname, '..', '..', '..', '..', 'track_web-main', 'backend', 'configuration');
 
 
 // Regex per convalidare il nome standard della cartella
 const SESSION_FOLDER_REGEX = /^(\d{4}\.\d{2}\.\d{2})\s+(\d{2}\.\d{2}\.\d{2})K(\d+)\+(\d{3})~K(\d+)\+(\d{3})$/;
 
+const logFilePath = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'TGM', 'import_debug.log');
+async function logDebug(msg) {
+  const timestamp = new Date().toISOString();
+  const formattedMsg = `[${timestamp}] ${msg}\n`;
+  console.log(`[TGM IMPORT DEBUG] ${msg}`);
+  try {
+    await fs.mkdir(path.dirname(logFilePath), { recursive: true });
+    await fs.appendFile(logFilePath, formattedMsg, 'utf-8');
+  } catch (err) {
+    console.error('Errore scrittura import_debug.log:', err);
+  }
+}
+
 async function deleteFolder(folderPath) {
   try {
     await fs.rm(folderPath, { recursive: true, force: true });
+    await logDebug(`Cartella rimossa dal filesystem: ${folderPath}`);
   } catch (err) {
     console.error(`Errore durante la rimozione della cartella ${folderPath}:`, err);
+    try {
+      await logDebug(`ERRORE durante la rimozione della cartella ${folderPath}: ${err.message}`);
+    } catch {}
   }
 }
 
@@ -586,19 +604,27 @@ router.get('/tgm/sessions', async (req, res) => {
 });
 
 router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
+  let foundSessionFolder = null;
+  let foundSessionName = null;
   const tempDirName = `import_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  const tempUploadDir = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'tmp_uploads', tempDirName);
-  const emailQueueDir = path.resolve(process.cwd(), '..', '..', 'track_web-main', 'backend', 'tmp_uploads', 'email_queue');
+  const tempUploadDir = path.resolve(__dirname, '..', '..', '..', '..', 'track_web-main', 'backend', 'tmp_uploads', tempDirName);
+  const emailQueueDir = path.resolve(__dirname, '..', '..', '..', '..', 'track_web-main', 'backend', 'tmp_uploads', 'email_queue');
   
   try {
     const targetPath = req.body.path;
     const overwrite = req.body.overwrite === 'true';
 
+    await logDebug(`--- NUOVO IMPORT INIZIATO ---`);
+    await logDebug(`Target Path (frontend): ${targetPath}`);
+    await logDebug(`Overwrite: ${overwrite}`);
+
     if (!targetPath) {
+      await logDebug(`ERRORE: Parametro path mancante`);
       return res.status(400).json({ error: 'The path parameter is required' });
     }
 
     const Easton = resolveTargetPath(targetPath);
+    await logDebug(`Easton (risolto): ${Easton}`);
     await fs.mkdir(tempUploadDir, { recursive: true });
 
     let isArchive = false;
@@ -624,17 +650,20 @@ router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
       }
     } else {
       const files = req.files || [];
+      await logDebug(`Ricevuti ${files.length} file caricati.`);
       if (files.length === 0) {
+        await logDebug(`ERRORE: Nessun file caricato`);
         return res.status(400).json({ error: 'No files uploaded' });
       }
 
       if (files.length === 1) {
         const file = files[0];
-        const ext = path.extname(file.originalname).toLowerCase();
+        const decodedOriginalName = Buffer.from(file.originalname, 'latin1').toString('utf8');
+        const ext = path.extname(decodedOriginalName).toLowerCase();
         if (ext === '.zip' || ext === '.rar') {
           isArchive = true;
-          archiveOriginalName = path.basename(file.originalname, ext);
-          archiveFilePath = path.join(tempUploadDir, file.originalname);
+          archiveOriginalName = path.basename(decodedOriginalName, ext);
+          archiveFilePath = path.join(tempUploadDir, decodedOriginalName);
           await fs.copyFile(file.path, archiveFilePath);
           try { await fs.unlink(file.path); } catch (e) {}
         }
@@ -654,31 +683,39 @@ router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
       }
     } else if (!emailFileName) {
       const files = req.files || [];
-      for (const file of files) {
-        const relativePath = file.originalname;
+      const relPaths = req.body.relPaths ? JSON.parse(req.body.relPaths) : [];
+      await logDebug(`Estrazione file non-archivio (sfusi): ${files.length} file`);
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const decodedOriginalName = Buffer.from(file.originalname, 'latin1').toString('utf8');
+        const relativePath = relPaths[i] || decodedOriginalName;
         const filePath = path.join(tempExtractDir, relativePath);
         
+        await logDebug(`  Salvataggio file: ${decodedOriginalName} -> ${filePath}`);
         await fs.mkdir(path.dirname(filePath), { recursive: true });
         await fs.copyFile(file.path, filePath);
         try { await fs.unlink(file.path); } catch (e) {}
       }
     }
 
-    let foundSessionFolder = '';
-    let foundSessionName = '';
-
     async function scanForSession(dir) {
+      await logDebug(`Scansione per sessione in: ${dir}`);
       const entries = await fs.readdir(dir, { withFileTypes: true });
       const currentName = path.basename(dir);
+      await logDebug(`  Nome cartella corrente: ${currentName}`);
       if (SESSION_FOLDER_REGEX.test(currentName)) {
         const filesInDir = entries.filter(e => e.isFile()).map(e => e.name);
         const hasExceedances = filesInDir.some(f => f.includes('超限報表.csv'));
         const hasTqi = filesInDir.some(f => f.includes('軌道TQI報表.csv'));
         const hasParams = filesInDir.some(f => f.includes('軌道參數報表.csv'));
 
+        await logDebug(`  Pattern cartella valido. File rilevati: [${filesInDir.join(', ')}]. Exceedances: ${hasExceedances}, TQI: ${hasTqi}, Params: ${hasParams}`);
+
         if (hasExceedances && hasTqi && hasParams) {
           foundSessionFolder = dir;
           foundSessionName = currentName;
+          await logDebug(`  Trovata cartella sessione valida: ${foundSessionFolder} -> ${foundSessionName}`);
           return;
         }
       }
@@ -692,25 +729,44 @@ router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
     }
 
     await scanForSession(tempExtractDir);
+    await logDebug(`Dopo scanForSession: foundSessionFolder=${foundSessionFolder}, foundSessionName=${foundSessionName}`);
 
-    if (!foundSessionFolder && SESSION_FOLDER_REGEX.test(archiveOriginalName)) {
+    if (!foundSessionFolder) {
+      await logDebug(`Cartella non trovata con scanForSession. Controllo file sfusi alla radice.`);
       const rootEntries = await fs.readdir(tempExtractDir, { withFileTypes: true });
       const filesInDir = rootEntries.filter(e => e.isFile()).map(e => e.name);
       const hasExceedances = filesInDir.some(f => f.includes('超限報表.csv'));
       const hasTqi = filesInDir.some(f => f.includes('軌道TQI報表.csv'));
       const hasParams = filesInDir.some(f => f.includes('軌道參數報表.csv'));
 
+      await logDebug(`  File sfusi: [${filesInDir.join(', ')}]. Exceedances: ${hasExceedances}, TQI: ${hasTqi}, Params: ${hasParams}`);
+
       if (hasExceedances && hasTqi && hasParams) {
         foundSessionFolder = tempExtractDir;
-        foundSessionName = archiveOriginalName;
+        
+        const frontendSessionName = req.body.sessionName;
+        if (frontendSessionName && SESSION_FOLDER_REGEX.test(frontendSessionName)) {
+          foundSessionName = frontendSessionName;
+        } else if (archiveOriginalName && SESSION_FOLDER_REGEX.test(archiveOriginalName)) {
+          foundSessionName = archiveOriginalName;
+        } else {
+          const paramsFile = filesInDir.find(f => f.includes('軌道參數報表.csv'));
+          const match = paramsFile.match(/^(\d{4}\.\d{2}\.\d{2}\s+\d{2}\.\d{2}\.\d{2})/);
+          foundSessionName = match ? match[1] : `Sessione_Recuperata_${Date.now()}`;
+        }
+        await logDebug(`  Trovata sessione in file sfusi. Folder: ${foundSessionFolder}, Name: ${foundSessionName}`);
       }
     }
 
     if (!foundSessionFolder) {
+      await logDebug(`ERRORE: Cartella sessione non trovata o incompleta.`);
+      const rootEntries = await fs.readdir(tempExtractDir).catch(()=>[]);
+      let debugInfo = `Original: ${archiveOriginalName || 'N/A'}. Files at root: ${rootEntries.join(', ')}`;
+      await logDebug(`  Dettagli debug: ${debugInfo}`);
       await deleteFolder(tempUploadDir);
       await cleanupEmailFile(emailQueueDir, emailFileName);
       return res.status(400).json({ 
-        error: 'Non-standard directory format or incomplete acquisition. Ensure the folder is named in the standard format and contains the three CSV files (*超限報表.csv, *軌道TQI報表.csv, *軌道參數報表.csv).' 
+        error: `Non-standard directory format or incomplete acquisition. Ensure the folder is named in the standard format and contains the three CSV files. Debug: ${debugInfo}` 
       });
     }
 
@@ -719,9 +775,11 @@ router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
     try {
       await fs.access(targetSessionPath);
       isDuplicate = true;
+      await logDebug(`La sessione è duplicata (cartella già esistente in ${targetSessionPath})`);
     } catch {}
 
     if (isDuplicate && !overwrite) {
+      await logDebug(`Aborting import: duplicate found and overwrite is false.`);
       await deleteFolder(tempUploadDir);
       return res.json({ 
         duplicate: true, 
@@ -745,45 +803,243 @@ router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
       }
     }
 
+    await logDebug(`File abbinati:`);
+    await logDebug(`  Exceedances: ${exceedancesFile || 'NON TROVATO'}`);
+    await logDebug(`  TQI: ${tqiFile || 'NON TROVATO'}`);
+    await logDebug(`  Parameters: ${parametersFile || 'NON TROVATO'}`);
+
     try {
+      await logDebug(`Parsing file CSV per validazione...`);
       await parseCSVFile(exceedancesFile);
       await parseCSVFile(tqiFile);
       await parseCSVFile(parametersFile);
+      await logDebug(`Validazione CSV completata con successo.`);
     } catch (parseErr) {
+      await logDebug(`ERRORE Validazione CSV fallita: ${parseErr.message}`);
       await deleteFolder(tempUploadDir);
       await cleanupEmailFile(emailQueueDir, emailFileName);
       return res.status(400).json({ error: `Corrupted CSV files or invalid headers: ${parseErr.message}` });
     }
 
     if (isDuplicate && overwrite) {
+      await logDebug(`Sovrascrittura sessione attiva. Rimozione vecchia cartella ${targetSessionPath}`);
       await deleteFolder(targetSessionPath);
       const targetDbJsonPath = path.join(Easton, `${foundSessionName}_db.json`);
       try { await fs.unlink(targetDbJsonPath); } catch {}
     }
 
+    await logDebug(`Creazione cartella sessione di destinazione: ${targetSessionPath}`);
     await fs.mkdir(targetSessionPath, { recursive: true });
-    await fs.copyFile(exceedancesFile, path.join(targetSessionPath, path.basename(exceedancesFile)));
-    await fs.copyFile(tqiFile, path.join(targetSessionPath, path.basename(tqiFile)));
-    await fs.copyFile(parametersFile, path.join(targetSessionPath, path.basename(parametersFile)));
+    for (const file of entries) {
+      const srcFile = path.join(foundSessionFolder, file);
+      const dstFile = path.join(targetSessionPath, file);
+      await logDebug(`  Copia file: ${srcFile} -> ${dstFile}`);
+      await fs.copyFile(srcFile, dstFile);
+    }
 
     const dbJsonPath = path.join(Easton, `${foundSessionName}_db.json`);
+    await logDebug(`Creazione file database sessione vuoto: ${dbJsonPath}`);
     await fs.writeFile(dbJsonPath, JSON.stringify([], null, 2), 'utf-8');
 
+    let reportData = null;
+
+    let isNewLine = false;
     try {
+      await logDebug(`Estrazione nome linea dal file parametri...`);
       const lineData = await extractLineNameData(path.join(targetSessionPath, path.basename(parametersFile)));
+      await logDebug(`Dati Linea estratti: ${JSON.stringify(lineData)}`);
+      
+      let currentLineId = '';
       if (lineData && lineData.stazionePartenza) {
-        let code = typeof lineData.stazionePartenza === 'string' ? lineData.stazionePartenza : (lineData.stazionePartenza.code || lineData.stazionePartenza.codice || '');
-        code = code.trim();
+        currentLineId = typeof lineData.stazionePartenza === 'string' ? lineData.stazionePartenza : (lineData.stazionePartenza.code || lineData.stazionePartenza.codice || '');
+        currentLineId = currentLineId.trim();
+        let code = currentLineId;
+        await logDebug(`Line Code pulito: "${code}"`);
         if (code && code !== '-' && !/^\d+$/.test(code)) {
-          const stations = await readStations();
-          if (!stations.find(s => s.code === code)) {
-            stations.push({ code, name: '', kmStart: 0, kmEnd: 0, tracks: 0 });
-            stations.sort((a, b) => a.code.localeCompare(b.code));
-            await writeStations(stations);
+          const lines = await readLines();
+          const lineExists = lines.find(l => l.id === code);
+          await logDebug(`Verifica esistenza linea "${code}" nel database lines.json: ${!!lineExists}`);
+          if (!lineExists) {
+            isNewLine = true;
+            lines.push({
+              id: code,
+              name: code,
+              startKm: 0,
+              endKm: 0,
+              tracks: ['Binario 1', 'Binario 2']
+            });
+            await writeLines(lines);
+            await logDebug(`Linea "${code}" creata nel database lines.json.`);
           }
         }
+      } else {
+        await logDebug(`Nessuna stazione di partenza (Line Name) valida trovata in lineData.`);
       }
+
+      // Estrai GIS da CSV parameters
+      reportData = {
+        lineId: currentLineId || 'UNKNOWN',
+        startKm: 0,
+        endKm: 0,
+        addedStations: 0,
+        addedSwitches: 0,
+        addedPoints: 0
+      };
+
+      try {
+        await logDebug(`Esecuzione extractGisElementsFromParameters su: ${path.basename(parametersFile)}`);
+        const gisElements = await extractGisElementsFromParameters(path.join(targetSessionPath, path.basename(parametersFile)));
+        await logDebug(`Elementi GIS estratti grezzi: ${gisElements.stations.length} stazioni, ${gisElements.switches.length} scambi, ${gisElements.points.length} punti noti.`);
+
+        if (gisElements.stations.length > 0 || gisElements.switches.length > 0 || gisElements.points.length > 0) {
+          const lineId = currentLineId || 'UNKNOWN_LINE';
+          let lineGis;
+          if (isNewLine) {
+            await logDebug(`Linea "${lineId}" è nuova o ricreata. Inizializzazione GIS vuoto per sovrascrivere vecchi file residui.`);
+            lineGis = {
+              lineId,
+              gisLayers: {
+                stations: [],
+                sleepers: [],
+                slab: [],
+                ballast: [],
+                curvatures: [],
+                tonnage: [],
+                switches: []
+              }
+            };
+          } else {
+            await logDebug(`Caricamento GIS esistente per linea "${lineId}"...`);
+            lineGis = await readGis(lineId);
+          }
+          
+          if (!lineGis.gisLayers.stations) lineGis.gisLayers.stations = [];
+          if (!lineGis.gisLayers.switches) lineGis.gisLayers.switches = [];
+          if (!lineGis.gisLayers.points) lineGis.gisLayers.points = [];
+
+          let maxKm = 0;
+          let minKm = 999999;
+          
+          const updateMinMax = (km) => {
+            if (km > maxKm) maxKm = km;
+            if (km < minKm) minKm = km;
+          };
+
+          const allStations = await readStations();
+          let stationsUpdated = false;
+
+          for (const s of gisElements.stations) {
+            updateMinMax(s.startKm);
+            updateMinMax(s.endKm);
+            const isDup = lineGis.gisLayers.stations.some(ex => Math.abs(ex.startKm - s.startKm) < 0.001 && Math.abs(ex.endKm - s.endKm) < 0.001);
+            const stCode = s.stationCode || s.id;
+            if (!isDup) {
+              lineGis.gisLayers.stations.push(s);
+              reportData.addedStations++;
+              await logDebug(`  Stazione GIS ${stCode} aggiunta al layer GIS della linea (km ${s.startKm} - ${s.endKm}).`);
+            } else {
+              await logDebug(`  Stazione GIS ${stCode} ignorata perché già presente in ${lineId}_gis.json (km ${s.startKm} - ${s.endKm}).`);
+            }
+
+            // Aggiunge la stazione al registro globale station.json se manca
+            const existingStation = allStations.find(existing => existing.code === stCode);
+            if (!existingStation) {
+              allStations.push({
+                code: stCode,
+                name: stCode,
+                kmStart: s.startKm,
+                kmEnd: s.endKm,
+                tracks: s.tracks || 1,
+                lineCode: lineId,
+                stationNumber: '',
+                stationType: 'station'
+              });
+              stationsUpdated = true;
+              await logDebug(`  Stazione ${stCode} aggiunta al registro station.json.`);
+            } else {
+              await logDebug(`  Stazione ${stCode} ignorata nel registro station.json perché già esistente.`);
+            }
+          }
+
+          if (stationsUpdated) {
+            allStations.sort((a, b) => a.code.localeCompare(b.code));
+            await writeStations(allStations);
+            await logDebug(`Nuove stazioni caricate e inserite in station.json.`);
+          }
+          
+          for (const s of gisElements.switches) {
+            updateMinMax(s.startKm);
+            updateMinMax(s.endKm);
+            const isDup = lineGis.gisLayers.switches.some(ex => Math.abs(ex.startKm - s.startKm) < 0.001 && Math.abs(ex.endKm - s.endKm) < 0.001);
+            const swId = s.switchId || s.id;
+            if (!isDup) {
+              lineGis.gisLayers.switches.push(s);
+              reportData.addedSwitches++;
+              await logDebug(`  Scambio GIS ${swId} aggiunto al layer GIS.`);
+            } else {
+              await logDebug(`  Scambio GIS ${swId} ignorato perché già esistente in ${lineId}_gis.json.`);
+            }
+          }
+
+          for (const p of gisElements.points) {
+            updateMinMax(p.km);
+            const isDup = lineGis.gisLayers.points.some(ex => Math.abs(ex.km - p.km) < 0.001 && ex.type === p.type);
+            const ptId = p.id;
+            if (!isDup) {
+              lineGis.gisLayers.points.push(p);
+              reportData.addedPoints++;
+              await logDebug(`  Punto Noto GIS ${ptId} aggiunto al layer GIS.`);
+            } else {
+              await logDebug(`  Punto Noto GIS ${ptId} ignorato perché già esistente in ${lineId}_gis.json.`);
+            }
+          }
+
+          if (minKm !== 999999) reportData.startKm = minKm;
+          reportData.endKm = maxKm;
+          
+          await logDebug(`Elementi GIS aggiunti (non duplicati): ${reportData.addedStations} stazioni, ${reportData.addedSwitches} scambi, ${reportData.addedPoints} punti noti.`);
+          await logDebug(`Estremi chilometrici calcolati per la tratta corrente: ${reportData.startKm} - ${reportData.endKm}`);
+
+          try {
+            await logDebug(`Aggiornamento chilometrica in lines.json per linea "${lineId}"...`);
+            const lines = await readLines();
+            const st = lines.find(l => l.id === lineId);
+            if (st) {
+              let updated = false;
+              if (minKm !== 999999 && (st.startKm === 0 || minKm < st.startKm)) { 
+                st.startKm = parseFloat(minKm.toFixed(3)); 
+                updated = true; 
+              }
+              if (maxKm > st.endKm) { 
+                st.endKm = parseFloat(maxKm.toFixed(3)); 
+                updated = true; 
+              }
+              if (updated) {
+                await writeLines(lines);
+                await logDebug(`Estremi chilometrici della linea aggiornati nel lines.json: ${st.startKm} - ${st.endKm}`);
+              } else {
+                await logDebug(`Nessun aggiornamento chilometrico necessario per lines.json (valori esistenti già inclusivi).`);
+              }
+            } else {
+              await logDebug(`AVVISO: Linea "${lineId}" non trovata in lines.json, impossibile aggiornare i km.`);
+            }
+          } catch (stErr) {
+            await logDebug(`ERRORE aggiornamento km in lines.json: ${stErr.message}`);
+            console.warn('Errore aggiornamento km in lines.json:', stErr);
+          }
+
+          await writeGis(lineId, lineGis);
+          await logDebug(`Scrittura file GIS completata per ${lineId}_gis.json`);
+        } else {
+          await logDebug(`Nessun elemento GIS da inserire.`);
+        }
+      } catch (gisErr) {
+        await logDebug(`ERRORE durante l'estrazione GIS o scrittura: ${gisErr.message}\nStack: ${gisErr.stack}`);
+        console.warn('Errore estrazione dati GIS da CSV:', gisErr);
+      }
+
     } catch (stationErr) {
+      await logDebug(`ERRORE nel blocco stationErr: ${stationErr.message}\nStack: ${stationErr.stack}`);
       console.warn('Impossibile aggiornare station.json:', stationErr);
     }
 
@@ -796,10 +1052,12 @@ router.post('/tgm/sessions/import', upload.any(), async (req, res) => {
     }
 
     await deleteFolder(tempUploadDir);
+    await logDebug(`Importazione terminata con successo. Risultato: ${JSON.stringify(reportData)}`);
 
-    res.json({ success: true, folderName: foundSessionName });
+    res.json({ success: true, folderName: foundSessionName, report: typeof reportData !== 'undefined' ? reportData : null });
 
   } catch (error) {
+    await logDebug(`ERRORE CRITICO NON GESTITO: ${error.message}\nStack: ${error.stack}`);
     console.error('Import error:', error);
     await deleteFolder(tempUploadDir);
     res.status(500).json({ error: error.message || 'Internal server error' });
@@ -852,23 +1110,6 @@ router.post('/tgm/sessions/manage', async (req, res) => {
         Object.assign(dbData, updates);
         await fs.writeFile(dbFilePath, JSON.stringify(dbData, null, 2), 'utf8');
 
-        if (updates.stazionePartenza) {
-          try {
-            let code = typeof updates.stazionePartenza === 'string' ? updates.stazionePartenza : (updates.stazionePartenza.code || updates.stazionePartenza.codice || '');
-            code = code.trim();
-            if (code && code !== '-' && !/^\d+$/.test(code)) {
-              const stations = await readStations();
-              if (!stations.find(s => s.code === code)) {
-                stations.push({ code, name: '', kmStart: 0, kmEnd: 0, tracks: 0 });
-                stations.sort((a, b) => a.code.localeCompare(b.code));
-                await writeStations(stations);
-              }
-            }
-          } catch (e) {
-            console.warn('Errore aggiornamento station.json da manage:', e);
-          }
-        }
-        
         return res.json({ success: true, message: 'Metadata updated successfully', data: dbData });
       } catch (err) {
         return res.status(500).json({ error: 'Failed to update metadata: ' + err.message });

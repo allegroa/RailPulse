@@ -16,33 +16,83 @@
       }
     ]
   },
-  "lines": [
-    {
-      "id": "line_nord",
-      "name": "Linea Nord",
-      "startKm": 0,
-      "endKm": 150,
-      "tracks": [
-        "Binario 1",
-        "Binario 2"
-      ]
-    },
-    {
-      "id": "line_sud",
-      "name": "Linea Sud",
-      "startKm": 0,
-      "endKm": 100,
-      "tracks": [
-        "Binario Unico",
-        "Binario 1",
-        "Binario 2"
-      ]
-    }
-  ],
   "operators": [
     "Costruzioni Ferroviarie SpA",
     "RailService Srl",
-    "Manutenzioni Italia"
+    "Manutenzioni Italia",
+    "ADIF - Administrator of Railway Network",
+    "ARTC - Australian Rail Track Corporation",
+    "AVG - Albtal-Verkehrs-Gesellschaft mbH",
+    "BC - Belarusian Railways",
+    "BDK - Banedanmark",
+    "BLS - BLS Netz",
+    "BN - Bane NOR SF",
+    "BRE - Bayerische Regionaleisenbahn",
+    "CFL - Société Nationale des Chemins de Fer Luxembourgeois",
+    "CFM - Calea Ferată din Moldova",
+    "CFR - Societatea Naţională de Transport Feroviar de Călători",
+    "CIE - Córas Iompair Éireann",
+    "DBN - DB Netz AG",
+    "DB Netz AG - DB Netz AG",
+    "DRE - Deutsche Regionaleisenbahn",
+    "EDS - ΕΔΙΣΥ",
+    "evb - Eisenbahnen und Verkehrsbetriebe Elbe-Weser GmbH",
+    "evb Infrastruktur - Eisenbahnen und Verkehrsbetriebe Elbe-Weser GmbH",
+    "EVR - EVR",
+    "FTA - Finish Transport Agency",
+    "GET - Getlink",
+    "GKB - Graz-Köflacher Bahn und Busbetrieb GmbH",
+    "GyS - GySEV",
+    "HS2 - High Speed Two Ltd.",
+    "HSB - Harzer Schmalspurbahnen GmbH",
+    "HZI - HŽ Infrastruktura",
+    "HzL - Hohenzollerische Landesbahn AG",
+    "InB - Infrabel",
+    "ISR - Israel Railways",
+    "JBV - Jernbaneverket",
+    "KTMB - Keretapi Tanah Melayu",
+    "KZH - Kazakhstan Temir Zholy",
+    "LDz - Latvijas dzelzceļš",
+    "LG - AB 'Lietuvos geležinkeliai'",
+    "MGB - Matterhorn Gotthard Bahn",
+    "MZ - Makedonski Železnici Infrastructure-Skopje",
+    "NEB - Niederbarnimer Eisenbahn AG, Berlin",
+    "NR - Network Rail Limited",
+    "NKS - National Railway Infrastructure Company",
+    "ÖBB - ÖBB Infra",
+    "OHE - Osthannoversche Eisenbahnen AG",
+    "OSE - Hellenic Railways Organisation, Athen",
+    "PLK - PKP Polskie Linie Kolejowe S.A.",
+    "PrR - ProRail",
+    "REF - Infraestruturas de Portugal S.A.",
+    "RFF - SNCF Réseau",
+    "RFI - Ferrovie dello Stato Italiane SpA",
+    "RhB - Rhätische Bahn AG",
+    "RHK - RHK",
+    "RIG - RegioInfra Gesellschaft mbH",
+    "RIN - Regio Infra Nord-Ost GmbH & Co. KG",
+    "RÖE - Raab-Oedenburg-Ebenfurter Eisenbahn",
+    "RSE - Rhein-Sieg-Eisenbahn GmbH",
+    "RZD - РЖД",
+    "SBB - SBB Infrastruktur",
+    "SLB - Salzburger Lokalbahn AG",
+    "SuH - Stern und Hafferl Verkehrsgesellschaft m.b.H.",
+    "SAR - Saudi Railway Company, Riyadh",
+    "SRO - Saudi Railways Organisation, Dammam",
+    "SWEG - Südwestdeutsche Landesverkehrs-AG",
+    "SZD - SŽDC",
+    "SZI - SŽ Infrastruktura",
+    "TCD - TCDD",
+    "ThE - Thüringer Eisenbahn GmbH",
+    "TrV - Trafikverket",
+    "UBTZ - Mongolian-Russian Joint-Stock Company “Ulaanbaatar railway”",
+    "UZ - Ukrainski Zaliznytsi",
+    "VPE - Vasúti Pályakapacitás-elosztó Kft.",
+    "VR - VR Track Ltd.",
+    "ZFB - ŽFBH",
+    "ZS - Infrastruktura Železnice Srbije",
+    "ZRS - Željeznice Republike Srpske",
+    "ZSR - Železnice Slovenskej Republiky"
   ],
   "taskTypes": [
     {
@@ -80,5 +130,10 @@
       "color": "#607d8b",
       "icon": "📝"
     }
-  ]
+  ],
+  "systemPrefs": {
+    "dataLocationType": "local",
+    "dataLocationPath": "D:\\004_Software\\RailPulse\\DATABASE",
+    "serverIp": ""
+  }
 }
