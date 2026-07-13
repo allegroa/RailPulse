@@ -79,6 +79,13 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], lin
   const sortedSessions = useMemo(() => {
     let sortable = [...sessions];
     
+    if (linesList && linesList.length > 0) {
+      sortable = sortable.filter(s => {
+        if (!s.isSession) return true;
+        return linesList.some(l => l.id === s.stazionePartenza);
+      });
+    }
+
     sortable = sortable.filter(s => {
       // Se è una cartella non-sessione, applichiamo il filtro solo al nome cartella (usando la colonna date)
       if (!s.isSession) {
@@ -166,7 +173,6 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], lin
               </th>
               <th className="p-3">LINE</th>
               <th className="p-3 text-center">DIR.</th>
-              <th className="p-3">FILES PRESENT</th>
               <th className="p-3 text-right">ACTIONS</th>
             </tr>
             <tr className="bg-white border-b border-slate-200 shadow-sm">
@@ -202,7 +208,6 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], lin
                 </select>
               </th>
               <th className="p-1"></th>
-              <th className="p-1"></th>
             </tr>
           </thead>
           <tbody>
@@ -212,7 +217,7 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], lin
                 onClick={() => onNavigate('..')}
               >
                 <td className="text-center p-3"></td>
-                <td className="p-3 font-bold text-blue-600" colSpan="9">
+                <td className="p-3 font-bold text-blue-600" colSpan="8">
                   <span className="mr-2">📁</span> .. (Torna indietro)
                 </td>
               </tr>
@@ -289,21 +294,6 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], lin
                   </td>
                 )}
                 
-                <td className="p-3">
-                  {session.isSession && (
-                    <div className="flex gap-1 flex-wrap">
-                      {session.hasParameters && (
-                        <span className="bg-green-50 text-green-700 border border-green-100 px-2 py-0.5 rounded-full text-xs font-semibold">{t('parameters', 'Parameters')}</span>
-                      )}
-                      {session.hasTqi && (
-                        <span className="bg-purple-50 text-purple-700 border border-purple-100 px-2 py-0.5 rounded-full text-xs font-semibold">{t('tqi', 'TQI')}</span>
-                      )}
-                      {session.hasExceedances && (
-                        <span className="bg-orange-50 text-orange-700 border border-orange-100 px-2 py-0.5 rounded-full text-xs font-semibold">{t('exceedances', 'Exceedances')}</span>
-                      )}
-                    </div>
-                  )}
-                </td>
                 <td className="p-3 text-right">
                   <div className="flex flex-col items-end gap-1">
                     <div className="flex justify-end gap-2 text-slate-400">
@@ -344,7 +334,7 @@ export default function TGMDatabaseVisualizer({ sessions, stationsList = [], lin
             
             {sortedSessions.length === 0 && !currentSubFolder && (
               <tr>
-                <td colSpan="10" className="p-8 text-center text-slate-500">
+                <td colSpan="9" className="p-8 text-center text-slate-500">
                   Nessuna sessione trovata.
                 </td>
               </tr>

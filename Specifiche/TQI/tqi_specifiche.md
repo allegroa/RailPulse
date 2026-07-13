@@ -6,6 +6,15 @@
 
 ---
 
+## 0. Architettura e Filosofia del Modulo
+
+Il modulo **TQI (Track Quality Index)** deve essere implementato come un modulo indipendente con le stesse caratteristiche architetturali e di isolamento dei moduli **TGM** (Track Geometry Measurement) e **RP** (RailProfile):
+- **Isolamento e Modularità (Micro-modulo / Plugin)**: Il codice del modulo (sia backend che frontend) deve essere isolato in modo che il suo ciclo di vita, sviluppo, configurazione, deployment ed eventuale rimozione non compromettano o influenzino in alcun modo le funzionalità core dell'applicazione principale (**WebOne** / **RailPulse**).
+- **Aggancio Dinamico**: Le rotte del backend e gli elementi della UI del frontend (come la Sidebar o i pannelli della Dashboard) devono essere registrati ed integrati dinamicamente. Se la cartella del modulo non è presente, l'applicazione principale deve continuare a funzionare regolarmente, omettendo semplicemente le funzionalità TQI e senza produrre errori a runtime.
+- **Integrazione dei Dati Coerente**: Il modulo si deve interfacciare in modo pulito e coerente con la struttura delle sessioni presenti nel database a file-system (`DATABASE/TGM/` e/o `DATABASE/RP/`), senza richiedere accoppiamenti rigidi o modifiche strutturali al core database.
+
+---
+
 ## 1. Definizione della Formula
 
 ### 1.1 TQI di Segmento

@@ -1233,13 +1233,12 @@ export default function GeneralConfigurationPage() {
                     <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-xs">
                       <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderNameId')}</th>
                       <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderKmRange')}</th>
-                      <th className="px-6 py-3 font-semibold text-slate-500">{t('tableHeaderTracks')}</th>
                       <th className="px-6 py-3 font-semibold text-slate-500 text-right">{t('tableHeaderActions')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {config?.lines?.length === 0 ? (
-                      <tr><td colSpan="4" className="px-6 py-12 text-center text-slate-500 font-medium">{t('noLinesMsg')}</td></tr>
+                      <tr><td colSpan="3" className="px-6 py-12 text-center text-slate-500 font-medium">{t('noLinesMsg')}</td></tr>
                     ) : config?.lines?.map(line => (
                       <tr key={line.id} className="hover:bg-slate-50 transition-colors">
                         <td className="px-6 py-4">
@@ -1253,15 +1252,6 @@ export default function GeneralConfigurationPage() {
                         </td>
                         <td className="px-6 py-4 text-sm text-slate-600 font-mono">
                           {Number(line.startKm).toFixed(3)} - {Number(line.endKm).toFixed(3)}
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex flex-wrap gap-2">
-                            {line.tracks.map((track, i) => (
-                              <span key={i} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-md border border-slate-200">
-                                {track}
-                              </span>
-                            ))}
-                          </div>
                         </td>
                         <td className="px-6 py-4 text-right">
                           <div className="flex justify-end gap-2">

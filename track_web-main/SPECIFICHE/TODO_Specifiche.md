@@ -15,6 +15,7 @@
 Il TQI quantifica la qualità geometrica del binario. Il valore è la somma delle deviazioni standard (σ) di 7 parametri geometrici:
 `TQI = σ_scartamento + σ_sopraelevazione + σ_allineamento_sx + σ_allineamento_dx + σ_livello_sx + σ_livello_dx + σ_planarità`
 
+- [ ] **A0 – Modulo TQI Indipendente**: Il modulo TQI deve essere strutturato come un modulo indipendente con le stesse caratteristiche architetturali e di usabilità della TGM e del modulo RP.
 - [ ] **A1 – Formula TQI configurabile**: L'operatore deve poter definire e modificare la formula di calcolo del TQI.
   - [ ] A1.1 – Implementare la formula standard: `σ = √[ (1/n) · (1/(n−1)) · ( Σxi² − (Σxi)² ) ]`
   - [ ] A1.2 – UI per inserimento/modifica della formula

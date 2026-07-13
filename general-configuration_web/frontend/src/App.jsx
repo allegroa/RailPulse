@@ -690,14 +690,13 @@ export default function App() {
                       <tr>
                         <th>{t('tableHeaderNameId')}</th>
                         <th>{t('tableHeaderKmRange')}</th>
-                        <th>{t('tableHeaderTracks')}</th>
                         <th style={{ textAlign: 'right' }}>{t('tableHeaderActions')}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {config?.lines?.length === 0 ? (
                         <tr>
-                          <td colSpan="4" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                          <td colSpan="3" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
                             {t('noLinesMsg')}
                           </td>
                         </tr>
@@ -715,15 +714,6 @@ export default function App() {
                             </td>
                             <td>
                               {Number(line.startKm).toFixed(3)} - {Number(line.endKm).toFixed(3)}
-                            </td>
-                            <td>
-                              <div className="tag-container">
-                                {line.tracks.map((track, i) => (
-                                  <span key={i} className="app-badge" style={{ fontSize: '0.75rem' }}>
-                                    {track}
-                                  </span>
-                                ))}
-                              </div>
                             </td>
                             <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                               <button 
