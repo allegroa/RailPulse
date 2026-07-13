@@ -65,6 +65,13 @@ app.use('/api/config', configRoutes);
 app.use('/api/maintenance', maintenanceRoutes);
 app.use('/api/taipei', taipeiRoutes);
 
+// Auto-caricamento del modulo TQI se presente nel file system (trigger restart per TQI formula calculation)
+const tqiRoutesPath = path.resolve(__dirname, '../../../TQI/backend/routes/tqi.routes.js');
+if (fs.existsSync(tqiRoutesPath)) {
+    app.use('/api/tqi', require(tqiRoutesPath));
+    console.log('✓ Modulo TQI caricato con successo.');
+}
+
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.use('/taipei_static', express.static(path.join(process.cwd(), 'public', 'taipei')));
 

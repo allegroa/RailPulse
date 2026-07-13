@@ -29,6 +29,9 @@ const navLinks = [
   { to: '/tgm', label: 'TGM', icon: (
     <span className="font-bold text-xs select-none bg-slate-100 px-1 py-0.5 rounded border border-slate-200">TGM</span>
   ) },
+  { to: '/projects/tqi', label: 'TQI', icon: (
+    <span className="font-bold text-xs select-none bg-slate-100 px-1 py-0.5 rounded border border-slate-200">TQI</span>
+  ) },
   { to: '/general-configuration', label: 'Configuration', icon: (
     <span className="font-bold text-xs select-none bg-slate-100 px-1 py-0.5 rounded border border-slate-200">CFG</span>
   ) },

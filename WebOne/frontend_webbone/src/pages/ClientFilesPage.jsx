@@ -33,6 +33,8 @@ function ClientFilesPage({ level = 'project' }) {
         navigate('/taipei');
       } else if (folder === 'railprofile') {
         navigate('/railprofile');
+      } else if (folder === 'tqi') {
+        navigate('/projects/tqi');
       } else if (folder === 'database_view') {
         navigate('/files');
       } else {
@@ -67,6 +69,7 @@ function ClientFilesPage({ level = 'project' }) {
     if (!displayFolders.includes('general-configuration_web')) displayFolders.push('general-configuration_web');
     if (!displayFolders.includes('taipei-scaffold')) displayFolders.push('taipei-scaffold');
     if (!displayFolders.includes('railprofile')) displayFolders.push('railprofile');
+    if (!displayFolders.includes('tqi')) displayFolders.push('tqi');
     if (!displayFolders.includes('database_view')) displayFolders.push('database_view');
   }
 
@@ -161,7 +164,7 @@ function ClientFilesPage({ level = 'project' }) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredFolders.map((folder, index) => {
-            const isSpecialModule = folder === 'track_web-main' || folder === 'maintenance-web' || folder === 'general-configuration_web' || folder === 'taipei-scaffold' || folder === 'railprofile';
+            const isSpecialModule = folder === 'track_web-main' || folder === 'maintenance-web' || folder === 'general-configuration_web' || folder === 'taipei-scaffold' || folder === 'railprofile' || folder === 'tqi';
             return (
               <div key={index} 
                 onClick={() => handleClick(folder)}
@@ -173,6 +176,7 @@ function ClientFilesPage({ level = 'project' }) {
                      folder === 'general-configuration_web' ? 'General Configuration' : 
                      folder === 'taipei-scaffold' ? 'Taipei Scaffold' :
                      folder === 'railprofile' ? 'Rail Profile' :
+                     folder === 'tqi' ? 'TQI (Track Quality Index)' :
                      folder === 'database_view' ? 'Database View' :
                      folder}
                   </h3>
@@ -182,6 +186,7 @@ function ClientFilesPage({ level = 'project' }) {
                      folder === 'general-configuration_web' ? 'General configuration of lines, tracks, operators and language' : 
                      folder === 'taipei-scaffold' ? 'Interactive map and stations management (Taipei)' :
                      folder === 'railprofile' ? 'Cross-sectional rail profile analysis' :
+                     folder === 'tqi' ? 'Track Quality Index Analysis' :
                      folder === 'database_view' ? 'Visualizzatore centralizzato acquisizioni' :
                      `View ${folder}`}
                   </p>

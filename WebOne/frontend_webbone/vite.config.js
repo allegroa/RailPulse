@@ -23,6 +23,9 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       }
+    },
+    fs: {
+      strict: false
     }
   },
   css: {
