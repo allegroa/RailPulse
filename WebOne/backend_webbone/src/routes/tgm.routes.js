@@ -311,7 +311,7 @@ router.get('/local-files', async (req, res) => {
   }
 
   try {
-    const fullPath = path.normalize(targetPath);
+    const fullPath = resolveTargetPath(targetPath);
 
     if (action === 'download' && fileName) {
       const filePath = path.join(fullPath, fileName);

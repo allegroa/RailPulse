@@ -2,7 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const Database = require('better-sqlite3');
 
-const DB_BASE_PATH = path.resolve(process.env.DATABASE_BASE_PATH || 'E:/Software/RailPulse/DATABASE');
+const DB_BASE_PATH = process.env.DATABASE_BASE_PATH && fs.existsSync(process.env.DATABASE_BASE_PATH)
+  ? path.resolve(process.env.DATABASE_BASE_PATH)
+  : (fs.existsSync(path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE'))
+      ? path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE')
+      : path.resolve('C:/Software/RailPulse/DATABASE'));
 const SESSION_FOLDER_REGEX = /^(\d{4}\.\d{2}\.\d{2})\s+(\d{2}\.\d{2}\.\d{2})K(\d+)\+(\d{3})~K(\d+)\+(\d{3})$/;
 
 exports.getAllAcquisitions = (req, res) => {

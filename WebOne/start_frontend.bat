@@ -1,13 +1,10 @@
 @echo off
-title WebOne Backend Server
+title WebOne Frontend
 echo ==============================================
-echo Avvio del Backend WebOne (Node.js) sulla porta 5000
+echo Avvio del Frontend WebOne (Vite) sulla porta 5173
 echo ==============================================
-echo Questo server comunica con l'interfaccia ospitata su XAMPP.
-echo Non chiudere questa finestra finche' usi WebOne.
 echo.
-
-cd /d "%~dp0backend_webbone"
+cd /d "%~dp0frontend_webbone"
 set PATH=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VisualStudio\NodeJs;C:\Program Files\nodejs;%PATH%
-npm start
+npm run dev
 pause

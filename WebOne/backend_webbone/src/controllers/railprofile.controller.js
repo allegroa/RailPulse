@@ -7,23 +7,31 @@ const { parseCSVFile } = require('../utils/railprofile.utils');
 // Resolved paths from environment (fallback to old hardcoded values)
 // ---------------------------------------------------------------------------
 function getDbPath() {
-    const configPathGlobal = path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json');
-    try {
-        if (fs.existsSync(configPathGlobal)) {
-            const data = fs.readFileSync(configPathGlobal, 'utf-8');
-            const config = JSON.parse(data);
-            if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
-                const dbDir = path.join(config.systemPrefs.dataLocationPath, 'RP');
-                if (!fs.existsSync(dbDir)) {
-                    fs.mkdirSync(dbDir, { recursive: true });
-                }
-                return path.join(dbDir, 'railprofile.db');
-            }
-        }
-    } catch (err) {
-        console.warn('Impossibile leggere config_db.json per railprofile, uso fallback');
+    if (process.env.RAILPROFILE_DB_PATH && fs.existsSync(process.env.RAILPROFILE_DB_PATH)) {
+        return path.resolve(process.env.RAILPROFILE_DB_PATH);
     }
-    return path.resolve(process.env.RAILPROFILE_DB_PATH || 'E:/Software/RailPulse/DATABASE/RP/railprofile.db');
+    const possibleConfigPaths = [
+        path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'config_db.json'),
+        path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json')
+    ];
+    for (const configPathGlobal of possibleConfigPaths) {
+        try {
+            if (fs.existsSync(configPathGlobal)) {
+                const data = fs.readFileSync(configPathGlobal, 'utf-8');
+                const config = JSON.parse(data);
+                if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
+                    const dbDir = path.join(config.systemPrefs.dataLocationPath, 'RP');
+                    const dbFile = path.join(dbDir, 'railprofile.db');
+                    if (fs.existsSync(dbFile)) {
+                        return dbFile;
+                    }
+                }
+            }
+        } catch (err) {
+            console.warn('Impossibile leggere config_db.json per railprofile:', err.message);
+        }
+    }
+    return path.resolve(process.env.RAILPROFILE_DB_PATH || 'C:/Software/RailPulse/DATABASE/RP/railprofile.db');
 }
 const configPath = path.resolve(process.env.RAILPROFILE_CONFIG_PATH || path.join(__dirname, '..', '..', 'config', 'railprofile_thresholds.json'));
 

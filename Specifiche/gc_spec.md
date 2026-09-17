@@ -2,9 +2,9 @@
 
 Il presente documento definisce le specifiche funzionali, la struttura dati e le interfacce di integrazione per il modulo **`general-configuration_web`** di RailPulse. L'obiettivo principale di questo modulo è centralizzare e gestire tutte le configurazioni comuni dell'intera piattaforma RailPulse, come le impostazioni di lingua e i database condivisi (linee ferroviarie, operatori, ditte e tipologie di intervento con relative codifiche grafiche).
 
-In futuro, questo modulo sarà interfacciato e integrato all'interno della piattaforma centrale `WebOne`.
+> **Stato Integrazione**: Il modulo è pienamente integrato nella piattaforma centrale `WebOne`. Il microservizio backend risiede sulla porta `5002`, mentre il frontend è integrato nella SPA di WebOne alla rotta `/general-configuration` (voce "CFG" nella Sidebar). I database sono centralizzati in `DATABASE/config_db.json` e `DATABASE/lines.json`.
 
-> **Nota sul Layout**: L'interfaccia utente e il layout di questo modulo devono seguire rigorosamente le regole e direttive descritte nel documento condiviso [`gen_layout.md`](gen_layout.md).
+> **Nota sul Layout**: L'interfaccia utente e il layout di questo modulo seguono rigorosamente le regole e direttive descritte nel documento condiviso [`gen_layout.md`](gen_layout.md).
 
 ---
 

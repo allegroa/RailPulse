@@ -164,7 +164,7 @@
   ],
   "systemPrefs": {
     "dataLocationType": "local",
-    "dataLocationPath": "E:\\Software\\RailPulse\\DATABASE",
+    "dataLocationPath": "C:\\Software\\RailPulse\\DATABASE",
     "serverIp": ""
   }
 }

@@ -1,18 +1,32 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-const CONFIG_PATH = path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json');
+const CONFIG_PATHS = [
+  path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'config_db.json'),
+  path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json')
+];
 
 async function getDbPath() {
-  try {
-    const configData = await fs.readFile(CONFIG_PATH, 'utf-8');
-    const config = JSON.parse(configData);
-    if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
-      return path.join(config.systemPrefs.dataLocationPath, 'MAINTENANCE', 'maintenance_db.json');
-    }
-  } catch (err) {
-    console.warn('Impossibile leggere config_db.json, uso percorso default per manutenzione');
+  for (const cfgPath of CONFIG_PATHS) {
+    try {
+      const configData = await fs.readFile(cfgPath, 'utf-8');
+      const config = JSON.parse(configData);
+      if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
+        const candidate = path.join(config.systemPrefs.dataLocationPath, 'MAINTENANCE', 'maintenance_db.json');
+        try {
+          await fs.access(candidate);
+          return candidate;
+        } catch {}
+      }
+    } catch (err) {}
   }
+  
+  const fallback = path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'MAINTENANCE', 'maintenance_db.json');
+  try {
+    await fs.access(fallback);
+    return fallback;
+  } catch {}
+
   return path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'maintenance_db.json');
 }
 

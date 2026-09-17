@@ -1,65 +1,78 @@
 # Struttura delle Directory e dei Moduli - RailPulse / WebOne
 
-Questo documento descrive l'organizzazione delle cartelle del progetto RailPulse / WebOne, con particolare attenzione alla struttura modulare multi-tenant per l'archiviazione dei file.
+Questo documento descrive l'organizzazione delle cartelle e dei moduli del repository **RailPulse**, con l'architettura dei micro-moduli e la persistenza dei dati.
 
 ---
 
 ## 1. Struttura Generale del Workspace
 
-Il workspace principale del progetto è organizzato nelle seguenti macro-aree:
-
-- **`WebOne/`**: Root principale dell'applicazione WebOne.
-  - **`backend_webbone/`**: Backend sviluppato in Node.js ed Express 5. Gestisce l'API REST, l'autenticazione JWT e l'accesso al database tramite Prisma.
-  - **`frontend_webbone/`**: Frontend Single Page Application (SPA) in React 19 + Vite 6.
-- **`TaipeiScaffold/`**: Modulo o ambiente separato per il caricamento/visualizzazione locale dei dati relativi alla metropolitana di Taipei.
-- **`Specifiche/`**: Documenti di specifica tecnica (es. specifiche software, specifiche di sviluppo, log delle modifiche).
-- **`docs/`**: Documentazione di supporto, file PDF normativi (EN 13231-3) e contratti.
-- **`DATABASE/`**: Risorse e script relativi alla persistenza dei dati.
+```
+c:\Software\RailPulse\
+├── WebOne/
+│   ├── backend_webbone/              # Backend centrale Node.js + Express 5 (Porta 5000)
+│   │   ├── prisma/                   # Schema relazionale Prisma e seed script
+│   │   ├── public/taipei/            # Applicazione statica D3 per Taipei Metro
+│   │   ├── src/
+│   │   │   ├── controllers/          # Logica di business (Auth, TGM, Files, MNT, RP)
+│   │   │   ├── routes/               # Endpoints REST (auth, tgm, files, maintenance, taipei, ecc.)
+│   │   │   └── app.js                # Inizializzazione Express e mount dinamico rotte
+│   │   └── server.js                 # Server HTTP e schedulatore polling email IMAP
+│   └── frontend_webbone/             # Frontend SPA React 19 + Vite 6 (Porta 5173)
+│       └── src/
+│           ├── components/           # Componenti condivisi (Sidebar, Layout, Skeletons)
+│           ├── pages/                # Viste di pagina (Dashboard, TGM, CFG, MNT, Visualizer, RP, Taipei)
+│           └── App.jsx               # Routing principale dell'applicazione
+├── general-configuration_web/        # Microservizio configurazioni comuni (Porta 5002)
+│   ├── server.js                     # Server Express per GIS, linee, operatori, task types
+│   └── package.json
+├── TQI/                              # Modulo autonomo Track Quality Index
+│   ├── backend/                      # Engine analitico TQI (formule, sigma, soglie, CSV parser)
+│   │   ├── routes/tqi.routes.js      # Rotte TQI montate dal backend principale in /api/tqi
+│   │   └── utils/tqi.js              # Algoritmi matematici TQI (7 parametri su 200m)
+│   └── frontend/                     # Componenti visuali TQI
+│       ├── components/               # TqiTrendChart, TqiHeatmap, TqiAlertTable, TqiSigmaBreakdown
+│       └── views/TqiDashboard.jsx    # Dashboard integrata in WebOne (/projects/tqi)
+├── maintenance-web/                  # Risorse e documentazione specifica del modulo manutenzione
+│   └── database/                     # Backup locale schema manutenzione
+├── TaipeiScaffold/                   # Risorse e documentazione della topologia Taipei Metro
+├── track_web-main/                   # Sorgenti e configurazioni TGM (track geometry)
+│   └── backend/configuration/        # config.json con parametri email e sistema TGM
+├── start_server/                     # Orchestratore desktop multipiattaforma
+│   ├── start_server_manager.py       # GUI Python/Tkinter per gestione processi e porte
+│   ├── start_server_manager.exe      # Eseguibile compilato standalone
+│   └── ss_specifiche.md              # Specifiche tecniche del server manager
+├── DATABASE/                         # Hub dati centralizzato condiviso
+│   ├── config_db.json                # Configurazione globale e preferenze di sistema
+│   ├── lines.json                    # Anagrafica globale linee e binari
+│   ├── station.json                  # Registro unificato stazioni e scambi
+│   ├── maintenance_db.json           # Registro interventi di manutenzione
+│   ├── GIS/                          # File cartografici KML, XML, Shapefile
+│   ├── Taipei/stations.json          # Singola source of truth topologia metro Taipei
+│   ├── TGM/                          # Directory sessioni geometriche e log di importazione
+│   └── RP/railprofile.db             # Database SQLite usura profilo rotaia
+├── Specifiche/                       # Specifiche tecniche, requisiti e piani di test
+├── docs/                             # Normative (es. EN 13231-3), guide e documentazione
+├── rules.md                          # Regole di condotta AI, protocolli e requisiti vincolanti
+├── .agent_specs_log.md               # Log permanente delle modifiche tecniche e architetturali
+└── start_servers_adts.bat / start_servers_rmt_home.bat # Script di avvio rapido
+```
 
 ---
 
-## 2. Struttura dei Moduli (Filesystem Speculare al Database)
+## 2. Struttura dei Moduli Filesystem Speculare
 
-Per garantire la multi-tenancy e l'isolamento completo dei dati tra clienti, progetti e sistemi, la struttura dei file caricati a filesystem sotto la cartella di upload del backend (`uploads/`) deve seguire in modo rigido e speculare la gerarchia definita a livello di database:
+La cartella di archiviazione file del backend (`uploads/`) adotta un partizionamento speculare alla multi-tenancy:
 
 ```
-/uploads/{clientFolder}/{projectSlug}/{systemSlug}/{moduleCode}/
-  ├── config/
-  ├── manuals/
-  └── upload/
+uploads/
+├── {clientFolder}/
+│   └── {projectSlug}/
+│       └── {systemSlug}/
+│           └── {moduleCode}/
+│               ├── config/           # Configurazioni e tolleranze per il modulo
+│               ├── manuals/          # Manuali d'uso e guide
+│               └── upload/           # Dati effettivi caricati
+└── maintenance/                      # Allegati e documenti degli interventi di manutenzione
 ```
 
-### Parametri del Path
-1. **`{clientFolder}`**: Il nome della cartella dedicata al Cliente, derivato dal campo `folderName` del modello `Client` a database.
-2. **`{projectSlug}`**: Lo slug univoco del Progetto, normalizzato in caratteri URL-safe a partire dal nome del progetto, associato al modello `Project`.
-3. **`{systemSlug}`**: Lo slug univoco del Sistema (linea ferroviaria/impianto), normalizzato a partire dal nome del sistema, associato al modello `System`.
-4. **`{moduleCode}`**: Il codice identificativo del modulo abilitato (es. `TRACK_GEOMETRY`, `CORRUGATION`, `TUNNEL_SCAN`), associato al modello `ModuleDefinition`.
-
-### Sottocartelle per Modulo
-Ogni modulo abilitato all'interno di un sistema possiede tre sotto-directory standard:
-- **`config/`**: Contiene i file di configurazione specifici del modulo, come tolleranze personalizzate o parametri di calcolo.
-- **`manuals/`**: Contiene la documentazione, i manuali d'uso o le linee guida operative specifiche del modulo per quel sistema.
-- **`upload/`**: Destinazione in cui vengono salvati i file di dati effettivi caricati dagli utenti (es. file CSV di rilievo, file `.geo` di geometria).
-
-> [!IMPORTANT]
-> Il percorso di archiviazione dei file **non viene mai accettato dal client** come parametro arbitrario del corpo della richiesta (body). Il percorso viene calcolato dinamicamente e in modo sicuro **esclusivamente lato server**, interrogando il database per risolvere le relazioni a partire dal `systemId` e dal `moduleCode` forniti durante l'upload.
-
----
-
-## 3. Struttura del Codice dei Moduli (Backend e Frontend)
-
-L'aggiunta o gestione di un modulo software all'interno del codice deve seguire una struttura standardizzata e disaccoppiata per facilitare la manutenzione.
-
-### Backend (`WebOne/backend_webbone/`)
-I moduli backend sono definiti a livello logico (non fisico) integrando:
-- **Prisma Schema**: La junction `SystemModule` che associa `System` a `ModuleDefinition` con flag `enabled` e configurazione JSON `configJson`.
-- **Routes (`src/routes/`)**: Definizione degli endpoint specifici protetti da middleware:
-  - `requireSystemAccess(systemId)`: verifica che il sistema appartenga al client dell'utente.
-  - `requireModule(moduleCode)`: verifica che il modulo sia abilitato per quel sistema specifico.
-- **Controllers (`src/controllers/`)**: Logica di elaborazione dati e interfacciamento con lo strato di storage (adattatore pluggabile: locale, SMB, MinIO).
-
-### Frontend (`WebOne/frontend_webbone/`)
-I moduli lato client si integrano in modo dinamico:
-- **Rotte Parametriche (`src/App.jsx`)**: Le pagine dei moduli caricano i dati dinamicamente in base a `systemId` e `moduleCode`.
-- **Sidebar Dinamica (`src/components/Sidebar.jsx`)**: Voci del menu generate a runtime in base alla risposta dell'endpoint `GET /api/me/context`. Vengono mostrati e resi accessibili solo i moduli abilitati sul sistema correntemente selezionato.
-- **Pagine Operative (`src/pages/`)**: Componenti dedicati (es. `DataVizualizer.jsx`, `RailProfilePage.jsx`) che consumano le API del backend inserendo i parametri del contesto attivo.
+I percorsi fisici non sono mai iniettati arbitrariamente dal client ma verificati e risolti rigorosamente lato server a partire dal profilo autenticato.

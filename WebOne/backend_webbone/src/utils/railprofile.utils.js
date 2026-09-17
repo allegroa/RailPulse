@@ -26,17 +26,26 @@ const parseValue = (v) => {
  * @returns {Array|null}
  */
 function getDbDir() {
-    const configPathGlobal = path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json');
-    try {
-        if (fs.existsSync(configPathGlobal)) {
-            const data = fs.readFileSync(configPathGlobal, 'utf-8');
-            const config = JSON.parse(data);
-            if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
-                return path.join(config.systemPrefs.dataLocationPath, 'RP');
+    if (process.env.RAILPROFILE_DB_DIR && fs.existsSync(process.env.RAILPROFILE_DB_DIR)) {
+        return path.resolve(process.env.RAILPROFILE_DB_DIR);
+    }
+    const possibleConfigPaths = [
+        path.resolve(__dirname, '..', '..', '..', '..', 'DATABASE', 'config_db.json'),
+        path.resolve(__dirname, '..', '..', '..', '..', 'general-configuration_web', 'database', 'config_db.json')
+    ];
+    for (const configPathGlobal of possibleConfigPaths) {
+        try {
+            if (fs.existsSync(configPathGlobal)) {
+                const data = fs.readFileSync(configPathGlobal, 'utf-8');
+                const config = JSON.parse(data);
+                if (config.systemPrefs && config.systemPrefs.dataLocationPath) {
+                    const candidate = path.join(config.systemPrefs.dataLocationPath, 'RP');
+                    if (fs.existsSync(candidate)) return candidate;
+                }
             }
-        }
-    } catch (err) {}
-    return process.env.RAILPROFILE_DB_DIR || 'E:/Software/RailPulse/DATABASE/RP';
+        } catch (err) {}
+    }
+    return process.env.RAILPROFILE_DB_DIR || 'C:/Software/RailPulse/DATABASE/RP';
 }
 
 const parseCSVFile = (filename) => {

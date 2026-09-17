@@ -31,9 +31,11 @@ Tuttavia, questa logica ignora eventuali salvataggi falliti. Se l'utente cambia 
 L'interfaccia permette di rinominare l'ID di una stazione e modificarne i metadati (Nome, Linea). Queste modifiche **chiamano solo il salvataggio su `localStorage`** e non avvisano il backend.
 Se l'ID viene cambiato (es. da `R28` a `R28X`), la successiva operazione di trascinamento invierà al backend il nuovo ID `R28X`. Il backend cercherà `R28X` nel file `app.js` tramite regex, non lo troverà (perché nel file sorgente è rimasto `R28`) e fallirà silenziosamente l'aggiornamento.
 
-## 3. Direttive per la Soluzione
+## 3. Direttive per la Soluzione [IMPLEMENTATO]
 
-Per rendere il sistema affidabile, l'architettura deve abbandonare l'approccio ibrido e adottare un modello Client-Server standard:
+> **Stato**: Implementato. Il decoupling completo è operativo. I dati sono persistiti esclusivamente in `DATABASE/Taipei/stations.json` tramite le rotte backend `/api/taipei/stations`. L'approccio basato su RegExp e sovrascrittura di `app.js` è stato rimosso.
+
+Per rendere il sistema affidabile, l'architettura ha adottato un modello Client-Server standard:
 
 1. **Decoupling dei Dati**: I dati `STATIONS` e `LINES` non devono più essere hardcoded all'interno di `app.js`.
 2. **Fetch Iniziale**: All'avvio, `app.js` deve caricare i dati delle stazioni interrogando un endpoint GET del backend (es. `/api/taipei/stations`), il quale leggerà dal file ufficiale `DATABASE/Taipei/stations.json`.
